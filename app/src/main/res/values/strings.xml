@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyNews</string>
+    <string name="param_toolbar_title">Parameters</string>
+    <string name="research_toolbar_title">Research</string>
 </resources>
