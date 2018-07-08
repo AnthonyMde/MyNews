@@ -2,4 +2,6 @@
     <string name="app_name">MyNews</string>
     <string name="param_toolbar_title">Parameters</string>
     <string name="research_toolbar_title">Research</string>
+    <string name="notification_activity_name">Notifications</string>
+    <string name="search_activity_name">Search Articles</string>
 </resources>

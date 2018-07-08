@@ -1,10 +1,12 @@
-package com.mamode.anthony.mynews;
+package com.mamode.anthony.mynews.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import com.mamode.anthony.mynews.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.menu_activity_main_params:
-                Toast.makeText(this, "Parameters", Toast.LENGTH_SHORT).show();
+            case R.id.menu_activity_main_menu_notifications:
+                launchNotificationsActivity();
                 return true;
-            case R.id.menu_activity_main_search:
-                Toast.makeText(this, "Searching...", Toast.LENGTH_SHORT).show();
+            case R.id.menu_activity_main_menu_search:
+                launchSearchActivity();
                 return true;
             default:return super.onOptionsItemSelected(item);
         }
@@ -40,5 +42,14 @@ public class MainActivity extends AppCompatActivity {
     private void configureToolbar() {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+    private void launchSearchActivity(){
+        Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchNotificationsActivity(){
+        Intent intent = new Intent(MainActivity.this, NotificationsActivity.class);
+        startActivity(intent);
     }
 }
