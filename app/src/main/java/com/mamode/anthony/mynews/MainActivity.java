@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
         this.configureToolbar();
     }
 
+    // ---------------TOOLBAR CONFIGURATION---------------------- //
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_button, menu);
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureToolbar() {
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.activity_main_toolbar);
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 }
