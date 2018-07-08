@@ -27,8 +27,7 @@ public class MostPopularFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_most_popular, container, false);
     }
     public static MostPopularFragment newInstance() {
-        MostPopularFragment fragment = new MostPopularFragment();
-        return fragment;
+        return new MostPopularFragment();
     }
 
 }

@@ -2,6 +2,7 @@ package com.mamode.anthony.mynews.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,8 +29,7 @@ public class BusinessFragment extends Fragment {
     }
 
     public static BusinessFragment newInstance() {
-        BusinessFragment fragment = new BusinessFragment();
-        return fragment;
+        return new BusinessFragment();
     }
 
 

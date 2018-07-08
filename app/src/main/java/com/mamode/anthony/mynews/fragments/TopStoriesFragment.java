@@ -29,8 +29,7 @@ public class TopStoriesFragment extends Fragment {
     }
 
     public static TopStoriesFragment newInstance() {
-        TopStoriesFragment fragment = new TopStoriesFragment();
-        return fragment;
+        return new TopStoriesFragment();
     }
 
 }
