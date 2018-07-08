@@ -1,4 +1,4 @@
-package com.mamode.anthony.mynews.controller;
+package com.mamode.anthony.mynews.controllers;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;

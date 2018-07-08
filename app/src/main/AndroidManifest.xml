@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.MainActivity">
+        <activity android:name=".controllers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,24 +19,24 @@
 
         <!--Child of MainActivity-->
         <activity
-            android:name=".controller.NotificationsActivity"
+            android:name=".controllers.NotificationsActivity"
             android:label="@string/notification_activity_name"
-            android:parentActivityName=".controller.MainActivity">
+            android:parentActivityName=".controllers.MainActivity">
             <!-- The meta-data element is needed for versions lower than 4.1 -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".controller.MainActivity"/>
+                android:value=".controllers.MainActivity"/>
         </activity>
         <!--Child of MainActivity-->
         <activity
-            android:name=".controller.SearchActivity"
+            android:name=".controllers.SearchActivity"
             android:label="@string/search_activity_name"
-            android:parentActivityName=".controller.MainActivity"
+            android:parentActivityName=".controllers.MainActivity"
             >
             <!-- The meta-data element is needed for versions lower than 4.1 -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".controller.MainActivity"/>
+                android:value=".controllers.MainActivity"/>
         </activity>
     </application>
 
