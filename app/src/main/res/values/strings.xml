@@ -10,4 +10,6 @@
     <string name="business_frag_txt">Hello Business !</string>
     <string name="most_pop_frag_txt">Hello from Most !</string>
     <string name="top_stories_frag_txt">Hey from Top Stories !</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

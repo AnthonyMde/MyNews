@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private android.support.v7.widget.Toolbar mToolbar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.configureToolbar();
         this.configurePageAdapterAndTabs();
+        this.configureDrawerLayout();
     }
 
     //---------------------------------------------
@@ -59,6 +63,18 @@ public class MainActivity extends AppCompatActivity {
     private void launchNotificationsActivity(){
         Intent intent = new Intent(MainActivity.this, NotificationsActivity.class);
         startActivity(intent);
+    }
+
+    //---------------------------------------------
+    //NAVIGATION DRAWER CONFIGURATION
+    //---------------------------------------------
+    private void configureDrawerLayout(){
+        mDrawerLayout = findViewById(R.id.activity_main_drawer_layout);
+        //Join the drawer with the toolbar to set the hamburger button
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
     //---------------------------------------------
