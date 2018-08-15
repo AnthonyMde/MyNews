@@ -13,16 +13,20 @@ import android.view.MenuItem;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.PagerAdapter;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
-    private android.support.v7.widget.Toolbar mToolbar;
-    private ViewPager mViewPager;
-    private TabLayout mTabLayout;
-    private DrawerLayout mDrawerLayout;
+    @BindView(R.id.toolbar) android.support.v7.widget.Toolbar mToolbar;
+    @BindView(R.id.activity_main_viewpager) ViewPager mViewPager;
+    @BindView(R.id.activity_main_tabs) TabLayout mTabLayout;
+    @BindView(R.id.activity_main_drawer_layout) DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         this.configureToolbar();
         this.configurePageAdapterAndTabs();
@@ -52,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureToolbar() {
-        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
     }
     private void launchSearchActivity(){
@@ -69,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
     //NAVIGATION DRAWER CONFIGURATION
     //---------------------------------------------
     private void configureDrawerLayout(){
-        mDrawerLayout = findViewById(R.id.activity_main_drawer_layout);
         //Join the drawer with the toolbar to set the hamburger button
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -82,11 +84,9 @@ public class MainActivity extends AppCompatActivity {
     //---------------------------------------------
     private void configurePageAdapterAndTabs(){
         //Set adapter to viewpager
-        mViewPager = findViewById(R.id.activity_main_viewpager);
         mViewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
 
         //Glue the tabs with the viewpager + tabs had the same width
-        mTabLayout = findViewById(R.id.activity_main_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
     }

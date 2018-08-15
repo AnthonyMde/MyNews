@@ -6,6 +6,11 @@
         <item name="colorPrimary">#00bbd3</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#f8e71c</item>
+        <item name="drawerArrowStyle">@style/NavDrawerTheme</item>
+    </style>
+
+    <style name="NavDrawerTheme" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/white</item>
     </style>
 
 </resources>
