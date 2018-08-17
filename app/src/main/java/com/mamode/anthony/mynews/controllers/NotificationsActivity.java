@@ -1,8 +1,10 @@
 package com.mamode.anthony.mynews.controllers;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.mamode.anthony.mynews.R;
 
@@ -10,15 +12,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NotificationsActivity extends AppCompatActivity {
-    /*@BindView(R.id.toolbar) android.support.v7.widget.Toolbar toolbar;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
-        /*ButterKnife.bind(this);*/
 
         this.configureToolbar();
+
     }
 
     private void configureToolbar(){

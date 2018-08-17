@@ -13,11 +13,6 @@
         <item name="drawerArrowStyle">@style/NavDrawerTheme</item>
     </style>
 
-    <!--action bar-->
-    <style name="toolbar_theme" parent="@style/Widget.AppCompat.Light.ActionBar">
-        <item name="colorControlNormal">@color/white</item>
-    </style>
-
     <style name="NavDrawerTheme" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@color/white</item>
     </style>

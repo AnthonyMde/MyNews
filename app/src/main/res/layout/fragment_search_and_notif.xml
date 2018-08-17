@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/textInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium"
+        android:theme="@style/AccentBlue"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search query term"
+            android:inputType="textShortMessage"
+            android:theme="@style/AccentBlue" />
+    </android.support.design.widget.TextInputLayout>
+
+    <EditText
+        android:id="@+id/begin_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium"
+        android:layout_marginRight="@dimen/medium"
+        android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+        android:focusable="false"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout"
+        app:layout_constraintEnd_toStartOf="@id/guideline_middle" />
+
+    <EditText
+        android:id="@+id/end_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium"
+        android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+        android:focusable="false"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        app:layout_constraintStart_toEndOf="@id/guideline_middle"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout"/>
+
+    <CheckBox
+        android:id="@+id/checkbox1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium"
+        app:layout_constraintTop_toBottomOf="@id/begin_date"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        android:text="CheckBox" />
+
+    <CheckBox
+        android:id="@+id/checkbox2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkbox1"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        android:text="CheckBox" />
+
+    <CheckBox
+        android:id="@+id/checkbox3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkbox2"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        android:text="CheckBox" />
+
+    <CheckBox
+        android:id="@+id/checkbox4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium"
+        app:layout_constraintTop_toBottomOf="@id/begin_date"
+        app:layout_constraintStart_toStartOf="@id/guideline_middle"
+        android:text="CheckBox" />
+
+    <CheckBox
+        android:id="@+id/checkbox5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkbox4"
+        app:layout_constraintStart_toStartOf="@id/guideline_middle"
+        android:text="CheckBox" />
+
+    <CheckBox
+        android:id="@+id/checkbox6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkbox5"
+        app:layout_constraintStart_toStartOf="@id/guideline_middle"
+        android:text="CheckBox" />
+
+    <Button
+        android:id="@+id/search_frag_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkbox3"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+        android:layout_marginTop="@dimen/x_large"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:text="SEARCH"/>
+
+    <Switch
+        android:visibility="gone"
+        android:id="@+id/notification_frag_switch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Enable notifications (once per day)"
+        android:layout_marginTop="@dimen/x_large"
+        android:layout_marginLeft="@dimen/small"
+        android:layout_marginRight="@dimen/small"
+        app:layout_constraintEnd_toStartOf="@id/guideline_end"
+        app:layout_constraintStart_toEndOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox3"
+        android:theme="@style/AccentBlue"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="8dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="8dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.53" />
+
+</android.support.constraint.ConstraintLayout>
