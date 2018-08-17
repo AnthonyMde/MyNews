@@ -1,26 +1,31 @@
 package com.mamode.anthony.mynews.controllers;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
 import com.mamode.anthony.mynews.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class NotificationsActivity extends AppCompatActivity {
+    /*@BindView(R.id.toolbar) android.support.v7.widget.Toolbar toolbar;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
+        /*ButterKnife.bind(this);*/
 
         this.configureToolbar();
     }
 
     private void configureToolbar(){
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.include_toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        if(ab != null)
+            ab.setDisplayHomeAsUpEnabled(true);
     }
 }

@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".controllers.NotificationsActivity">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar"
+        android:id="@+id/include_toolbar"/>
+
+    <include layout="@layout/checkboxes"
+        android:id="@+id/checkboxes"/>
+
+    <include layout="@layout/text_input_search"
+        android:id="@+id/text_input_search"/>
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Enable notifications (once per day)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkboxes"
+        android:theme="@style/AccentBlue"/>
 
 </android.support.constraint.ConstraintLayout>

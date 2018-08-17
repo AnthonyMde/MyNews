@@ -6,6 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".controllers.SearchActivity">
 
-    <include layout="@layout/toolbar"/>
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/include_toolbar"/>
+
+    <include
+        layout="@layout/text_input_search"
+        android:id="@+id/text_input_search"
+        />
+
+    <include
+        layout="@layout/checkboxes"
+        android:id="@+id/checkboxes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium"
+        app:layout_constraintStart_toStartOf="@id/begin_date"
+        app:layout_constraintTop_toBottomOf="@id/begin_date"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Begin Date"
+        app:layout_constraintStart_toStartOf="@id/begin_date"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_search" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="End Date"
+        app:layout_constraintStart_toEndOf="@+id/begin_date"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_search" />
+    <EditText
+        android:id="@+id/begin_date"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:focusable="false"
+        android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+        app:layout_constraintStart_toStartOf="@id/text_input_search"
+        app:layout_constraintTop_toBottomOf="@id/text_input_search" />
+
+    <EditText
+        android:id="@+id/end_date"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
+        android:focusable="false"
+        app:layout_constraintStart_toEndOf="@+id/begin_date"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_search" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/checkboxes"
+        app:layout_constraintStart_toStartOf="@id/checkboxes"
+        android:layout_marginTop="@dimen/large"
+        android:layout_marginRight="@dimen/medium"
+        android:layout_marginLeft="@dimen/medium"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:text="SEARCH"/>
+
+
 
 </android.support.constraint.ConstraintLayout>
