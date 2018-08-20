@@ -47,9 +47,7 @@ public class NotificationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_search_and_notif, container, false);
-        layout.findViewById(R.id.begin_date).setVisibility(View.GONE);
-        layout.findViewById(R.id.end_date).setVisibility(View.GONE);
-        layout.findViewById(R.id.search_frag_button).setVisibility(View.GONE);
+        layout.findViewById(R.id.search_group_hide).setVisibility(View.GONE);
         layout.findViewById(R.id.notification_frag_switch).setVisibility(View.VISIBLE);
         return layout;
     }
