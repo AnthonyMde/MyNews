@@ -9,8 +9,10 @@
     <item
         android:id="@+id/menu_activity_main_menu_notifications"
         android:icon="@drawable/ic_more_vert_white_24dp"
-        app:showAsAction="ifRoom"
-        android:title="@string/param_toolbar_title">
+        app:showAsAction="never"
+        android:title="@string/notification_toolbar_title">
     </item>
+    <item android:title="@string/help_toolbar_title" />
+    <item android:title="@string/about_toolbar_title" />
 
 </menu>

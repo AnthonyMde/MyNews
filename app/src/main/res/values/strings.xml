@@ -1,15 +1,21 @@
 <resources>
+    <!-- activity name -->
     <string name="app_name">MyNews</string>
-    <string name="param_toolbar_title">Parameters</string>
-    <string name="research_toolbar_title">Research</string>
     <string name="notification_activity_name">Notifications</string>
     <string name="search_activity_name">Search Articles</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- toolbar text -->
+    <string name="notification_toolbar_title">Notifications</string>
+    <string name="research_toolbar_title">Research</string>
+    <string name="help_toolbar_title">Help</string>
+    <string name="about_toolbar_title">About</string>
+
+    <!-- fragment title -->
     <string name="business_frag_txt">Hello Business !</string>
     <string name="most_pop_frag_txt">Hello from Most !</string>
     <string name="top_stories_frag_txt">Hey from Top Stories !</string>
+
+    <!-- navigation drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
