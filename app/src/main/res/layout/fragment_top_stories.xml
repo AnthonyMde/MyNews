@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".fragments.TopStoriesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/main_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/top_stories_frag_txt" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>
