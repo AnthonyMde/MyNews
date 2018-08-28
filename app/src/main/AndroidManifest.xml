@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mamode.anthony.mynews">
 
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <!-- todo: fix bad google indexation -->
     <application
         android:allowBackup="true"
