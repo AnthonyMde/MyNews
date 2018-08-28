@@ -12,7 +12,10 @@ import com.mamode.anthony.mynews.fragments.TopStoriesFragment;
 import com.mamode.anthony.mynews.models.Article;
 import com.mamode.anthony.mynews.models.Multimedium;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +42,8 @@ public class MainRecyclerViewHolder extends RecyclerView.ViewHolder {
         }
         this.ariadneThread.setText(ariane);
 
-        this.date.setText(article.getUpdatedDate());
+        String date = this.parseDate(article);
+        this.date.setText(date);
 
         List<Multimedium> multimedia = article.getMultimedia();
         if (multimedia.size() != 0) {
@@ -47,4 +51,18 @@ public class MainRecyclerViewHolder extends RecyclerView.ViewHolder {
             Glide.with(image.getContext()).load(url).into(image);
         }
     }
+
+    private String parseDate(Article article){
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));   // This line converts the given date into UTC time zone
+        java.util.Date dateObj = null;
+        try {
+            dateObj = sdf.parse(article.getUpdatedDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new SimpleDateFormat("MM/dd/yyyy").format(dateObj);
+    }
+
+
 }
