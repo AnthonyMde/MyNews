@@ -1,7 +1,6 @@
 package com.mamode.anthony.mynews.fragments;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,26 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mamode.anthony.mynews.R;
-import com.mamode.anthony.mynews.adapters.MainRecyclerViewAdapter;
-import com.mamode.anthony.mynews.controllers.MainActivity;
-import com.mamode.anthony.mynews.models.Article;
+import com.mamode.anthony.mynews.adapters.TopStoriesAdapter;
 import com.mamode.anthony.mynews.models.TopStories;
 import com.mamode.anthony.mynews.utils.ArticleCalls;
 import com.mamode.anthony.mynews.utils.Constants;
-import com.mamode.anthony.mynews.utils.NewsService;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbacks {
-    private MainRecyclerViewAdapter mAdapter;
+    private TopStoriesAdapter mAdapter;
     @BindView(R.id.main_recycler_view) RecyclerView mRecyclerView;
 
     public TopStoriesFragment() {
@@ -58,7 +51,7 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
     //RECYCLER VIEW CONFIGURATION
     //---------------------------------------------
     private void configureRecyclerView(TopStories articles) {
-        mAdapter = new MainRecyclerViewAdapter(articles.getArticles());
+        mAdapter = new TopStoriesAdapter(articles.getArticles());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
 

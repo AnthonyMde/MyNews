@@ -2,7 +2,6 @@ package com.mamode.anthony.mynews.fragments;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +12,10 @@ import com.mamode.anthony.mynews.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BusinessFragment extends Fragment {
+public class ScienceFragment extends Fragment {
 
 
-    public BusinessFragment() {
+    public ScienceFragment() {
         // Required empty public constructor
     }
 
@@ -25,11 +24,11 @@ public class BusinessFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_business, container, false);
+        return inflater.inflate(R.layout.fragment_science, container, false);
     }
 
-    public static BusinessFragment newInstance() {
-        return new BusinessFragment();
+    public static ScienceFragment newInstance() {
+        return new ScienceFragment();
     }
 
 

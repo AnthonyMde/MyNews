@@ -7,13 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mamode.anthony.mynews.R;
-import com.mamode.anthony.mynews.adapters.MainRecyclerViewAdapter;
 import com.mamode.anthony.mynews.adapters.PagerAdapter;
 
 import butterknife.BindView;

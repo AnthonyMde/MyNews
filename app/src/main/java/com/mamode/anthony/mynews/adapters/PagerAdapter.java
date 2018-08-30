@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.mamode.anthony.mynews.fragments.BusinessFragment;
+import com.mamode.anthony.mynews.fragments.ScienceFragment;
 import com.mamode.anthony.mynews.fragments.MostPopularFragment;
 import com.mamode.anthony.mynews.fragments.TopStoriesFragment;
 
@@ -23,7 +23,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return MostPopularFragment.newInstance();
             case 2:
-                return BusinessFragment.newInstance();
+                return ScienceFragment.newInstance();
             default:
                 return null;
         }
@@ -43,7 +43,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return "Most Popular";
             case 2:
-                return "Business";
+                return "Science";
             default:
                 return null;
         }

@@ -2,11 +2,9 @@ package com.mamode.anthony.mynews.utils;
 
 import android.support.annotation.Nullable;
 
-import com.mamode.anthony.mynews.models.Article;
 import com.mamode.anthony.mynews.models.TopStories;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -8,32 +8,32 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mamode.anthony.mynews.R;
-import com.mamode.anthony.mynews.models.Article;
-import com.mamode.anthony.mynews.views.MainRecyclerViewHolder;
+import com.mamode.anthony.mynews.models.MostPopularArticle;
+import com.mamode.anthony.mynews.views.MostPopularViewHolder;
 
 import java.util.List;
 
-public class MainRecyclerViewAdapter extends RecyclerView.Adapter<MainRecyclerViewHolder>{
-    private List<Article> mArticles;
+public class MostPopularAdapter extends RecyclerView.Adapter<MostPopularViewHolder>{
+    private List<MostPopularArticle> mArticles;
 
-    public MainRecyclerViewAdapter(List<Article> articles) {
+    public MostPopularAdapter(List<MostPopularArticle> articles) {
         super();
         mArticles = articles;
     }
 
     @NonNull
     @Override
-    public MainRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MostPopularViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recycler_view_item, parent, false);
-        return new MainRecyclerViewHolder(view);
+        return new MostPopularViewHolder(view);
     }
 
     //retrieve article object by position and set their UI
     @Override
-    public void onBindViewHolder(@NonNull MainRecyclerViewHolder holder, int position) {
-        holder.updateWithArticle(mArticles.get(position));
+    public void onBindViewHolder(@NonNull MostPopularViewHolder holder, int position) {
+        holder.updateWithMostPopularArticle(mArticles.get(position));
     }
 
     @Override
