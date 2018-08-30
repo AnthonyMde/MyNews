@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".controllers.NewsWebView"/>
+
         <!--Child of MainActivity-->
         <activity
             android:name=".controllers.NotificationsActivity"

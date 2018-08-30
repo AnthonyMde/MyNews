@@ -1,5 +1,6 @@
 package com.mamode.anthony.mynews.views;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mamode.anthony.mynews.R;
+import com.mamode.anthony.mynews.adapters.TopStoriesAdapter;
 import com.mamode.anthony.mynews.models.TopStoriesArticle;
 import com.mamode.anthony.mynews.models.Multimedium;
 
@@ -20,11 +22,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TopStoriesViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.recycler_item_snippet) private TextView snippet;
-    @BindView(R.id.recycler_item_ariane) private TextView ariadneThread;
-    @BindView(R.id.recycler_item_date) private TextView date;
-    @BindView(R.id.recycler_item_image) private ImageView image;
-
+    @BindView(R.id.recycler_item_snippet) TextView snippet;
+    @BindView(R.id.recycler_item_ariane) TextView ariadneThread;
+    @BindView(R.id.recycler_item_date) TextView date;
+    @BindView(R.id.recycler_item_image) ImageView image;
+    @BindView(R.id.recycler_item) View recyclerItem;
 
     public TopStoriesViewHolder(View itemView) {
         super(itemView);
@@ -63,5 +65,12 @@ public class TopStoriesViewHolder extends RecyclerView.ViewHolder {
         return new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(dateObj);
     }
 
-
+    public void bind(final TopStoriesArticle article, final TopStoriesAdapter.OnItemClickListener listener) {
+        recyclerItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClik(article);
+            }
+        });
+    }
 }

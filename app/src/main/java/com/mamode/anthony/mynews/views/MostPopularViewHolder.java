@@ -12,10 +12,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MostPopularViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.recycler_item_snippet) private TextView snippet;
-    @BindView(R.id.recycler_item_ariane) private TextView ariadneThread;
-    @BindView(R.id.recycler_item_date) private TextView date;
-    @BindView(R.id.recycler_item_image) private ImageView image;
+    @BindView(R.id.recycler_item_snippet) TextView snippet;
+    @BindView(R.id.recycler_item_ariane) TextView ariadneThread;
+    @BindView(R.id.recycler_item_date) TextView date;
+    @BindView(R.id.recycler_item_image) ImageView image;
 
 
     public MostPopularViewHolder(View itemView) {

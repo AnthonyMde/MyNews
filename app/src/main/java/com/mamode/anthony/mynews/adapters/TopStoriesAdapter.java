@@ -14,11 +14,17 @@ import com.mamode.anthony.mynews.views.TopStoriesViewHolder;
 import java.util.List;
 
 public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesViewHolder>{
-    private List<TopStoriesArticle> mArticles;
+    public interface OnItemClickListener {
+        void onItemClik(TopStoriesArticle article);
+    }
 
-    public TopStoriesAdapter(List<TopStoriesArticle> articles) {
+    private List<TopStoriesArticle> mArticles;
+    private OnItemClickListener mListener;
+
+    public TopStoriesAdapter(List<TopStoriesArticle> articles, OnItemClickListener listener) {
         super();
         mArticles = articles;
+        mListener = listener;
     }
 
     @NonNull
@@ -34,8 +40,8 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesViewHolder
     @Override
     public void onBindViewHolder(@NonNull TopStoriesViewHolder holder, int position) {
         holder.updateWithTopStoriesArticle(mArticles.get(position));
+        holder.bind(mArticles.get(position), mListener);
     }
-
     @Override
     public int getItemCount() {
         return mArticles.size();

@@ -1,6 +1,7 @@
 package com.mamode.anthony.mynews.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,10 @@ import android.view.ViewGroup;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.TopStoriesAdapter;
+import com.mamode.anthony.mynews.controllers.MainActivity;
+import com.mamode.anthony.mynews.controllers.NewsWebView;
 import com.mamode.anthony.mynews.models.TopStories;
+import com.mamode.anthony.mynews.models.TopStoriesArticle;
 import com.mamode.anthony.mynews.utils.ArticleCalls;
 import com.mamode.anthony.mynews.utils.Constants;
 
@@ -24,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbacks {
+public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbacks, TopStoriesAdapter.OnItemClickListener {
     private TopStoriesAdapter mAdapter;
     @BindView(R.id.main_recycler_view) RecyclerView mRecyclerView;
 
@@ -51,7 +55,7 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
     //RECYCLER VIEW CONFIGURATION
     //---------------------------------------------
     private void configureRecyclerView(TopStories articles) {
-        mAdapter = new TopStoriesAdapter(articles.getArticles());
+        mAdapter = new TopStoriesAdapter(articles.getArticles(), this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
 
@@ -72,5 +76,12 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
     @Override
     public void onFailure() {
         Log.e("onFailure", "Inside");
+    }
+
+    @Override
+    public void onItemClik(TopStoriesArticle article) {
+        Intent intent = new Intent(getActivity(), NewsWebView.class);
+        intent.putExtra("url", article.getUrl());
+        getActivity().startActivity(intent);
     }
 }
