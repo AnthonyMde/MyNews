@@ -1,6 +1,5 @@
 package com.mamode.anthony.mynews.utils;
 
-import com.mamode.anthony.mynews.models.MostPopulars;
 import com.mamode.anthony.mynews.models.NewsArticles;
 
 import retrofit2.Call;
@@ -16,6 +15,9 @@ public interface NewsService {
 
     @GET("svc/mostpopular/v2/mostviewed/all-sections/1.json")
     Call<NewsArticles> getMostPopular(@Query("api-key") String apiKey);
+
+    @GET("svc/topstories/v2/science.json")
+    Call<NewsArticles> getTopStoriesScience(@Query("api-key") String apiKey);
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/")

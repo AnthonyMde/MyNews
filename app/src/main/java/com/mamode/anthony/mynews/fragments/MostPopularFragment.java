@@ -38,9 +38,9 @@ public class MostPopularFragment extends Fragment implements ArticleCalls.Callba
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_most_popular, container, false);
+        View view = inflater.inflate(R.layout.fragment_top_stories, container, false);
         ButterKnife.bind(this, view);
-        ArticleCalls.fetchMostPopular(this, Constants.API_KEY);
+        ArticleCalls.fetchNews(this, Constants.API_KEY, "MostPopular");
         return view;
     }
 
@@ -54,7 +54,6 @@ public class MostPopularFragment extends Fragment implements ArticleCalls.Callba
             this.configureRecyclerView(articles);
         }
     }
-
     @Override
     public void onFailure() {
         Log.e("onFailure", "Inside");
@@ -64,7 +63,6 @@ public class MostPopularFragment extends Fragment implements ArticleCalls.Callba
         RecyclerViewAdapter mAdapter = new RecyclerViewAdapter(articles.getArticles(), this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
     @Override

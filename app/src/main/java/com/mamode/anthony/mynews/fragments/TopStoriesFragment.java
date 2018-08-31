@@ -40,7 +40,7 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top_stories, container, false);
         ButterKnife.bind(this, view);
-        ArticleCalls.fetchTopStories(this, Constants.API_KEY);
+        ArticleCalls.fetchNews(this, Constants.API_KEY, "TopStories");
         return view;
     }
 
