@@ -37,11 +37,11 @@ public class TopStoriesViewHolder extends RecyclerView.ViewHolder {
     public void updateWithTopStoriesArticle(TopStoriesArticle article){
         this.snippet.setText(article.getAbstract());
 
-        String ariane = article.getSection();
+        String ariadneThread = article.getSection();
         if (!article.getSubsection().equals("")){
-            ariane += " > " + article.getSubsection();
+            ariadneThread += " > " + article.getSubsection();
         }
-        this.ariadneThread.setText(ariane);
+        this.ariadneThread.setText(ariadneThread);
 
         String date = this.parseDate(article);
         this.date.setText(date);
@@ -61,6 +61,7 @@ public class TopStoriesViewHolder extends RecyclerView.ViewHolder {
             dateObj = sdf.parse(article.getPublishedDate());
         } catch (ParseException e) {
             e.printStackTrace();
+            return "";
         }
         return new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(dateObj);
     }

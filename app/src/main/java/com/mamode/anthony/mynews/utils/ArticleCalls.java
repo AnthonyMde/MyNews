@@ -18,18 +18,18 @@ public class ArticleCalls {
         void onFailure();
     }
 
-    // 2 - Public method to start fetching users following by Jake Wharton
+    // Public method to start fetching top stories api data
     public static void fetchTopStories(Callbacks callbacks, String apikey){
 
-        // 2.1 - Create a weak reference to callback (avoid memory leaks)
+        // Create a weak reference to callback (avoid memory leaks)
         final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<Callbacks>(callbacks);
 
-        // 2.2 - Get a Retrofit instance and the related endpoints
+        // Get a Retrofit instance and the related endpoints
         NewsService newsService = NewsService.retrofit.create(NewsService.class);
 
-        // 2.3 - Create the call on TopStories API
+        // Create the call on TopStories API
         Call<TopStories> call = newsService.getTopStories(apikey);
-        // 2.4 - Start the call
+        // Start the call
         call.enqueue(new Callback<TopStories>() {
 
             @Override

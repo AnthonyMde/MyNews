@@ -1,10 +1,12 @@
 package com.mamode.anthony.mynews.controllers;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Window;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -16,8 +18,8 @@ import butterknife.ButterKnife;
 public class NewsWebView extends Activity {
     @BindView(R.id.webview)
     WebView webview;
-    private String articleUrl = "";
 
+    @SuppressLint("setJavaScriptEnabled")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,22 +29,23 @@ public class NewsWebView extends Activity {
         ButterKnife.bind(this);
 
         webview.getSettings().setJavaScriptEnabled(true);
+        webview.setWebChromeClient(new WebChromeClient());
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setLoadWithOverviewMode(true);
         webview.getSettings().setUseWideViewPort(true);
 
+        WebSettings webSettings = webview.getSettings();
+        webSettings.setDomStorageEnabled(true);
+
         // Load URL
         Intent intent = getIntent();
-        articleUrl = intent.getStringExtra("url");
-        webview.loadUrl(articleUrl);
-
+        webview.loadUrl(intent.getStringExtra("url"));
         // Show the progress bar
         webview.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
                 setProgress(progress * 100);
             }
         });
-
         // Call private class InsideWebViewClient
         webview.setWebViewClient(new InsideWebViewClient());
     }
