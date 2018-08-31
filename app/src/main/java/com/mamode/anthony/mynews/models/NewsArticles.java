@@ -4,16 +4,16 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-    public class TopStories {
+    public class NewsArticles {
         @SerializedName("results")
         @Expose
-        private List<TopStoriesArticle> articles = null;
+        private List<NewsArticle> articles = null;
 
-        public List<TopStoriesArticle> getArticles() {
+        public List<NewsArticle> getArticles() {
             return articles;
         }
 
-        public void setArticles(List<TopStoriesArticle> articles) {
+        public void setArticles(List<NewsArticle> articles) {
             this.articles = articles;
         }
 

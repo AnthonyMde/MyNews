@@ -3,7 +3,6 @@ package com.mamode.anthony.mynews.models;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.mamode.anthony.mynews.utils.Article;
 
 public class MostPopularArticle {
     @SerializedName("section")

@@ -13,11 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mamode.anthony.mynews.R;
-import com.mamode.anthony.mynews.adapters.TopStoriesAdapter;
-import com.mamode.anthony.mynews.controllers.MainActivity;
+import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
 import com.mamode.anthony.mynews.controllers.NewsWebView;
-import com.mamode.anthony.mynews.models.TopStories;
-import com.mamode.anthony.mynews.models.TopStoriesArticle;
+import com.mamode.anthony.mynews.models.NewsArticles;
+import com.mamode.anthony.mynews.models.NewsArticle;
 import com.mamode.anthony.mynews.utils.ArticleCalls;
 import com.mamode.anthony.mynews.utils.Constants;
 
@@ -28,8 +27,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbacks, TopStoriesAdapter.OnItemClickListener {
-    private TopStoriesAdapter mAdapter;
+public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbacks, RecyclerViewAdapter.OnItemClickListener {
     @BindView(R.id.main_recycler_view) RecyclerView mRecyclerView;
 
     public TopStoriesFragment() {
@@ -46,31 +44,15 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
         return view;
     }
 
-
     public static TopStoriesFragment newInstance() {
         return new TopStoriesFragment();
     }
 
-    //---------------------------------------------
-    //RECYCLER VIEW CONFIGURATION
-    //---------------------------------------------
-    private void configureRecyclerView(TopStories articles) {
-        mAdapter = new TopStoriesAdapter(articles.getArticles(), this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mAdapter);
-
-    }
-
-
     @Override
-    public void onResponse(@Nullable TopStories articles) {
+    public void onResponse(@Nullable NewsArticles articles) {
         if (articles != null) {
-            this.updateUIWithListOfArticles(articles);
+            this.configureRecyclerView(articles);
         }
-    }
-
-    private void updateUIWithListOfArticles(TopStories articles) {
-        this.configureRecyclerView(articles);
     }
 
     @Override
@@ -78,8 +60,15 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
         Log.e("onFailure", "Inside");
     }
 
+
+    private void configureRecyclerView(NewsArticles articles) {
+        RecyclerViewAdapter mAdapter = new RecyclerViewAdapter(articles.getArticles(), this);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
     @Override
-    public void onItemClik(TopStoriesArticle article) {
+    public void onItemClik(NewsArticle article) {
         Intent intent = new Intent(getActivity(), NewsWebView.class);
         intent.putExtra("url", article.getUrl());
         getActivity().startActivity(intent);

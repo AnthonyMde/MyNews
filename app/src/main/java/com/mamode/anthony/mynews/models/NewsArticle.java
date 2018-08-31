@@ -2,36 +2,32 @@ package com.mamode.anthony.mynews.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.mamode.anthony.mynews.utils.Article;
 
 import java.util.List;
 
-public class TopStoriesArticle {
+public class NewsArticle {
         @SerializedName("section")
         @Expose
-        private String section;
+        private String section = null;
         @SerializedName("subsection")
         @Expose
-        private String subsection;
+        private String subsection = null;
         @SerializedName("abstract")
         @Expose
-        private String _abstract;
+        private String _abstract = null;
         @SerializedName("url")
         @Expose
-        private String url;
+        private String url = null;
         @SerializedName("published_date")
         @Expose
-        private String publishedDate;
+        private String publishedDate = null;
         @SerializedName("multimedia")
         @Expose
         private List<Multimedium> multimedia = null;
-        @SerializedName("short_url")
+        //from MostPopular API
+        @SerializedName("media")
         @Expose
-        private String shortUrl;
-
-        public String getImage() {
-            return multimedia.get(0).getUrl();
-        }
+        private List<Medium> media = null;
 
         public String getSection() {
             return section;
@@ -81,12 +77,12 @@ public class TopStoriesArticle {
             this.multimedia = multimedia;
         }
 
-        public String getShortUrl() {
-            return shortUrl;
+        public List<Medium> getMedia() {
+            return media;
         }
 
-        public void setShortUrl(String shortUrl) {
-            this.shortUrl = shortUrl;
+        public void setMedia(List<Medium> media) {
+            this.media = media;
         }
 
     }

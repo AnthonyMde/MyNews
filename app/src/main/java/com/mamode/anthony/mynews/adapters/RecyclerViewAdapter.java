@@ -8,20 +8,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mamode.anthony.mynews.R;
-import com.mamode.anthony.mynews.models.TopStoriesArticle;
-import com.mamode.anthony.mynews.views.TopStoriesViewHolder;
+import com.mamode.anthony.mynews.models.NewsArticle;
+import com.mamode.anthony.mynews.views.RecyclerViewHolder;
 
 import java.util.List;
 
-public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
     public interface OnItemClickListener {
-        void onItemClik(TopStoriesArticle article);
+        void onItemClik(NewsArticle article);
     }
 
-    private List<TopStoriesArticle> mArticles;
+    private List<NewsArticle> mArticles;
     private OnItemClickListener mListener;
 
-    public TopStoriesAdapter(List<TopStoriesArticle> articles, OnItemClickListener listener) {
+    public RecyclerViewAdapter(List<NewsArticle> articles, OnItemClickListener listener) {
         super();
         mArticles = articles;
         mListener = listener;
@@ -29,16 +29,16 @@ public class TopStoriesAdapter extends RecyclerView.Adapter<TopStoriesViewHolder
 
     @NonNull
     @Override
-    public TopStoriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recycler_view_item, parent, false);
-        return new TopStoriesViewHolder(view);
+        return new RecyclerViewHolder(view);
     }
 
     //retrieve article object by position and set their UI
     @Override
-    public void onBindViewHolder(@NonNull TopStoriesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         holder.updateWithTopStoriesArticle(mArticles.get(position));
         holder.bind(mArticles.get(position), mListener);
     }
