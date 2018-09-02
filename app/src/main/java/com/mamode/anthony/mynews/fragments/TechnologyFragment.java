@@ -12,30 +12,31 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
 import com.mamode.anthony.mynews.controllers.NewsWebView;
-import com.mamode.anthony.mynews.models.NewsArticles;
 import com.mamode.anthony.mynews.models.NewsArticle;
+import com.mamode.anthony.mynews.models.NewsArticles;
 import com.mamode.anthony.mynews.utils.ArticleCalls;
 import com.mamode.anthony.mynews.utils.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbacks, RecyclerViewAdapter.OnItemClickListener {
-    @BindView(R.id.main_recycler_view) RecyclerView mRecyclerView;
+public class TechnologyFragment extends Fragment implements ArticleCalls.Callbacks, RecyclerViewAdapter.OnItemClickListener {
+    @BindView(R.id.main_recycler_view)
+    RecyclerView mRecyclerView;
 
-    public TopStoriesFragment() {
+    public TechnologyFragment() {
         // Required empty public constructor
     }
-    public static TopStoriesFragment newInstance() {
-        return new TopStoriesFragment();
+    public static TechnologyFragment newInstance() {
+        return new TechnologyFragment();
     }
 
     @Override
@@ -50,7 +51,7 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArticleCalls.fetchNews(this, Constants.API_KEY, "TopStories");
+        ArticleCalls.fetchNews(this, Constants.API_KEY, "Technology");
     }
 
     @Override
@@ -59,12 +60,10 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
             this.configureRecyclerView(articles);
         }
     }
-
     @Override
     public void onFailure() {
         Log.e("onFailure", "Inside");
     }
-
 
     private void configureRecyclerView(NewsArticles articles) {
         RecyclerViewAdapter mAdapter = new RecyclerViewAdapter(articles.getArticles(), this);
@@ -79,3 +78,4 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
         getActivity().startActivity(intent);
     }
 }
+

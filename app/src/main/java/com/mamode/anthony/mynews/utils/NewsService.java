@@ -19,6 +19,15 @@ public interface NewsService {
     @GET("svc/topstories/v2/science.json")
     Call<NewsArticles> getTopStoriesScience(@Query("api-key") String apiKey);
 
+    @GET("svc/topstories/v2/world.json")
+    Call<NewsArticles> getTopStoriesWorld(@Query("api-key") String apiKey);
+
+    @GET("svc/topstories/v2/health.json")
+    Call<NewsArticles> getTopStoriesHealth(@Query("api-key") String apiKey);
+
+    @GET("svc/topstories/v2/technology.json")
+    Call<NewsArticles> getTopStoriesTechnology(@Query("api-key") String apiKey);
+
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/")
             .addConverterFactory(GsonConverterFactory.create())

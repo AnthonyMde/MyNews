@@ -1,5 +1,6 @@
 package com.mamode.anthony.mynews.controllers;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.PagerAdapter;
@@ -21,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.activity_main_viewpager) ViewPager mViewPager;
     @BindView(R.id.activity_main_tabs) TabLayout mTabLayout;
     @BindView(R.id.activity_main_drawer_layout) DrawerLayout mDrawerLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

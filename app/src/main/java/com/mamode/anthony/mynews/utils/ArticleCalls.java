@@ -37,6 +37,15 @@ public class ArticleCalls {
             case "Science":
                 call = newsService.getTopStoriesScience(apikey);
                 break;
+            case "World":
+                call = newsService.getTopStoriesWorld(apikey);
+                break;
+            case "Health":
+                call = newsService.getTopStoriesHealth(apikey);
+                break;
+            case "Technology":
+                call = newsService.getTopStoriesTechnology(apikey);
+                break;
         }
         // Start the call
         if (call != null) {

@@ -5,9 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.mamode.anthony.mynews.fragments.HealthFragment;
 import com.mamode.anthony.mynews.fragments.ScienceFragment;
 import com.mamode.anthony.mynews.fragments.MostPopularFragment;
+import com.mamode.anthony.mynews.fragments.TechnologyFragment;
 import com.mamode.anthony.mynews.fragments.TopStoriesFragment;
+import com.mamode.anthony.mynews.fragments.WorldFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
 
@@ -24,6 +27,12 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 return MostPopularFragment.newInstance();
             case 2:
                 return ScienceFragment.newInstance();
+            case 3:
+                return WorldFragment.newInstance();
+            case 4:
+                return HealthFragment.newInstance();
+            case 5:
+                return TechnologyFragment.newInstance();
             default:
                 return null;
         }
@@ -31,7 +40,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 5;
     }
 
     @Nullable
@@ -44,6 +53,12 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 return "Most Popular";
             case 2:
                 return "Science";
+            case 3:
+                return "World";
+            case 4:
+                return "Health";
+            case 5:
+                return "Technology";
             default:
                 return null;
         }

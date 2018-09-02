@@ -3,6 +3,7 @@ package com.mamode.anthony.mynews.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,9 @@ public class ScienceFragment extends Fragment implements ArticleCalls.Callbacks,
     public ScienceFragment() {
         // Required empty public constructor
     }
+    public static ScienceFragment newInstance() {
+        return new ScienceFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,12 +44,13 @@ public class ScienceFragment extends Fragment implements ArticleCalls.Callbacks,
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top_stories, container, false);
         ButterKnife.bind(this, view);
-        ArticleCalls.fetchNews(this, Constants.API_KEY, "Science");
         return view;
     }
 
-    public static ScienceFragment newInstance() {
-        return new ScienceFragment();
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ArticleCalls.fetchNews(this, Constants.API_KEY, "Science");
     }
 
     @Override
