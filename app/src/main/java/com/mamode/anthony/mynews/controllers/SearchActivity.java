@@ -10,8 +10,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.mamode.anthony.mynews.R;
+import com.mamode.anthony.mynews.utils.DateUtils;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +22,8 @@ public class SearchActivity extends AppCompatActivity {
     private int actualYear;
     private int actualMonth;
     private int actualDay;
+    private String beginDateValue = "";
+    private String endDateValue = "";
 
     @BindView(R.id.begin_date) EditText beginDate;
     @BindView(R.id.end_date) EditText endDate;
@@ -32,19 +36,9 @@ public class SearchActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         this.configureToolbar();
-        this.configureBeginDate();
-        this.configureEndDate();
-
-        //todo: refacto the beginData and add endDate computation methods
-        //todo: beginData shall not exceed endDate value and conversely
-        Calendar calendar = Calendar.getInstance();
-        actualYear = calendar.get(Calendar.YEAR);
-        actualMonth = calendar.get(Calendar.MONTH);
-        actualDay = calendar.get(Calendar.DAY_OF_MONTH);
-
-        beginDate.setText(actualDay+"/"+actualMonth+"/"+actualYear);
-        endDate.setText(actualDay+"/"+actualMonth+"/"+actualYear);
-
+        this.setActualDate();
+        this.configureDatePicker(beginDate);
+        this.configureDatePicker(endDate);
     }
 
     private void configureToolbar(){
@@ -55,39 +49,41 @@ public class SearchActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void configureBeginDate() {
-        beginDate.setKeyListener(null);
-        beginDate.setOnClickListener(new View.OnClickListener() {
+    private void setActualDate(){
+        Calendar calendar = Calendar.getInstance();
+        this.actualYear = calendar.get(Calendar.YEAR);
+        this.actualMonth = calendar.get(Calendar.MONTH);
+        this.actualDay = calendar.get(Calendar.DAY_OF_MONTH);
+    }
+
+    private void configureDatePicker(final EditText datePickerEditText){
+        datePickerEditText.setKeyListener(null);
+        datePickerEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePicker;
-                datePicker = new DatePickerDialog(SearchActivity.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
+                final DatePickerDialog datePickerDialog;
+                datePickerDialog = new DatePickerDialog(SearchActivity.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        beginDate.setText(dayOfMonth+"/"+month+"/"+year);
+                        if (datePickerEditText == beginDate){
+                            beginDateValue = DateUtils.addZeroToDate(dayOfMonth)+"/"+DateUtils.addZeroToDate(month+1)+"/"+year;
+                            datePickerEditText.setText(beginDateValue);
+                        }else {
+                            endDateValue = DateUtils.addZeroToDate(dayOfMonth)+"/"+DateUtils.addZeroToDate(month+1)+"/"+year;
+                            datePickerEditText.setText(endDateValue);
+                        }
                     }
                 }, actualYear, actualMonth, actualDay);
-                datePicker.show();
+
+                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+                if (datePickerEditText == beginDate && !endDateValue.equals("")){
+                    datePickerDialog.getDatePicker().setMaxDate((long)DateUtils.convertDateIntoMillis(endDateValue) + 40000000);
+                }
+                if (datePickerEditText == endDate && !beginDateValue.equals("")){
+                    datePickerDialog.getDatePicker().setMinDate((long)(DateUtils.convertDateIntoMillis(beginDateValue) + 40000000));
+                }
+                datePickerDialog.show();
             }
         });
     }
-
-    private void configureEndDate() {
-        endDate.setKeyListener(null);
-        endDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog datePicker;
-                datePicker = new DatePickerDialog(SearchActivity.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        endDate.setText(dayOfMonth+"/"+month+"/"+year);
-                    }
-                }, actualYear, actualMonth, actualDay);
-                datePicker.show();
-            }
-        });
-    }
-
-
 }

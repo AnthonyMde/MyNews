@@ -1,6 +1,6 @@
 package com.mamode.anthony.mynews.controllers;
 
-import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.PagerAdapter;
@@ -89,6 +88,13 @@ public class MainActivity extends AppCompatActivity {
 
         //Glue the tabs with the viewpager + tabs had the same width
         mTabLayout.setupWithViewPager(mViewPager);
-        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        int paddingInPixels = convertDipInPixel(52);
+        mTabLayout.getChildAt(mTabLayout.getChildCount()-1).setPadding(paddingInPixels, 0 , paddingInPixels, 0);
+    }
+
+    private int convertDipInPixel(float dips) {
+        final float SCALE = getBaseContext().getResources().getDisplayMetrics().density;
+        return (int)(dips * SCALE + 0.5f);
     }
 }

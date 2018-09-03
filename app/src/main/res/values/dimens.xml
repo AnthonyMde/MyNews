@@ -8,4 +8,9 @@
     <dimen name="x_large">36dp</dimen>
 
     <dimen name="elevation_tabs">4dp</dimen>
+
+    <!--tabs navigation-->
+    <dimen name="min_width_tabs">90dp</dimen>
+    <dimen name="tab_start_offset">52dp</dimen>
+    <dimen name="max_width_tabs">360dp</dimen>
 </resources>
