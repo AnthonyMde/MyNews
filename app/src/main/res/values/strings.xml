@@ -19,6 +19,20 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- search and notification layout strings -->
+    <string name="search_input_text">Search query term</string>
+    <string name="begin_date_text">Begin Date</string>
+    <string name="end_date_text">End Date</string>
+    <string name="checkbox_science_text">Science</string>
+    <string name="checkbox_health_text">Health</string>
+    <string name="checkbox_world_text">World</string>
+    <string name="checkbox_technology_text">Technology</string>
+    <string name="search_button_text">SEARCH</string>
+    <string name="notification_switch_text">Enable notifications (once per day)</string>
+
+    <!-- RecyclerView row strings -->
+    <string name="recycler_view_image_description">news_article_picture</string>
+    <string name="recycler_view_row_title">fil ariane</string>
+    <string name="recycler_view_content_text">Ici l\'apperçu du début de l\'article à l\'intérieur de cet item</string>
+    <string name="recycler_view_date">17/25/89</string>
 </resources>

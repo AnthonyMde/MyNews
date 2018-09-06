@@ -14,10 +14,10 @@ import com.mamode.anthony.mynews.views.RecyclerViewHolder;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
+    // Implementing by fragment who need callback on recyclerView item click.
     public interface OnItemClickListener {
-        void onItemClik(NewsArticle article);
+        void onItemClick(NewsArticle article);
     }
-
     private List<NewsArticle> mArticles;
     private OnItemClickListener mListener;
 
@@ -36,10 +36,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         return new RecyclerViewHolder(view);
     }
 
-    //retrieve article object by position and set their UI
+    // Retrieve article object by position,
+    // set recyclerView item content with updateWithArticleContent() method,
+    // set onClickListener for each item with bind() method.
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
-        holder.updateWithTopStoriesArticle(mArticles.get(position));
+        holder.updateWithArticleContent(mArticles.get(position));
         holder.bind(mArticles.get(position), mListener);
     }
     @Override

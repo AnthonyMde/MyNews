@@ -26,14 +26,6 @@ public class MediumMetadatum {
         this.url = url;
     }
 
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
     public Integer getHeight() {
         return height;
     }

@@ -33,24 +33,12 @@ public class NewsArticle {
             return section;
         }
 
-        public void setSection(String section) {
-            this.section = section;
-        }
-
         public String getSubsection() {
             return subsection;
         }
 
-        public void setSubsection(String subsection) {
-            this.subsection = subsection;
-        }
-
         public String getAbstract() {
             return _abstract;
-        }
-
-        public void setAbstract(String _abstract) {
-            this._abstract = _abstract;
         }
 
         public String getUrl() {
@@ -65,24 +53,12 @@ public class NewsArticle {
             return publishedDate;
         }
 
-        public void setPublishedDate(String publishedDate) {
-            this.publishedDate = publishedDate;
-        }
-
         public List<Multimedium> getMultimedia() {
             return multimedia;
         }
 
-        public void setMultimedia(List<Multimedium> multimedia) {
-            this.multimedia = multimedia;
-        }
-
         public List<Medium> getMedia() {
             return media;
-        }
-
-        public void setMedia(List<Medium> media) {
-            this.media = media;
         }
 
     }

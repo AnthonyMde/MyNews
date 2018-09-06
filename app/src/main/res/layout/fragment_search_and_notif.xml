@@ -10,6 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium"
+        android:paddingBottom="@dimen/medium"
         android:theme="@style/AccentBlue"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -18,17 +19,40 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search query term"
+            android:hint="@string/search_input_text"
             android:inputType="textShortMessage"
             android:theme="@style/AccentBlue" />
     </android.support.design.widget.TextInputLayout>
 
+    <TextView
+        android:id="@+id/begin_date_label"
+        android:labelFor="@id/begin_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/begin_date_text"
+        android:layout_marginTop="@dimen/small"
+        android:layout_marginStart="@dimen/x_small"
+        app:layout_constraintStart_toStartOf="@id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout"/>
+
+    <TextView
+        android:id="@+id/end_date_label"
+        android:labelFor="@id/end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/end_date_text"
+        android:layout_marginStart="@dimen/x_small"
+        android:layout_marginTop="@dimen/small"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout"
+        app:layout_constraintStart_toStartOf="@id/end_date"/>
+
     <EditText
         android:id="@+id/begin_date"
+        android:inputType="date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium"
-        android:layout_marginRight="@dimen/medium"
+        android:layout_marginEnd="@dimen/medium"
         android:drawableEnd="@drawable/ic_arrow_drop_down_black_24dp"
         android:focusable="false"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -37,6 +61,7 @@
 
     <EditText
         android:id="@+id/end_date"
+        android:inputType="date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium"
@@ -53,7 +78,7 @@
         android:layout_marginTop="@dimen/medium"
         app:layout_constraintTop_toBottomOf="@id/begin_date"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        android:text="CheckBox" />
+        android:text="@string/checkbox_science_text" />
 
     <CheckBox
         android:id="@+id/checkbox2"
@@ -61,7 +86,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/checkbox1"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        android:text="CheckBox" />
+        android:text="@string/checkbox_health_text" />
 
     <CheckBox
         android:id="@+id/checkbox3"
@@ -69,7 +94,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/checkbox2"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
-        android:text="CheckBox" />
+        android:text="@string/checkbox_world_text" />
 
     <CheckBox
         android:id="@+id/checkbox4"
@@ -78,7 +103,7 @@
         android:layout_marginTop="@dimen/medium"
         app:layout_constraintTop_toBottomOf="@id/begin_date"
         app:layout_constraintStart_toStartOf="@id/guideline_middle"
-        android:text="CheckBox" />
+        android:text="@string/checkbox_technology_text" />
 
     <CheckBox
         android:id="@+id/checkbox5"
@@ -103,17 +128,17 @@
         app:layout_constraintTop_toBottomOf="@id/checkbox3"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
-        android:layout_marginTop="@dimen/x_large"
+        android:layout_marginTop="@dimen/large_xx"
         android:background="@color/colorPrimary"
         android:textColor="@color/white"
-        android:text="SEARCH"/>
+        android:text="@string/search_button_text"/>
 
     <Switch
         android:visibility="gone"
         android:id="@+id/notification_frag_switch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Enable notifications (once per day)"
+        android:text="@string/notification_switch_text"
         android:layout_marginTop="@dimen/x_large"
         android:layout_marginLeft="@dimen/small"
         android:layout_marginRight="@dimen/small"
@@ -126,7 +151,7 @@
         android:id="@+id/search_group_hide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="begin_date, end_date, search_frag_button"/>
+        app:constraint_referenced_ids="begin_date, end_date, begin_date_label, end_date_label, search_frag_button"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_start"

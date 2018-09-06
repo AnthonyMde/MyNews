@@ -23,11 +23,12 @@ public class NewsWebView extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Prepare the progress bar
+        // Prepare the progress bar.
         requestWindowFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.news_web_view);
         ButterKnife.bind(this);
 
+        // Configure the webView.
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebChromeClient(new WebChromeClient());
         webview.getSettings().setBuiltInZoomControls(true);
@@ -37,22 +38,22 @@ public class NewsWebView extends Activity {
         WebSettings webSettings = webview.getSettings();
         webSettings.setDomStorageEnabled(true);
 
-        // Load URL
+        // Load URL.
         Intent intent = getIntent();
         webview.loadUrl(intent.getStringExtra("url"));
-        // Show the progress bar
+        // Show the progress bar.
         webview.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
                 setProgress(progress * 100);
             }
         });
-        // Call private class InsideWebViewClient
+        // Call private class InsideWebViewClient.
         webview.setWebViewClient(new InsideWebViewClient());
     }
 
     private class InsideWebViewClient extends WebViewClient {
         @Override
-        // Force links to be opened inside WebView and not in Default Browser
+        // Force links to be opened inside WebView and not in Default Browser.
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             return true;

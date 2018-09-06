@@ -19,15 +19,11 @@ import com.mamode.anthony.mynews.controllers.NewsWebView;
 import com.mamode.anthony.mynews.models.NewsArticles;
 import com.mamode.anthony.mynews.models.NewsArticle;
 import com.mamode.anthony.mynews.utils.ArticleCalls;
-import com.mamode.anthony.mynews.utils.Constants;
+import com.mamode.anthony.mynews.models.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbacks, RecyclerViewAdapter.OnItemClickListener {
     @BindView(R.id.main_recycler_view) RecyclerView mRecyclerView;
 
@@ -39,7 +35,7 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_top_stories, container, false);
@@ -50,21 +46,22 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //NYT api call.
         ArticleCalls.fetchNews(this, Constants.API_KEY, "TopStories");
     }
 
+    //If data are received from the NYT api.
     @Override
     public void onResponse(@Nullable NewsArticles articles) {
         if (articles != null) {
             this.configureRecyclerView(articles);
         }
     }
-
+    //If fetching NYT data api has failed.
     @Override
     public void onFailure() {
-        Log.e("onFailure", "Inside");
+        Log.e("ArticleCalls-onFailure", "Can not reach NYT data API");
     }
-
 
     private void configureRecyclerView(NewsArticles articles) {
         RecyclerViewAdapter mAdapter = new RecyclerViewAdapter(articles.getArticles(), this);
@@ -72,8 +69,9 @@ public class TopStoriesFragment extends Fragment implements ArticleCalls.Callbac
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    //Open webView on recyclerView item clicked.
     @Override
-    public void onItemClik(NewsArticle article) {
+    public void onItemClick(NewsArticle article) {
         Intent intent = new Intent(getActivity(), NewsWebView.class);
         intent.putExtra("url", article.getUrl());
         getActivity().startActivity(intent);

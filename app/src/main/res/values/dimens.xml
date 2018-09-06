@@ -6,6 +6,7 @@
     <dimen name="medium">16dp</dimen>
     <dimen name="large">24dp</dimen>
     <dimen name="x_large">36dp</dimen>
+    <dimen name="large_xx">72dp</dimen>
 
     <dimen name="elevation_tabs">4dp</dimen>
 

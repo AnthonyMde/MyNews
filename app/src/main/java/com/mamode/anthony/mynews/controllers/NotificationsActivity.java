@@ -3,11 +3,7 @@ package com.mamode.anthony.mynews.controllers;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-
 import com.mamode.anthony.mynews.R;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class NotificationsActivity extends AppCompatActivity {
 
@@ -17,7 +13,6 @@ public class NotificationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notifications);
 
         this.configureToolbar();
-
     }
 
     private void configureToolbar(){

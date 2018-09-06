@@ -12,9 +12,4 @@ import com.google.gson.annotations.SerializedName;
         public List<NewsArticle> getArticles() {
             return articles;
         }
-
-        public void setArticles(List<NewsArticle> articles) {
-            this.articles = articles;
-        }
-
 }

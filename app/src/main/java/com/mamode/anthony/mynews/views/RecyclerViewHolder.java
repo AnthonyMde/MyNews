@@ -32,8 +32,8 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    //Use API data to fill recycler view item
-    public void updateWithTopStoriesArticle(NewsArticle article){
+    //Use API data to fill recycler view item.
+    public void updateWithArticleContent(NewsArticle article){
         this.snippet.setText(article.getAbstract());
 
         String ariadneThread = article.getSection();
@@ -59,6 +59,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    //Convert the data api date in usable String.
     private String parseDate(NewsArticle article){
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));   // This line converts the given date into UTC time zone
@@ -72,11 +73,13 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         return new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(dateObj);
     }
 
+    //Set onClickListener (on each recyclerView item) for fragment implementing the OnItemClickListener interface.
+    //This bind method is used by the Adapter (no by the ViewHolder directly).
     public void bind(final NewsArticle article, final RecyclerViewAdapter.OnItemClickListener listener) {
         recyclerItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onItemClik(article);
+                listener.onItemClick(article);
             }
         });
     }

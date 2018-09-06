@@ -18,6 +18,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
+    // Create new fragment according to its position.
     @Override
     public Fragment getItem(int position) {
         switch (position){

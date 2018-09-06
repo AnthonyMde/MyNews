@@ -4,13 +4,12 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.mamode.anthony.mynews.R;
-import com.mamode.anthony.mynews.utils.DateUtils;
+import com.mamode.anthony.mynews.utils.Utils;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -56,6 +55,7 @@ public class SearchActivity extends AppCompatActivity {
         this.actualDay = calendar.get(Calendar.DAY_OF_MONTH);
     }
 
+    // Set default google calendar with max and min date logic
     private void configureDatePicker(final EditText datePickerEditText){
         datePickerEditText.setKeyListener(null);
         datePickerEditText.setOnClickListener(new View.OnClickListener() {
@@ -66,10 +66,10 @@ public class SearchActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         if (datePickerEditText == beginDate){
-                            beginDateValue = DateUtils.addZeroToDate(dayOfMonth)+"/"+DateUtils.addZeroToDate(month+1)+"/"+year;
+                            beginDateValue = Utils.addZeroToDate(dayOfMonth)+"/"+ Utils.addZeroToDate(month+1)+"/"+year;
                             datePickerEditText.setText(beginDateValue);
                         }else {
-                            endDateValue = DateUtils.addZeroToDate(dayOfMonth)+"/"+DateUtils.addZeroToDate(month+1)+"/"+year;
+                            endDateValue = Utils.addZeroToDate(dayOfMonth)+"/"+ Utils.addZeroToDate(month+1)+"/"+year;
                             datePickerEditText.setText(endDateValue);
                         }
                     }
@@ -77,10 +77,10 @@ public class SearchActivity extends AppCompatActivity {
 
                 datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
                 if (datePickerEditText == beginDate && !endDateValue.equals("")){
-                    datePickerDialog.getDatePicker().setMaxDate((long)DateUtils.convertDateIntoMillis(endDateValue) + 40000000);
+                    datePickerDialog.getDatePicker().setMaxDate((long) Utils.convertDateIntoMillis(endDateValue) + 40000000);
                 }
                 if (datePickerEditText == endDate && !beginDateValue.equals("")){
-                    datePickerDialog.getDatePicker().setMinDate((long)(DateUtils.convertDateIntoMillis(beginDateValue) + 40000000));
+                    datePickerDialog.getDatePicker().setMinDate((long)(Utils.convertDateIntoMillis(beginDateValue) + 40000000));
                 }
                 datePickerDialog.show();
             }

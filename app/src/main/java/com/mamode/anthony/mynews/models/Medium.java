@@ -12,9 +12,4 @@ public class Medium {
     public List<MediumMetadatum> getMediaMetadatum() {
         return mediumMetadata;
     }
-
-    public void setMediaMetadata(List<MediumMetadatum> mediumMetadata) {
-        this.mediumMetadata = mediumMetadata;
-    }
-
 }

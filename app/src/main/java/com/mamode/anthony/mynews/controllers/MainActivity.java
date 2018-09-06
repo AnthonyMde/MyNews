@@ -1,6 +1,5 @@
 package com.mamode.anthony.mynews.controllers;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -13,6 +12,7 @@ import android.view.MenuItem;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.PagerAdapter;
+import com.mamode.anthony.mynews.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private void configureToolbar() {
         setSupportActionBar(mToolbar);
     }
+
     private void launchSearchActivity(){
         Intent intent = new Intent(MainActivity.this, SearchActivity.class);
         startActivity(intent);
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     //NAVIGATION DRAWER CONFIGURATION
     //---------------------------------------------
     private void configureDrawerLayout(){
-        //Join the drawer with the toolbar to set the hamburger button
+        // Join the drawer with the toolbar to set the hamburger button.
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
@@ -83,18 +84,13 @@ public class MainActivity extends AppCompatActivity {
     //TABS and VIEWPAGER CONFIGURATION
     //---------------------------------------------
     private void configurePageAdapterAndTabs(){
-        //Set adapter to viewpager
+        // Set adapter to viewpager.
         mViewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
 
-        //Glue the tabs with the viewpager + tabs had the same width
+        // Glue the tabs with the viewpager + tabs had the same width.
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-        int paddingInPixels = convertDipInPixel(52);
+        int paddingInPixels = Utils.convertDipInPixel(getBaseContext(), 52);
         mTabLayout.getChildAt(mTabLayout.getChildCount()-1).setPadding(paddingInPixels, 0 , paddingInPixels, 0);
-    }
-
-    private int convertDipInPixel(float dips) {
-        final float SCALE = getBaseContext().getResources().getDisplayMetrics().density;
-        return (int)(dips * SCALE + 0.5f);
     }
 }
