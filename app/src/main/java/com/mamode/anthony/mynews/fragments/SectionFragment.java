@@ -1,7 +1,7 @@
 package com.mamode.anthony.mynews.fragments;
 
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,31 +15,46 @@ import android.view.ViewGroup;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
-import com.mamode.anthony.mynews.controllers.NewsWebView;
 import com.mamode.anthony.mynews.models.NewsArticle;
 import com.mamode.anthony.mynews.models.NewsArticles;
 import com.mamode.anthony.mynews.utils.ArticleCalls;
 import com.mamode.anthony.mynews.models.Constants;
+import com.mamode.anthony.mynews.utils.SectionType;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TechnologyFragment extends Fragment implements ArticleCalls.Callbacks, RecyclerViewAdapter.OnItemClickListener {
+public class SectionFragment extends Fragment implements ArticleCalls.Callbacks, RecyclerViewAdapter.OnItemClickListener {
     @BindView(R.id.main_recycler_view)
     RecyclerView mRecyclerView;
 
-    public TechnologyFragment() {
+    private SectionFragmentCallback callback;
+    private static final String FRAGMENT_TYPE = "fragment-type";
+    private SectionType mFragmentType;
+
+    public SectionFragment() {
         // Required empty public constructor
     }
-    public static TechnologyFragment newInstance() {
-        return new TechnologyFragment();
+    public static SectionFragment newInstance(SectionType type) {
+        SectionFragment fragment = new SectionFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(FRAGMENT_TYPE, type);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null)
+        mFragmentType = (SectionType) getArguments().getSerializable(FRAGMENT_TYPE);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_top_stories, container, false);
+        View view = inflater.inflate(R.layout.fragment_section, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -48,7 +63,16 @@ public class TechnologyFragment extends Fragment implements ArticleCalls.Callbac
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //NYT api call.
-        ArticleCalls.fetchNews(this, Constants.API_KEY, "Technology");
+        ArticleCalls.fetchNews(this, Constants.API_KEY, mFragmentType);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (getActivity() != null)
+            callback = (SectionFragmentCallback) getActivity();
+
     }
 
     //If data are received from the NYT api.
@@ -73,9 +97,11 @@ public class TechnologyFragment extends Fragment implements ArticleCalls.Callbac
     //Open webView on recyclerView item clicked.
     @Override
     public void onItemClick(NewsArticle article) {
-        Intent intent = new Intent(getActivity(), NewsWebView.class);
-        intent.putExtra("url", article.getUrl());
-        getActivity().startActivity(intent);
+        if (callback != null)
+            callback.openUrl(article.getUrl());
+    }
+
+    public interface SectionFragmentCallback {
+        void openUrl(String url);
     }
 }
-

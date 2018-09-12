@@ -12,12 +12,13 @@ import android.view.MenuItem;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.PagerAdapter;
+import com.mamode.anthony.mynews.fragments.SectionFragment;
 import com.mamode.anthony.mynews.utils.Utils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SectionFragment.SectionFragmentCallback{
     @BindView(R.id.toolbar) android.support.v7.widget.Toolbar mToolbar;
     @BindView(R.id.activity_main_viewpager) ViewPager mViewPager;
     @BindView(R.id.activity_main_tabs) TabLayout mTabLayout;
@@ -92,5 +93,12 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         int paddingInPixels = Utils.convertDipInPixel(getBaseContext(), 52);
         mTabLayout.getChildAt(mTabLayout.getChildCount()-1).setPadding(paddingInPixels, 0 , paddingInPixels, 0);
+    }
+
+    @Override
+    public void openUrl(String url) {
+        Intent intent = new Intent(this, NewsWebView.class);
+        intent.putExtra("url",url);
+        startActivity(intent);
     }
 }
