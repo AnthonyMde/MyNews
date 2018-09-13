@@ -11,8 +11,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.mamode.anthony.mynews.utils.SectionType.*;
-
 public class ArticleCalls {
 
     // 1 - Creating a callback
@@ -22,7 +20,7 @@ public class ArticleCalls {
     }
 
     // Public method to start fetching top stories api data
-    public static void fetchNews(Callbacks callbacks, String apikey, SectionType fragmentType) {
+    public static void fetchNews(Callbacks callbacks, String apikey, @FragmentNewsType.FragmentType int fragmentType) {
         // Create a weak reference to callback (avoid memory leaks)
         final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<>(callbacks);
         // Get a Retrofit instance and the related endpoints
@@ -32,22 +30,22 @@ public class ArticleCalls {
 
         // Make the right API call according to the name fragment
         switch (fragmentType) {
-            case TOPSTORIES:
+            case FragmentNewsType.TOPSTORIES:
                 call = newsService.getTopStories(apikey);
                 break;
-            case MOSTPOPULAR:
+            case FragmentNewsType.MOSTPOPULAR:
                 call = newsService.getMostPopular(apikey);
                 break;
-            case SCIENCE:
+            case FragmentNewsType.SCIENCE:
                 call = newsService.getTopStoriesScience(apikey);
                 break;
-            case WORLD:
+            case FragmentNewsType.WORLD:
                 call = newsService.getTopStoriesWorld(apikey);
                 break;
-            case HEALTH:
+            case FragmentNewsType.HEALTH:
                 call = newsService.getTopStoriesHealth(apikey);
                 break;
-            case TECHNOLOGY:
+            case FragmentNewsType.TECHNOLOGY:
                 call = newsService.getTopStoriesTechnology(apikey);
                 break;
         }

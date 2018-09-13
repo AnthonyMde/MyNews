@@ -19,7 +19,7 @@ import com.mamode.anthony.mynews.models.NewsArticle;
 import com.mamode.anthony.mynews.models.NewsArticles;
 import com.mamode.anthony.mynews.utils.ArticleCalls;
 import com.mamode.anthony.mynews.models.Constants;
-import com.mamode.anthony.mynews.utils.SectionType;
+import com.mamode.anthony.mynews.utils.FragmentNewsType;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,16 +29,16 @@ public class SectionFragment extends Fragment implements ArticleCalls.Callbacks,
     RecyclerView mRecyclerView;
 
     private SectionFragmentCallback callback;
-    private static final String FRAGMENT_TYPE = "fragment-type";
-    private SectionType mFragmentType;
+    private static final String FRAGMENT_TYPE = "FRAGMENT-TYPE";
+    private int mFragmentType;
 
     public SectionFragment() {
         // Required empty public constructor
     }
-    public static SectionFragment newInstance(SectionType type) {
+    public static SectionFragment newInstance(@FragmentNewsType.FragmentType int type) {
         SectionFragment fragment = new SectionFragment();
         Bundle args = new Bundle();
-        args.putSerializable(FRAGMENT_TYPE, type);
+        args.putInt(FRAGMENT_TYPE, type);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,7 +47,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.Callbacks,
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null)
-        mFragmentType = (SectionType) getArguments().getSerializable(FRAGMENT_TYPE);
+        mFragmentType = getArguments().getInt(FRAGMENT_TYPE);
     }
 
     @Override

@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.mamode.anthony.mynews.fragments.SectionFragment;
-import com.mamode.anthony.mynews.utils.SectionType;
+import com.mamode.anthony.mynews.utils.FragmentNewsType;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     public PagerAdapter(FragmentManager fm) {
@@ -18,24 +18,24 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return SectionFragment.newInstance(SectionType.TOPSTORIES);
+                return SectionFragment.newInstance(FragmentNewsType.TOPSTORIES);
             case 1:
-                return SectionFragment.newInstance(SectionType.MOSTPOPULAR);
+                return SectionFragment.newInstance(FragmentNewsType.MOSTPOPULAR);
             case 2:
-                return SectionFragment.newInstance(SectionType.SCIENCE);
+                return SectionFragment.newInstance(FragmentNewsType.SCIENCE);
             case 3:
-                return SectionFragment.newInstance(SectionType.HEALTH);
+                return SectionFragment.newInstance(FragmentNewsType.WORLD);
             case 4:
-                return SectionFragment.newInstance(SectionType.WORLD);
+                return SectionFragment.newInstance(FragmentNewsType.HEALTH);
             case 5:
-                return SectionFragment.newInstance(SectionType.TECHNOLOGY);
+                return SectionFragment.newInstance(FragmentNewsType.TECHNOLOGY);
             default:
                 return null;
         }
     }
     @Override
     public int getCount() {
-        return 5;
+        return 6;
     }
 
     @Nullable
