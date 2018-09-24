@@ -1,0 +1,65 @@
+{
+  "section": "Science",
+  "subsection": "",
+  "title": "Saltmarsh Sparrows Fight to Keep Their Heads Above Water",
+  "abstract": "Rising sea levels are bringing more nest-flooding tides that threaten to push the birds that breed in coastal marshes along the Atlantic Coast to extinction.",
+  "url": "https://www.nytimes.com/2018/09/17/science/saltmarsh-sparrow-extinction.html",
+  "byline": "By JAMES GORMAN",
+  "item_type": "Article",
+  "updated_date": "2018-09-18T00:20:01-04:00",
+  "created_date": "2018-09-17T13:18:27-04:00",
+  "published_date": "2018-09-17T13:18:27-04:00",
+  "multimedia": [
+    {
+      "url": "https://static01.nyt.com/images/2018/09/18/science/18SCI-SPARROWS1/merlin_141234075_fafe4100-5370-49a3-9fe0-97330cf98cd9-thumbStandard.jpg",
+      "format": "Standard Thumbnail",
+      "height": 75,
+      "width": 75,
+      "type": "image",
+      "subtype": "photo",
+      "caption": "A saltmarsh sparrow chick at  Hammonasset Beach State Park.",
+      "copyright": "Karsten Moran for The New York Times"
+    },
+    {
+      "url": "https://static01.nyt.com/images/2018/09/18/science/18SCI-SPARROWS1/merlin_141234075_fafe4100-5370-49a3-9fe0-97330cf98cd9-thumbLarge.jpg",
+      "format": "thumbLarge",
+      "height": 150,
+      "width": 150,
+      "type": "image",
+      "subtype": "photo",
+      "caption": "A saltmarsh sparrow chick at  Hammonasset Beach State Park.",
+      "copyright": "Karsten Moran for The New York Times"
+    },
+    {
+      "url": "https://static01.nyt.com/images/2018/09/18/science/18SCI-SPARROWS1/merlin_141234075_fafe4100-5370-49a3-9fe0-97330cf98cd9-articleInline.jpg",
+      "format": "Normal",
+      "height": 127,
+      "width": 190,
+      "type": "image",
+      "subtype": "photo",
+      "caption": "A saltmarsh sparrow chick at  Hammonasset Beach State Park.",
+      "copyright": "Karsten Moran for The New York Times"
+    },
+    {
+      "url": "https://static01.nyt.com/images/2018/09/18/science/18SCI-SPARROWS1/merlin_141234075_fafe4100-5370-49a3-9fe0-97330cf98cd9-mediumThreeByTwo210.jpg",
+      "format": "mediumThreeByTwo210",
+      "height": 140,
+      "width": 210,
+      "type": "image",
+      "subtype": "photo",
+      "caption": "A saltmarsh sparrow chick at  Hammonasset Beach State Park.",
+      "copyright": "Karsten Moran for The New York Times"
+    },
+    {
+      "url": "https://static01.nyt.com/images/2018/09/18/science/18SCI-SPARROWS1/merlin_141234075_fafe4100-5370-49a3-9fe0-97330cf98cd9-superJumbo.jpg",
+      "format": "superJumbo",
+      "height": 1365,
+      "width": 2048,
+      "type": "image",
+      "subtype": "photo",
+      "caption": "A saltmarsh sparrow chick at  Hammonasset Beach State Park.",
+      "copyright": "Karsten Moran for The New York Times"
+    }
+  ],
+  "short_url": "https://nyti.ms/2NlZFZU"
+}

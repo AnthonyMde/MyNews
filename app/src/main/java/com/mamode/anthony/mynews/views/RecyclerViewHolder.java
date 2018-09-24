@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
 import com.mamode.anthony.mynews.models.NewsArticle;
-import com.mamode.anthony.mynews.models.Multimedium;
+import com.mamode.anthony.mynews.models.Multimedia;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,14 +46,14 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         this.date.setText(date);
 
         if (article.getMultimedia() != null) {
-            List<Multimedium> multimedia = article.getMultimedia();
+            List<Multimedia> multimedia = article.getMultimedia();
             if (multimedia.size() != 0) {
                 String url = multimedia.get(0).getUrl();
                 Glide.with(image.getContext()).load(url).into(image);
             }
         }else if (article.getMedia() != null) {
-            if (article.getMedia().size() != 0 && article.getMedia().get(0).getMediaMetadatum().size() != 0){
-                String url = article.getMedia().get(0).getMediaMetadatum().get(0).getUrl();
+            if (article.getMedia().size() != 0 && article.getMedia().get(0).getMediumMetadata().size() != 0){
+                String url = article.getMedia().get(0).getMediumMetadata().get(0).getUrl();
                 Glide.with(image.getContext()).load(url).into(image);
             }
         }

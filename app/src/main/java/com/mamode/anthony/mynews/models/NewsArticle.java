@@ -21,10 +21,11 @@ public class NewsArticle {
         @SerializedName("published_date")
         @Expose
         private String publishedDate = null;
+        //From TopStories API.
         @SerializedName("multimedia")
         @Expose
-        private List<Multimedium> multimedia = null;
-        //from MostPopular API
+        private List<Multimedia> multimedia = null;
+        //From MostPopular API.
         @SerializedName("media")
         @Expose
         private List<Medium> media = null;
@@ -45,18 +46,16 @@ public class NewsArticle {
             return url;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
         public String getPublishedDate() {
             return publishedDate;
         }
 
-        public List<Multimedium> getMultimedia() {
+        /* Specific to the TopStories API */
+        public List<Multimedia> getMultimedia() {
             return multimedia;
         }
 
+        /* Specific to the MostPopularArticle API */
         public List<Medium> getMedia() {
             return media;
         }

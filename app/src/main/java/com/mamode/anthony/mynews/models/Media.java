@@ -9,7 +9,7 @@ public class Medium {
     @Expose
     private List<MediumMetadatum> mediumMetadata = null;
 
-    public List<MediumMetadatum> getMediaMetadatum() {
+    public List<MediumMetadatum> getMediumMetadata() {
         return mediumMetadata;
     }
 }

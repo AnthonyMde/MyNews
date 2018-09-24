@@ -3,6 +3,7 @@ package com.mamode.anthony.mynews.utils;
 import android.content.Context;
 import android.util.Log;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -15,13 +16,8 @@ public class Utils {
             return String.valueOf(date);
     }
 
-    public static float convertDateIntoMillis(String date){
-        try{
+    public static float convertDateIntoMillis(String date) throws ParseException{
             return new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).parse(date).getTime();
-        }catch (Exception e){
-            Log.e("convertDateIntoMillis", "Error during parsing date");
-            return new Date().getTime();
-        }
     }
 
     public static int convertDipInPixel(Context context, float dips) {

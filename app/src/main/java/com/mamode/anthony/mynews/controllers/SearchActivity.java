@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.utils.Utils;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -77,10 +79,20 @@ public class SearchActivity extends AppCompatActivity {
 
                 datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
                 if (datePickerEditText == beginDate && !endDateValue.equals("")){
-                    datePickerDialog.getDatePicker().setMaxDate((long) Utils.convertDateIntoMillis(endDateValue) + 40000000);
+                    try {
+                        datePickerDialog.getDatePicker().setMaxDate((long)Utils.convertDateIntoMillis(endDateValue) + 40000000);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "The date can't be parsed, please contact support", Toast.LENGTH_LONG).show();
+                    }
                 }
                 if (datePickerEditText == endDate && !beginDateValue.equals("")){
-                    datePickerDialog.getDatePicker().setMinDate((long)(Utils.convertDateIntoMillis(beginDateValue) + 40000000));
+                    try {
+                        datePickerDialog.getDatePicker().setMinDate((long)Utils.convertDateIntoMillis(beginDateValue) + 40000000);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "The date can't be parsed, please contact support", Toast.LENGTH_LONG).show();
+                    }
                 }
                 datePickerDialog.show();
             }
