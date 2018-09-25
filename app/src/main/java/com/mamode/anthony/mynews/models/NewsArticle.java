@@ -28,7 +28,7 @@ public class NewsArticle {
         //From MostPopular API.
         @SerializedName("media")
         @Expose
-        private List<Medium> media = null;
+        private List<Media> media = null;
 
         public String getSection() {
             return section;
@@ -56,7 +56,7 @@ public class NewsArticle {
         }
 
         /* Specific to the MostPopularArticle API */
-        public List<Medium> getMedia() {
+        public List<Media> getMedia() {
             return media;
         }
 

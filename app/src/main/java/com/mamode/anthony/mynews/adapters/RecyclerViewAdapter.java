@@ -21,6 +21,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     private List<NewsArticle> mArticles;
     private OnItemClickListener mListener;
 
+    public RecyclerViewAdapter(OnItemClickListener listener){
+        mListener = listener;
+    }
+
     public RecyclerViewAdapter(List<NewsArticle> articles, OnItemClickListener listener) {
         super();
         mArticles = articles;

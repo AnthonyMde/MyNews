@@ -89,9 +89,9 @@ public class SectionFragment extends Fragment implements ArticleCalls.Callbacks,
     }
 
     private void configureRecyclerView(NewsArticles articles) {
-        RecyclerViewAdapter mAdapter = new RecyclerViewAdapter(articles.getArticles(), this);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(articles.getArticles(), this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(adapter);
     }
 
     //Open webView on recyclerView item clicked.

@@ -52,8 +52,8 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
                 Glide.with(image.getContext()).load(url).into(image);
             }
         }else if (article.getMedia() != null) {
-            if (article.getMedia().size() != 0 && article.getMedia().get(0).getMediumMetadata().size() != 0){
-                String url = article.getMedia().get(0).getMediumMetadata().get(0).getUrl();
+            if (article.getMedia().size() != 0 && article.getMedia().get(0).getMediaMetadata().size() != 0){
+                String url = article.getMedia().get(0).getMediaMetadata().get(0).getUrl();
                 Glide.with(image.getContext()).load(url).into(image);
             }
         }
