@@ -1,23 +1,14 @@
 package com.mamode.anthony.mynews.models;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.mamode.anthony.mynews.GsonParser;
 
-import org.apache.commons.io.FileUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.List;
 
-import okio.Utf8;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class TopStoriesArticleTest {
 
@@ -71,6 +62,6 @@ public class TopStoriesArticleTest {
     /* From MostPopular API */
     @Test
     public void Given_DataApi_When_CallApi_Then_GetMedia() {
-
+        // TODO
     }
 }

@@ -1,12 +1,22 @@
 package com.mamode.anthony.mynews.controllers;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mamode.anthony.mynews.R;
@@ -19,15 +29,19 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity{
     private int actualYear;
     private int actualMonth;
     private int actualDay;
     private String beginDateValue = "";
     private String endDateValue = "";
+    private int checkboxCounter = 0;
 
     @BindView(R.id.begin_date) EditText beginDate;
     @BindView(R.id.end_date) EditText endDate;
+    @BindView(R.id.search_frag_button) Button mSearchButton;
+    @BindView(R.id.input_search_and_notif) TextInputEditText mInput;
+    @BindView(R.id.textInputLayout) TextInputLayout mInputLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +54,23 @@ public class SearchActivity extends AppCompatActivity {
         this.setActualDate();
         this.configureDatePicker(beginDate);
         this.configureDatePicker(endDate);
+
+        mInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                doWeSetButtonClickable();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void configureToolbar(){
@@ -48,6 +79,20 @@ public class SearchActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         if(ab != null)
             ab.setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void doWeSetButtonClickable(){
+        if(mInput.getText().length()>=3){
+            if(checkboxCounter>=1)mSearchButton.setEnabled(true);
+            else{mSearchButton.setEnabled(false);}
+        }else{mSearchButton.setEnabled(false);}
+    }
+
+    // Method call from the layout file
+    public void onCheckboxClicked(View view){
+        if(((CheckBox)view).isChecked()){checkboxCounter++;}
+        else{checkboxCounter--;}
+        doWeSetButtonClickable();
     }
 
     private void setActualDate(){
