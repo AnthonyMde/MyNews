@@ -32,7 +32,7 @@
 
     <!-- RecyclerView row strings -->
     <string name="recycler_view_image_description">news_article_picture</string>
-    <string name="recycler_view_row_title">fil ariane</string>
+    <string name="recycler_view_row_title">fil d\'ariane</string>
     <string name="recycler_view_content_text">Ici l\'apperçu du début de l\'article à l\'intérieur de cet item</string>
     <string name="recycler_view_date">17/25/89</string>
 </resources>

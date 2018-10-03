@@ -10,6 +10,7 @@ import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
 import com.mamode.anthony.mynews.models.NewsArticle;
 import com.mamode.anthony.mynews.models.Multimedia;
+import com.mamode.anthony.mynews.utils.Utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.recycler_item_snippet) TextView snippet;
-    @BindView(R.id.recycler_item_ariane) TextView ariadneThread;
+    @BindView(R.id.recycler_item_bread_crumbs) TextView breadCrumbs;
     @BindView(R.id.recycler_item_date) TextView date;
     @BindView(R.id.recycler_item_image) ImageView image;
     @BindView(R.id.recycler_item) View recyclerItem;
@@ -34,17 +35,24 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
     //Use API data to fill recycler view item.
     public void updateWithArticleContent(NewsArticle article){
-        this.snippet.setText(article.getAbstract());
+        snippet.setText(article.getAbstract());
+        displayBreadCrumbs(article);
+        displayDate(article);
+        displayImage(article);
+    }
 
-        String ariadneThread = article.getSection();
-            if (article.getSubsection() != null && !article.getSubsection().equals("")){
-                ariadneThread += " > " + article.getSubsection();
-            }
-            this.ariadneThread.setText(ariadneThread);
-
-        String date = this.parseDate(article);
+    private void displayBreadCrumbs(NewsArticle article) {
+        String breadCrumbs = article.getSection();
+        if (article.getSubsection() != null && !article.getSubsection().equals("")){
+            breadCrumbs += " > " + article.getSubsection();
+        }
+        this.breadCrumbs.setText(breadCrumbs);
+    }
+    private void displayDate(NewsArticle article) {
+        String date = Utils.setFrenchDateFormat(Utils.parseDate(article));
         this.date.setText(date);
-
+    }
+    private void displayImage(NewsArticle article) {
         if (article.getMultimedia() != null) {
             List<Multimedia> multimedia = article.getMultimedia();
             if (multimedia.size() != 0) {
@@ -57,20 +65,6 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
                 Glide.with(image.getContext()).load(url).into(image);
             }
         }
-    }
-
-    //Convert the data api date in usable String.
-    private String parseDate(NewsArticle article){
-        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));   // This line converts the given date into UTC time zone
-        java.util.Date dateObj;
-        try {
-            dateObj = sdf.parse(article.getPublishedDate());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return "";
-        }
-        return new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(dateObj);
     }
 
     //Set onClickListener (on each recyclerView item) for fragment implementing the OnItemClickListener interface.

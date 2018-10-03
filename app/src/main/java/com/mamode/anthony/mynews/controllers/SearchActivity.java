@@ -11,7 +11,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -26,11 +25,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SearchActivity extends AppCompatActivity{
-    private int actualYear;
-    private int actualMonth;
-    private int actualDay;
-    private String beginDateValue = "";
-    private String endDateValue = "";
+    private int actualYear, actualMonth, actualDay;
+    private String beginDateValue = "", endDateValue = "";
     private int checkboxCounter = 0;
 
     @BindView(R.id.begin_date) EditText beginDate;
@@ -77,18 +73,6 @@ public class SearchActivity extends AppCompatActivity{
             ab.setDisplayHomeAsUpEnabled(true);
     }
 
-    // Search button is enabled or disabled according to the required conditions.
-    // At least 3 letters in the input and 1 checkbox checked
-    private void enableSearchIfConditionMet(){
-        mSearchButton.setEnabled(mInput.getText().length()>=3 && checkboxCounter>=1);
-    }
-
-    // Method call from the fragment_search_and_notif layout file
-    public void onCheckboxClicked(View view){
-        checkboxCounter = ((CheckBox)view).isChecked() ? checkboxCounter+1 : checkboxCounter-1;
-        enableSearchIfConditionMet();
-    }
-
     private void setActualDate(){
         Calendar calendar = Calendar.getInstance();
         this.actualYear = calendar.get(Calendar.YEAR);
@@ -99,22 +83,19 @@ public class SearchActivity extends AppCompatActivity{
     // Set default google calendar with max and min date logic
     private void configureDatePicker(final EditText datePickerEditText){
         datePickerEditText.setKeyListener(null);
-        datePickerEditText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final DatePickerDialog datePickerDialog;
-                datePickerDialog = new DatePickerDialog(SearchActivity.this, R.style.DialogTheme, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        setDatePickerDate(year, month, dayOfMonth, datePickerEditText);
-                    }
-                }, actualYear, actualMonth, actualDay);
+        datePickerEditText.setOnClickListener((View v) -> onDatePickerClick(datePickerEditText));
+    }
 
-                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
-                setDatePickerBoundaries(datePickerDialog, datePickerEditText);
-                datePickerDialog.show();
-            }
-        });
+    private void onDatePickerClick(final EditText datePickerEditText) {
+        final DatePickerDialog datePickerDialog;
+        datePickerDialog = new DatePickerDialog(SearchActivity.this, R.style.DialogTheme,
+                (view, year, month, dayOfMonth) -> displaySelectedDate(year, month, dayOfMonth, datePickerEditText), actualYear, actualMonth, actualDay);
+
+        // Max date by default is the current day
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
+        // Max and Min date depends on what is selected in begin DatePicker and end DatePicker
+        setDatePickerBoundaries(datePickerDialog, datePickerEditText);
+        datePickerDialog.show();
     }
 
     // Logic for avoid the begin date and the end date to pass each other
@@ -131,8 +112,8 @@ public class SearchActivity extends AppCompatActivity{
 
     }
 
-    // Display the selected date
-    private void setDatePickerDate(int year, int month, int dayOfMonth, EditText datePickerEditText) {
+    // Display the selected date and store it (those data are used in setDatePickerBoundaries)
+    private void displaySelectedDate(int year, int month, int dayOfMonth, EditText datePickerEditText) {
         if (datePickerEditText == beginDate){
             beginDateValue = Utils.addZeroToDate(dayOfMonth)+"/"+ Utils.addZeroToDate(month+1)+"/"+year;
             datePickerEditText.setText(beginDateValue);
@@ -140,5 +121,17 @@ public class SearchActivity extends AppCompatActivity{
             endDateValue = Utils.addZeroToDate(dayOfMonth)+"/"+ Utils.addZeroToDate(month+1)+"/"+year;
             datePickerEditText.setText(endDateValue);
         }
+    }
+
+    // Search button is enabled or disabled according to the required conditions.
+    // At least 3 letters in the input and 1 checkbox checked
+    private void enableSearchIfConditionMet(){
+        mSearchButton.setEnabled(mInput.getText().length()>=3 && checkboxCounter>=1);
+    }
+
+    // Method call from the fragment_search_and_notif layout file
+    public void onCheckboxClicked(View view){
+        checkboxCounter = ((CheckBox)view).isChecked() ? checkboxCounter+1 : checkboxCounter-1;
+        enableSearchIfConditionMet();
     }
 }
