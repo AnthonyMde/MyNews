@@ -14,21 +14,21 @@ import retrofit2.Response;
 public class ArticleCalls {
 
     // 1 - Creating a callback
-    public interface Callbacks {
+    public interface ArticleCallsCallback {
         void onResponse(@Nullable NewsArticles articles);
         void onFailure();
     }
 
+    public static void fetchSearchArticles(ArticleCallsCallback callback, String apikey, String searchQuery){}
     // Public method to start fetching top stories api data
-    public static void fetchNews(Callbacks callbacks, String apikey, @FragmentNewsType.FragmentType int fragmentType) {
+    public static void fetchNews(ArticleCallsCallback callback, String apikey, @FragmentNewsType.FragmentType int fragmentType) {
         // Create a weak reference to callback (avoid memory leaks)
-        final WeakReference<Callbacks> callbacksWeakReference = new WeakReference<>(callbacks);
+        final WeakReference<ArticleCallsCallback> callbacksWeakReference = new WeakReference<>(callback);
         // Get a Retrofit instance and the related endpoints
         NewsService newsService = NewsService.retrofit.create(NewsService.class);
-        // Create the call on NewsArticles API
         Call<NewsArticles> call = null;
 
-        // Make the right API call according to the name fragment
+        // Make the right API call according to the fragment name
         switch (fragmentType) {
             case FragmentNewsType.TOPSTORIES:
                 call = newsService.getTopStories(apikey);

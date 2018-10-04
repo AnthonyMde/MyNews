@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.mamode.anthony.mynews.R;
 
 public class SearchFragment extends Fragment {
+    private SearchFragmentCallback callback;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -30,5 +31,12 @@ public class SearchFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        if (getActivity() != null)
+            callback = (SearchFragmentCallback) getActivity();
+        callback.fetchSearchArticles();
+    }
+
+    public interface SearchFragmentCallback{
+        void fetchSearchArticles();
     }
 }

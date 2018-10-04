@@ -70,11 +70,6 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     //Set onClickListener (on each recyclerView item) for fragment implementing the OnItemClickListener interface.
     //This bind method is used by the Adapter (no by the ViewHolder directly).
     public void bind(final NewsArticle article, final RecyclerViewAdapter.OnItemClickListener listener) {
-        recyclerItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onItemClick(article);
-            }
-        });
+        recyclerItem.setOnClickListener(view -> listener.onItemClick(article));
     }
 }

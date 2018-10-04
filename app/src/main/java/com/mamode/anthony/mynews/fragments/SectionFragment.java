@@ -24,7 +24,7 @@ import com.mamode.anthony.mynews.utils.FragmentNewsType;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SectionFragment extends Fragment implements ArticleCalls.Callbacks, RecyclerViewAdapter.OnItemClickListener {
+public class SectionFragment extends Fragment implements ArticleCalls.ArticleCallsCallback, RecyclerViewAdapter.OnItemClickListener {
     @BindView(R.id.main_recycler_view)
     RecyclerView mRecyclerView;
 

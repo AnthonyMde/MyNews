@@ -9,22 +9,48 @@ public class NewsArticle {
         @SerializedName("section")
         @Expose
         private String section = null;
+
+        // From Search API.
+        @SerializedName("section_name")
+        @Expose
+        private String search_section = null;
+
         @SerializedName("subsection")
         @Expose
         private String subsection = null;
+
+        // From Search API.
+        @SerializedName("subsection_name")
+        @Expose
+        private String search_subsection = null;
+
         @SerializedName("abstract")
         @Expose
         private String _abstract = null;
+
         @SerializedName("url")
         @Expose
         private String url = null;
+
+        // From Search API.
+        @SerializedName("web_url")
+        @Expose
+        private String search_url = null;
+
         @SerializedName("published_date")
         @Expose
         private String publishedDate = null;
-        //From TopStories API.
+
+        // From Search API.
+        @SerializedName("pub_date")
+        @Expose
+        private String search_publishedDate = null;
+
+        //From TopStories and Search API.
         @SerializedName("multimedia")
         @Expose
         private List<Multimedia> multimedia = null;
+
         //From MostPopular API.
         @SerializedName("media")
         @Expose
@@ -34,9 +60,13 @@ public class NewsArticle {
             return section;
         }
 
+        public String getSearchSection() { return search_section;}
+
         public String getSubsection() {
             return subsection;
         }
+
+        public String getSearchSubsection() { return search_subsection;}
 
         public String getAbstract() {
             return _abstract;
@@ -46,16 +76,18 @@ public class NewsArticle {
             return url;
         }
 
+        public String getSearchUrl(){return search_url;}
+
         public String getPublishedDate() {
             return publishedDate;
         }
 
-        /* Specific to the TopStories API */
+        public String getSearchPublishedDate(){ return search_publishedDate;}
+
         public List<Multimedia> getMultimedia() {
             return multimedia;
         }
 
-        /* Specific to the MostPopularArticle API */
         public List<Media> getMedia() {
             return media;
         }
