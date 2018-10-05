@@ -39,4 +39,6 @@ public class NotificationsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
     }
+
+
 }

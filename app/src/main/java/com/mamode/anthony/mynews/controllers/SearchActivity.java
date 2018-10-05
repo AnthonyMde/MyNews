@@ -25,16 +25,21 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends AppCompatActivity implements SearchFragment.SearchFragmentCallback {
+public class SearchActivity extends AppCompatActivity {
     private int actualYear, actualMonth, actualDay;
     private String beginDateValue = "", endDateValue = "";
     private int checkboxCounter = 0;
 
-    @BindView(R.id.begin_date) EditText beginDate;
-    @BindView(R.id.end_date) EditText endDate;
-    @BindView(R.id.search_frag_button) Button mSearchButton;
-    @BindView(R.id.input_search_and_notif) TextInputEditText mInput;
-    @BindView(R.id.textInputLayout) TextInputLayout mInputLayout;
+    @BindView(R.id.begin_date)
+    EditText beginDate;
+    @BindView(R.id.end_date)
+    EditText endDate;
+    @BindView(R.id.search_frag_button)
+    Button mSearchButton;
+    @BindView(R.id.input_search_and_notif)
+    TextInputEditText mInput;
+    @BindView(R.id.textInputLayout)
+    TextInputLayout mInputLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,17 +132,12 @@ public class SearchActivity extends AppCompatActivity implements SearchFragment.
     // Search button is enabled or disabled according to the required conditions.
     // At least 3 letters in the input and 1 checkbox checked
     private void enableSearchIfConditionMet(){
-        mSearchButton.setEnabled(mInput.getText().length()>=3 && checkboxCounter>=1);
+        mSearchButton.setEnabled(mInput.getText().length()>= 1 && checkboxCounter>=1);
     }
 
     // Method call from the fragment_search_and_notif layout file
     public void onCheckboxClicked(View view){
         checkboxCounter = ((CheckBox)view).isChecked() ? checkboxCounter+1 : checkboxCounter-1;
         enableSearchIfConditionMet();
-    }
-
-    @Override
-    public void fetchSearchArticles() {
-        // TODO: Do call api to fetch search articles data
     }
 }

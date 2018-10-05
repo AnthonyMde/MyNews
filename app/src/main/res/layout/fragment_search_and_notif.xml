@@ -144,6 +144,7 @@
     <Switch
         android:visibility="gone"
         android:id="@+id/notification_frag_switch"
+        android:enabled="false"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/notification_switch_text"

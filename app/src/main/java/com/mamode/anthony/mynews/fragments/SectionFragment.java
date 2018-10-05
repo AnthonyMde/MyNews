@@ -72,7 +72,6 @@ public class SectionFragment extends Fragment implements ArticleCalls.ArticleCal
 
         if (getActivity() != null)
             callback = (SectionFragmentCallback) getActivity();
-
     }
 
     //If data are received from the NYT api.

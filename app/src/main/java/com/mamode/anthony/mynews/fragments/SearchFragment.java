@@ -3,15 +3,17 @@ package com.mamode.anthony.mynews.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.mamode.anthony.mynews.R;
+import com.mamode.anthony.mynews.models.NewsArticles;
+import com.mamode.anthony.mynews.utils.ArticleCalls;
 
-public class SearchFragment extends Fragment {
-    private SearchFragmentCallback callback;
+public class SearchFragment extends Fragment implements ArticleCalls.ArticleCallsCallback{
 
     public SearchFragment() {
         // Required empty public constructor
@@ -29,14 +31,23 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (getActivity() != null)
-            callback = (SearchFragmentCallback) getActivity();
-        callback.fetchSearchArticles();
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // TODO: ArticleCalls.fetchSearchArticles(this, );
     }
 
-    public interface SearchFragmentCallback{
-        void fetchSearchArticles();
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onResponse(@Nullable NewsArticles articles) {
+
+    }
+
+    @Override
+    public void onFailure() {
+
     }
 }
