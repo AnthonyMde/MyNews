@@ -4,6 +4,8 @@ import com.mamode.anthony.mynews.models.NewsArticles;
 
 import java.util.Map;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -34,9 +36,15 @@ public interface NewsService {
     @GET("svc/search/v2/articlesearch.json")
             Call<NewsArticles> getSearchArticles(@QueryMap Map<String, String> query);
 
+
+    HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+    OkHttpClient.Builder client = new OkHttpClient.Builder()
+            .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
+
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(client.build())
             .build();
 }
 

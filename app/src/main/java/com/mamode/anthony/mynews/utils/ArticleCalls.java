@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import com.mamode.anthony.mynews.models.NewsArticles;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,7 +21,10 @@ public class ArticleCalls {
         void onFailure();
     }
 
-    public static void fetchSearchArticles(ArticleCallsCallback callback, String apikey, String searchQuery){}
+    public static void fetchSearchArticles(ArticleCallsCallback callback, String apikey, String searchQuery){
+        Map<String, String> query = new HashMap<>();
+        query.put("api-key", apikey);
+    }
     // Public method to start fetching top stories api data
     public static void fetchNews(ArticleCallsCallback callback, String apikey, @FragmentNewsType.FragmentType int fragmentType) {
         // Create a weak reference to callback (avoid memory leaks)
