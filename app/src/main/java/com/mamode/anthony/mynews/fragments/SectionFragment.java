@@ -21,6 +21,8 @@ import com.mamode.anthony.mynews.utils.ArticleCalls;
 import com.mamode.anthony.mynews.models.Constants;
 import com.mamode.anthony.mynews.utils.FragmentNewsType;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -42,6 +44,17 @@ public class SectionFragment extends Fragment implements ArticleCalls.ArticleCal
         fragment.setArguments(args);
         return fragment;
     }
+
+
+    public static SectionFragment newInstance(List<NewsArticle> articles) {
+        SectionFragment fragment = new SectionFragment();
+        Bundle args = new Bundle();
+        args.putInt(FRAGMENT_TYPE, 0);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

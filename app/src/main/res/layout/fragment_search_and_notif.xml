@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_and_notif_view_group"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -74,7 +75,6 @@
 
     <CheckBox
         android:id="@+id/checkbox1"
-        android:onClick="onCheckboxClicked"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium"
@@ -84,7 +84,6 @@
 
     <CheckBox
         android:id="@+id/checkbox2"
-        android:onClick="onCheckboxClicked"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/checkbox1"
@@ -93,7 +92,6 @@
 
     <CheckBox
         android:id="@+id/checkbox3"
-        android:onClick="onCheckboxClicked"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/checkbox2"
@@ -102,7 +100,6 @@
 
     <CheckBox
         android:id="@+id/checkbox4"
-        android:onClick="onCheckboxClicked"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium"
@@ -112,7 +109,6 @@
 
     <CheckBox
         android:id="@+id/checkbox5"
-        android:onClick="onCheckboxClicked"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/checkbox4"
@@ -121,7 +117,6 @@
 
     <CheckBox
         android:id="@+id/checkbox6"
-        android:onClick="onCheckboxClicked"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/checkbox5"
