@@ -18,6 +18,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public interface OnItemClickListener {
         void onItemClick(NewsArticle article);
     }
+
     private List<NewsArticle> mArticles;
     private OnItemClickListener mListener;
 
@@ -48,6 +49,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.updateWithArticleContent(mArticles.get(position));
         holder.bind(mArticles.get(position), mListener);
     }
+
     @Override
     public int getItemCount() {
         return mArticles.size();

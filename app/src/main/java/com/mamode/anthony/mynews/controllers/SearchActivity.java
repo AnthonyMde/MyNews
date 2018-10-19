@@ -26,12 +26,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SearchActivity extends AppCompatActivity {
+    private SearchFragment searchFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_articles);
 
+        setContentView(R.layout.activity_search_articles);
+        searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.frag_search);
         this.configureToolbar();
     }
 
@@ -41,5 +43,11 @@ public class SearchActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         if(ab != null)
             ab.setDisplayHomeAsUpEnabled(true);
+    }
+
+    // Method call from the fragment_search_and_notif layout file
+    public void onCheckboxClicked(View view) {
+        if (searchFragment != null)
+            searchFragment.onCheckboxClicked(view);
     }
 }

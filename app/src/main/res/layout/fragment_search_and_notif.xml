@@ -78,6 +78,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintTop_toBottomOf="@id/begin_date"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         android:text="@string/checkbox_science_text" />
@@ -85,6 +86,7 @@
     <CheckBox
         android:id="@+id/checkbox2"
         android:layout_width="0dp"
+        android:onClick="onCheckboxClicked"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/checkbox1"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -94,6 +96,7 @@
         android:id="@+id/checkbox3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintTop_toBottomOf="@id/checkbox2"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         android:text="@string/checkbox_world_text" />
@@ -102,6 +105,7 @@
         android:id="@+id/checkbox4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
         android:layout_marginTop="@dimen/medium"
         app:layout_constraintTop_toBottomOf="@id/begin_date"
         app:layout_constraintStart_toStartOf="@id/guideline_middle"
@@ -111,6 +115,7 @@
         android:id="@+id/checkbox5"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintTop_toBottomOf="@id/checkbox4"
         app:layout_constraintStart_toStartOf="@id/guideline_middle"
         android:text="CheckBox" />
@@ -119,6 +124,7 @@
         android:id="@+id/checkbox6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="onCheckboxClicked"
         app:layout_constraintTop_toBottomOf="@id/checkbox5"
         app:layout_constraintStart_toStartOf="@id/guideline_middle"
         android:text="CheckBox" />

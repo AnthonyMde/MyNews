@@ -10,6 +10,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,11 +92,6 @@ public class SearchFragment extends Fragment implements ArticleCalls.ArticleCall
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
     public void onResponse(@Nullable NewsArticles articles) {
 
     }
@@ -163,7 +159,6 @@ public class SearchFragment extends Fragment implements ArticleCalls.ArticleCall
         mSearchButton.setEnabled(mInput.getText().length()>= 1 && checkboxCounter>=1);
     }
 
-    // Method call from the fragment_search_and_notif layout file
     public void onCheckboxClicked(View view){
         checkboxCounter = ((CheckBox)view).isChecked() ? checkboxCounter+1 : checkboxCounter-1;
         enableSearchIfConditionMet();

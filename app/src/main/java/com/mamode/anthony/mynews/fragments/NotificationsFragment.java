@@ -44,12 +44,6 @@ public class NotificationsFragment extends Fragment {
         view.findViewById(R.id.search_group_hide).setVisibility(View.GONE);
         view.findViewById(R.id.notification_frag_switch).setVisibility(View.VISIBLE);
 
-        final ViewGroup checkBoxContainer = (ViewGroup) view.findViewById(R.id.checkbox1).getParent();
-        for (int i=0; i < checkBoxContainer.getChildCount(); i++){
-            if (checkBoxContainer.getChildAt(i) instanceof CheckBox)
-                checkBoxContainer.getChildAt(i).setOnClickListener(checkBoxOnClickListener);
-        }
-
         return view;
     }
 
@@ -72,17 +66,6 @@ public class NotificationsFragment extends Fragment {
 
             }
         });
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     // Search button is enabled or disabled according to the required conditions.
@@ -91,9 +74,8 @@ public class NotificationsFragment extends Fragment {
         mSwitch.setEnabled(mInput.getText().length()>= 1 && checkboxCounter>=1);
     }
 
-    final View.OnClickListener checkBoxOnClickListener = view -> {
-        Log.e("Method","Checkbox clicked !!!");
+    public void onCheckboxClicked(View view){
         checkboxCounter = ((CheckBox)view).isChecked() ? checkboxCounter+1 : checkboxCounter-1;
         enableSearchIfConditionMet();
-    };
+    }
 }

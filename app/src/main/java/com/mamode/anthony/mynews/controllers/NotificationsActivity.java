@@ -12,18 +12,20 @@ import android.widget.CheckBox;
 import android.widget.Switch;
 
 import com.mamode.anthony.mynews.R;
+import com.mamode.anthony.mynews.fragments.NotificationsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NotificationsActivity extends AppCompatActivity {
-
+    private NotificationsFragment notificationsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notifications);
 
+        setContentView(R.layout.activity_notifications);
+        notificationsFragment = (NotificationsFragment) getSupportFragmentManager().findFragmentById(R.id.frag_notif);
         this.configureToolbar();
     }
 
@@ -33,5 +35,11 @@ public class NotificationsActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         if(ab != null)
             ab.setDisplayHomeAsUpEnabled(true);
+    }
+
+    // Method call from the fragment_search_and_notif layout file
+    public void onCheckboxClicked(View view) {
+        if (notificationsFragment != null)
+            notificationsFragment.onCheckboxClicked(view);
     }
 }
