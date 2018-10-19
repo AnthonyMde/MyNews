@@ -1,10 +1,9 @@
-package com.mamode.anthony.mynews.models;
+package com.mamode.anthony.mynews.NewsRepository;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MediaMetadata {
-
+public class Multimedia {
     @SerializedName("url")
     @Expose
     private String url;

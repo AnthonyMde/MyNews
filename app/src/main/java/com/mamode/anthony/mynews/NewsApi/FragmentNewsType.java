@@ -1,4 +1,4 @@
-package com.mamode.anthony.mynews.utils;
+package com.mamode.anthony.mynews.NewsApi;
 
 import android.support.annotation.IntDef;
 

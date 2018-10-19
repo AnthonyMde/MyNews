@@ -1,6 +1,8 @@
-package com.mamode.anthony.mynews.models;
+package com.mamode.anthony.mynews.model;
 
 import com.mamode.anthony.mynews.GsonParser;
+import com.mamode.anthony.mynews.NewsRepository.Multimedia;
+import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

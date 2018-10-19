@@ -1,13 +1,12 @@
-package com.mamode.anthony.mynews.utils;
+package com.mamode.anthony.mynews.NewsApi;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.mamode.anthony.mynews.models.NewsArticles;
+import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;

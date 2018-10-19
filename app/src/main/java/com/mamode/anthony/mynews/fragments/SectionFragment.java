@@ -15,11 +15,11 @@ import android.view.ViewGroup;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
-import com.mamode.anthony.mynews.models.NewsArticle;
-import com.mamode.anthony.mynews.models.NewsArticles;
-import com.mamode.anthony.mynews.utils.ArticleCalls;
-import com.mamode.anthony.mynews.models.Constants;
-import com.mamode.anthony.mynews.utils.FragmentNewsType;
+import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
+import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
+import com.mamode.anthony.mynews.NewsApi.ArticleCalls;
+import com.mamode.anthony.mynews.model.Constants;
+import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
 
 import java.util.List;
 

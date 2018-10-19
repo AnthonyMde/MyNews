@@ -8,15 +8,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
-import com.mamode.anthony.mynews.models.NewsArticle;
-import com.mamode.anthony.mynews.models.Multimedia;
-import com.mamode.anthony.mynews.utils.Utils;
+import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
+import com.mamode.anthony.mynews.NewsRepository.Multimedia;
+import com.mamode.anthony.mynews.utils.NewsDate;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,7 +45,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         this.breadCrumbs.setText(breadCrumbs);
     }
     private void displayDate(NewsArticle article) {
-        String date = Utils.setFrenchDateFormat(Utils.parseDate(article));
+        String date = NewsDate.setFrenchDateFormat(NewsDate.parseDate(article));
         this.date.setText(date);
     }
     private void displayImage(NewsArticle article) {

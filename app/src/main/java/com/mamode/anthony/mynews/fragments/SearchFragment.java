@@ -1,7 +1,6 @@
 package com.mamode.anthony.mynews.fragments;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,7 +9,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +18,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.mamode.anthony.mynews.R;
-import com.mamode.anthony.mynews.controllers.SearchActivity;
-import com.mamode.anthony.mynews.models.NewsArticles;
-import com.mamode.anthony.mynews.utils.ArticleCalls;
-import com.mamode.anthony.mynews.utils.Utils;
+import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
+import com.mamode.anthony.mynews.NewsApi.ArticleCalls;
+import com.mamode.anthony.mynews.utils.NewsDate;
 
 import java.text.ParseException;
 import java.util.Calendar;
@@ -132,9 +129,9 @@ public class SearchFragment extends Fragment implements ArticleCalls.ArticleCall
     private void setDatePickerBoundaries(DatePickerDialog datePickerDialog, EditText datePickerEditText) {
         try {
             if (datePickerEditText == beginDate && !endDateValue.equals(""))
-                datePickerDialog.getDatePicker().setMaxDate((long) Utils.convertDateIntoMillis(endDateValue) + 40000000);
+                datePickerDialog.getDatePicker().setMaxDate((long) NewsDate.convertDateIntoMillis(endDateValue) + 40000000);
             else if (datePickerEditText == endDate && !beginDateValue.equals(""))
-                datePickerDialog.getDatePicker().setMinDate((long) Utils.convertDateIntoMillis(beginDateValue) + 40000000);
+                datePickerDialog.getDatePicker().setMinDate((long) NewsDate.convertDateIntoMillis(beginDateValue) + 40000000);
         } catch (ParseException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), "The date can't be parsed, please contact support", Toast.LENGTH_LONG).show();
@@ -145,10 +142,10 @@ public class SearchFragment extends Fragment implements ArticleCalls.ArticleCall
     // Display the selected date and store it (those data are used in setDatePickerBoundaries)
     private void displaySelectedDate(int year, int month, int dayOfMonth, EditText datePickerEditText) {
         if (datePickerEditText == beginDate){
-            beginDateValue = Utils.addZeroToDate(dayOfMonth)+"/"+ Utils.addZeroToDate(month+1)+"/"+year;
+            beginDateValue = NewsDate.addZeroToDate(dayOfMonth)+"/"+ NewsDate.addZeroToDate(month+1)+"/"+year;
             datePickerEditText.setText(beginDateValue);
         }else {
-            endDateValue = Utils.addZeroToDate(dayOfMonth)+"/"+ Utils.addZeroToDate(month+1)+"/"+year;
+            endDateValue = NewsDate.addZeroToDate(dayOfMonth)+"/"+ NewsDate.addZeroToDate(month+1)+"/"+year;
             datePickerEditText.setText(endDateValue);
         }
     }

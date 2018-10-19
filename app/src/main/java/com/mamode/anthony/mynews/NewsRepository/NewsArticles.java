@@ -1,4 +1,4 @@
-package com.mamode.anthony.mynews.models;
+package com.mamode.anthony.mynews.NewsRepository;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
