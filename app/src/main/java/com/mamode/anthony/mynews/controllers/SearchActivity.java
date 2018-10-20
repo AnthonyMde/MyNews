@@ -1,43 +1,29 @@
 package com.mamode.anthony.mynews.controllers;
 
-import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Toast;
 
+import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.fragments.SearchFragment;
-import com.mamode.anthony.mynews.utils.Utils;
-
-import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import com.mamode.anthony.mynews.fragments.SectionFragment;
 
 public class SearchActivity extends AppCompatActivity {
-    private SearchFragment searchFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_search_articles);
-        searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.frag_search);
-        this.configureToolbar();
+        configureToolbar();
+        addSearchFragment();
     }
 
-    private void configureToolbar(){
+    private void configureToolbar() {
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.include_toolbar);
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
@@ -45,8 +31,22 @@ public class SearchActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
     }
 
+    private void addSearchFragment() {
+        SearchFragment searchFragment = SearchFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.frag_search_container, searchFragment).commit();
+    }
+
+    public void replaceWithResearchResultsFragment() {
+        SectionFragment sectionFragment = SectionFragment.newInstance(FragmentNewsType.SCIENCE);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.frag_search_container, sectionFragment).commit();
+    }
     // Method call from the fragment_search_and_notif layout file
     public void onCheckboxClicked(View view) {
+        SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.frag_search_container);
         if (searchFragment != null)
             searchFragment.onCheckboxClicked(view);
     }

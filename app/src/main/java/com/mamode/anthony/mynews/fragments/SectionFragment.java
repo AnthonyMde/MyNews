@@ -21,6 +21,7 @@ import com.mamode.anthony.mynews.NewsApi.ArticleCalls;
 import com.mamode.anthony.mynews.model.Constants;
 import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,7 +33,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.ArticleCal
 
     private SectionFragmentCallback callback;
     private static final String FRAGMENT_TYPE = "FRAGMENT-TYPE";
-    private int mFragmentType;
+    private int mFragmentType = 0;
 
     public SectionFragment() {
         // Required empty public constructor
@@ -76,7 +77,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.ArticleCal
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //NYT api call.
-        ArticleCalls.fetchNews(this, Constants.API_KEY, mFragmentType);
+        ArticleCalls.fetchNews(this, Constants.API_KEY, mFragmentType, null);
     }
 
     @Override

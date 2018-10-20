@@ -23,12 +23,8 @@ public class ArticleCalls {
         void onFailure();
     }
 
-    public static void fetchSearchArticles(ArticleCallsCallback callback, HashMap<String, String> query){
-        final WeakReference<ArticleCallsCallback> callbacksWeakReference = new WeakReference<>(callback);
-        call = newsService.getSearchArticles(query);
-    }
     // Public method to start fetching top stories api data
-    public static void fetchNews(ArticleCallsCallback callback, String apikey, @FragmentNewsType.FragmentType int fragmentType) {
+    public static void fetchNews(ArticleCallsCallback callback, String apikey, @FragmentNewsType.FragmentType int fragmentType, @Nullable HashMap<String, String> query) {
         // Create a weak reference to callback (avoid memory leaks)
         final WeakReference<ArticleCallsCallback> callbacksWeakReference = new WeakReference<>(callback);
 
@@ -52,6 +48,8 @@ public class ArticleCalls {
             case FragmentNewsType.TECHNOLOGY:
                 call = newsService.getTopStoriesTechnology(apikey);
                 break;
+            case FragmentNewsType.SEARCH:
+                call = newsService.getSearchArticles(query);
         }
         // Start the call
         if (call != null) {

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -17,9 +18,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
 import com.mamode.anthony.mynews.NewsApi.ArticleCalls;
+import com.mamode.anthony.mynews.controllers.SearchActivity;
 import com.mamode.anthony.mynews.utils.NewsDate;
 
 import java.text.ParseException;
@@ -47,6 +50,10 @@ public class SearchFragment extends Fragment implements ArticleCalls.ArticleCall
 
     public SearchFragment() {
         // Required empty public constructor
+    }
+
+    public static SearchFragment newInstance() {
+        return new SearchFragment();
     }
 
     @Override
@@ -82,6 +89,10 @@ public class SearchFragment extends Fragment implements ArticleCalls.ArticleCall
 
             }
         });
+        mSearchButton.setOnClickListener(view1 -> {
+            if(getActivity() != null)
+            ((SearchActivity)getActivity()).replaceWithResearchResultsFragment();
+        });
         this.setActualDate();
         this.configureDatePicker(beginDate);
         this.configureDatePicker(endDate);
@@ -98,7 +109,7 @@ public class SearchFragment extends Fragment implements ArticleCalls.ArticleCall
 
     }
 
-    private void setActualDate(){
+    private void setActualDate() {
         Calendar calendar = Calendar.getInstance();
         this.actualYear = calendar.get(Calendar.YEAR);
         this.actualMonth = calendar.get(Calendar.MONTH);
@@ -106,7 +117,7 @@ public class SearchFragment extends Fragment implements ArticleCalls.ArticleCall
     }
 
     // Set default google calendar with max and min date logic
-    private void configureDatePicker(final EditText datePickerEditText){
+    private void configureDatePicker(final EditText datePickerEditText) {
         datePickerEditText.setKeyListener(null);
         datePickerEditText.setOnClickListener((View v) -> onDatePickerClick(datePickerEditText));
     }
@@ -152,11 +163,11 @@ public class SearchFragment extends Fragment implements ArticleCalls.ArticleCall
 
     // Search button is enabled or disabled according to the required conditions.
     // At least 3 letters in the input and 1 checkbox checked
-    private void enableSearchIfConditionMet(){
+    private void enableSearchIfConditionMet() {
         mSearchButton.setEnabled(mInput.getText().length()>= 1 && checkboxCounter>=1);
     }
 
-    public void onCheckboxClicked(View view){
+    public void onCheckboxClicked(View view) {
         checkboxCounter = ((CheckBox)view).isChecked() ? checkboxCounter+1 : checkboxCounter-1;
         enableSearchIfConditionMet();
     }

@@ -12,9 +12,10 @@ public class FragmentNewsType {
     public static final int HEALTH = 3;
     public static final int WORLD = 4;
     public static final int TECHNOLOGY = 5;
+    public static final int SEARCH = 6;
 
     @IntDef({TOPSTORIES, MOSTPOPULAR, HEALTH, TECHNOLOGY,
-    SCIENCE, WORLD})
+    SCIENCE, WORLD, SEARCH})
     @Retention(RetentionPolicy.SOURCE)
     public @interface FragmentType{}
 }

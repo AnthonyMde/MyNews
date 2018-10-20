@@ -35,4 +35,7 @@
     <string name="recycler_view_row_title">fil d\'ariane</string>
     <string name="recycler_view_content_text">Ici l\'apperçu du début de l\'article à l\'intérieur de cet item</string>
     <string name="recycler_view_date">17/25/89</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
