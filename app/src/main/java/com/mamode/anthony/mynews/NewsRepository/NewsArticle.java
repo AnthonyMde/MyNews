@@ -57,32 +57,32 @@ public class NewsArticle {
         private List<Media> media = null;
 
         public String getSection() {
-            return section;
+            if(section != null) return section;
+            if(search_section != null) return search_section;
+            else return "";
         }
-
-        public String getSearchSection() { return search_section;}
 
         public String getSubsection() {
-            return subsection;
+            if(subsection != null) return subsection;
+            if(search_subsection != null) return search_subsection;
+            else return "";
         }
-
-        public String getSearchSubsection() { return search_subsection;}
 
         public String getAbstract() {
             return _abstract;
         }
 
         public String getUrl() {
-            return url;
+            if(url != null) return url;
+            if(search_url != null) return search_url;
+            else return null;
         }
-
-        public String getSearchUrl(){return search_url;}
 
         public String getPublishedDate() {
-            return publishedDate;
+            if(publishedDate != null) return publishedDate;
+            if(search_publishedDate != null) return search_publishedDate;
+            else return "";
         }
-
-        public String getSearchPublishedDate(){ return search_publishedDate;}
 
         public List<Multimedia> getMultimedia() {
             return multimedia;

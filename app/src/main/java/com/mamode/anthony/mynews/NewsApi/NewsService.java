@@ -1,5 +1,7 @@
 package com.mamode.anthony.mynews.NewsApi;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
 
 import java.util.Map;
@@ -34,16 +36,17 @@ public interface NewsService {
     Call<NewsArticles> getTopStoriesTechnology(@Query("api-key") String apiKey);
 
     @GET("svc/search/v2/articlesearch.json")
-            Call<NewsArticles> getSearchArticles(@QueryMap Map<String, String> query);
+    Call<NewsArticles> getSearchArticles(@QueryMap Map<String, String> query);
 
 
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     OkHttpClient.Builder client = new OkHttpClient.Builder()
             .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
 
+    Gson gson = new GsonBuilder().registerTypeAdapterFactory(new DocsTypeAdapterFactory()).create();
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://api.nytimes.com/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client.build())
             .build();
 }
