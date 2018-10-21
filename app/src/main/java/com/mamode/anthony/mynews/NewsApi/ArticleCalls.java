@@ -18,15 +18,15 @@ public class ArticleCalls {
     private static Call<NewsArticles> call = null;
 
     // 1 - Creating a callback
-    public interface ArticleCallsCallback {
+    public interface onAPIResponseListener {
         void onResponse(@Nullable NewsArticles articles);
         void onFailure();
     }
 
     // Public method to start fetching top stories api data
-    public static void fetchNews(ArticleCallsCallback callback, String apikey, @FragmentNewsType.FragmentType int fragmentType, @Nullable HashMap<String, String> query) {
+    public static void fetchNews(onAPIResponseListener callback, String apikey, @FragmentNewsType.FragmentType int fragmentType, @Nullable HashMap<String, String> query) {
         // Create a weak reference to callback (avoid memory leaks)
-        final WeakReference<ArticleCallsCallback> callbacksWeakReference = new WeakReference<>(callback);
+        final WeakReference<onAPIResponseListener> callbacksWeakReference = new WeakReference<>(callback);
 
         // Make the right API call according to the fragment name
         switch (fragmentType) {

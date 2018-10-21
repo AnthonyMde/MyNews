@@ -21,13 +21,12 @@ import com.mamode.anthony.mynews.NewsApi.ArticleCalls;
 import com.mamode.anthony.mynews.model.Constants;
 import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
 
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SectionFragment extends Fragment implements ArticleCalls.ArticleCallsCallback, RecyclerViewAdapter.OnItemClickListener {
+public class SectionFragment extends Fragment implements ArticleCalls.onAPIResponseListener, RecyclerViewAdapter.OnItemClickListener {
     @BindView(R.id.main_recycler_view)
     RecyclerView mRecyclerView;
 
@@ -57,6 +56,13 @@ public class SectionFragment extends Fragment implements ArticleCalls.ArticleCal
     }
 
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        if (getActivity() != null)
+            callback = (SectionFragmentCallback) getActivity();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,14 +85,6 @@ public class SectionFragment extends Fragment implements ArticleCalls.ArticleCal
         super.onViewCreated(view, savedInstanceState);
         //NYT api call.
         ArticleCalls.fetchNews(this, Constants.API_KEY, mFragmentType, null);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        if (getActivity() != null)
-            callback = (SectionFragmentCallback) getActivity();
     }
 
     //If data are received from the NYT api.
