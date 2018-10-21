@@ -35,6 +35,8 @@ public class NewsDate {
 
     public static String setFrenchDateFormat(String date) {
         String[] d = date.split("/");
-        return d[1] + "/" + d[0] + "/" + d[2];
+        if (d.length == 3)
+            return d[1] + "/" + d[0] + "/" + d[2];
+        else return "";
     }
 }

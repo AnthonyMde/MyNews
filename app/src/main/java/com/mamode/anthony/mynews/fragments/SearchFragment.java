@@ -108,7 +108,6 @@ public class SearchFragment extends Fragment {
             query = new HashMap<>();
             addQueryDataToTheMap();
             if(onResearchListener != null)
-                Log.e("APITRY", "Just before trigger method in frag : "+query.get("api-key"));
                 onResearchListener.displaySearchResults(query);
         });
         this.setActualDate();
@@ -118,10 +117,12 @@ public class SearchFragment extends Fragment {
 
     private void addQueryDataToTheMap() {
         query.put("api-key", Constants.API_KEY);
-        Log.e("APITRY", "In the PUT method : "+query.get("api-key"));
         query.put("q", mInput.getText().toString());
-        // query.put("begin_date", queryBeginDateValue);
-        // query.put("end_date", queryEndDateValue);
+        query.put("hl", "true");
+        if(!queryBeginDateValue.equals(""))
+        query.put("begin_date", queryBeginDateValue);
+        if(!queryEndDateValue.equals(""))
+        query.put("end_date", queryEndDateValue);
         // TODO: Add themes query
     }
 
@@ -171,11 +172,11 @@ public class SearchFragment extends Fragment {
         if (datePickerEditText == beginDate){
             beginDateValue = NewsDate.addZeroToDate(dayOfMonth)+"/"+ NewsDate.addZeroToDate(month+1)+"/"+year;
             datePickerEditText.setText(beginDateValue);
-            queryBeginDateValue = "" + year + month + dayOfMonth;
+            queryBeginDateValue = "" + year + (month+1) + dayOfMonth;
         }else {
             endDateValue = NewsDate.addZeroToDate(dayOfMonth)+"/"+ NewsDate.addZeroToDate(month+1)+"/"+year;
             datePickerEditText.setText(endDateValue);
-            queryEndDateValue = "" + year + month + dayOfMonth;
+            queryEndDateValue = "" + year + (month+1) + dayOfMonth;
         }
     }
 

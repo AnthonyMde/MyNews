@@ -65,7 +65,7 @@ public class NewsArticle {
         public String getSection() {
             if(section != null) return section;
             if(search_section != null) return search_section;
-            else return "Search Article";
+            else return "News Article";
         }
 
         public String getSubsection() {

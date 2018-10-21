@@ -18,11 +18,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-    @BindView(R.id.recycler_item_snippet) TextView snippet;
-    @BindView(R.id.recycler_item_bread_crumbs) TextView breadCrumbs;
-    @BindView(R.id.recycler_item_date) TextView date;
-    @BindView(R.id.recycler_item_image) ImageView image;
-    @BindView(R.id.recycler_item) View recyclerItem;
+    @BindView(R.id.recycler_item_snippet)
+    TextView snippet;
+    @BindView(R.id.recycler_item_bread_crumbs)
+    TextView breadCrumbs;
+    @BindView(R.id.recycler_item_date)
+    TextView date;
+    @BindView(R.id.recycler_item_image)
+    ImageView image;
+    @BindView(R.id.recycler_item)
+    View recyclerItem;
 
     public RecyclerViewHolder(View itemView) {
         super(itemView);
@@ -30,7 +35,7 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     }
 
     //Use API data to fill recycler view item.
-    public void updateWithArticleContent(NewsArticle article){
+    public void updateWithArticleContent(NewsArticle article) {
         snippet.setText(article.getAbstract());
         displayBreadCrumbs(article);
         displayDate(article);
@@ -39,32 +44,38 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
     private void displayBreadCrumbs(NewsArticle article) {
         String breadCrumbs = article.getSection();
-        if (article.getSubsection() != null && !article.getSubsection().equals("")){
+        if (article.getSubsection() != null && !article.getSubsection().equals("")) {
             breadCrumbs += " > " + article.getSubsection();
         }
         this.breadCrumbs.setText(breadCrumbs);
     }
+
     private void displayDate(NewsArticle article) {
         String date = NewsDate.setFrenchDateFormat(NewsDate.parseDate(article));
         this.date.setText(date);
     }
+
     private void displayImage(NewsArticle article) {
         if (article.getMultimedia() != null) {
             List<Multimedia> multimedia = article.getMultimedia();
             if (multimedia.size() != 0) {
                 String url = multimedia.get(0).getUrl();
-                if(url.contains("http")) {
+                if (url.contains("https://")) {
                     Glide.with(image.getContext()).load(url).into(image);
                 } else if (multimedia.get(2) != null) {
                     // The good image format is in the third place in the searchAPI response array
                     String formatUrl = "https://static01.nyt.com/" + multimedia.get(2).getUrl();
                     Glide.with(image.getContext()).load(formatUrl).into(image);
                 }
+            } else {
+                Glide.with(image.getContext()).load("http://academiejaroussky.org/wp-content/uploads/2018/01/Symbol-New-York-Times.png").into(image);
             }
-        }else if (article.getMedia() != null) {
-            if (article.getMedia().size() != 0 && article.getMedia().get(0).getMediaMetadata().size() != 0){
+        } else if (article.getMedia() != null) {
+            if (article.getMedia().size() != 0 && article.getMedia().get(0).getMediaMetadata().size() != 0) {
                 String url = article.getMedia().get(0).getMediaMetadata().get(0).getUrl();
                 Glide.with(image.getContext()).load(url).into(image);
+            } else {
+                Glide.with(image.getContext()).load("http://academiejaroussky.org/wp-content/uploads/2018/01/Symbol-New-York-Times.png").into(image);
             }
         }
     }
