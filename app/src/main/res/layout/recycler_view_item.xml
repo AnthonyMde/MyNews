@@ -8,6 +8,7 @@
 
     <ImageView
         android:id="@+id/recycler_item_image"
+        android:src="@drawable/nyt_placeholder"
         android:contentDescription="@string/recycler_view_image_description"
         android:layout_width="60dp"
         android:layout_height="60dp"

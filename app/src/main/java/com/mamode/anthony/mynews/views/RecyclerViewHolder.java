@@ -67,15 +67,11 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
                     String formatUrl = "https://static01.nyt.com/" + multimedia.get(2).getUrl();
                     Glide.with(image.getContext()).load(formatUrl).into(image);
                 }
-            } else {
-                Glide.with(image.getContext()).load("http://academiejaroussky.org/wp-content/uploads/2018/01/Symbol-New-York-Times.png").into(image);
             }
         } else if (article.getMedia() != null) {
             if (article.getMedia().size() != 0 && article.getMedia().get(0).getMediaMetadata().size() != 0) {
                 String url = article.getMedia().get(0).getMediaMetadata().get(0).getUrl();
                 Glide.with(image.getContext()).load(url).into(image);
-            } else {
-                Glide.with(image.getContext()).load("http://academiejaroussky.org/wp-content/uploads/2018/01/Symbol-New-York-Times.png").into(image);
             }
         }
     }

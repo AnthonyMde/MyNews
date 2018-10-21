@@ -172,11 +172,11 @@ public class SearchFragment extends Fragment {
         if (datePickerEditText == beginDate){
             beginDateValue = NewsDate.addZeroToDate(dayOfMonth)+"/"+ NewsDate.addZeroToDate(month+1)+"/"+year;
             datePickerEditText.setText(beginDateValue);
-            queryBeginDateValue = "" + year + (month+1) + dayOfMonth;
+            queryBeginDateValue = "" + year + (NewsDate.addZeroToDate(month+1)) + NewsDate.addZeroToDate(dayOfMonth);
         }else {
             endDateValue = NewsDate.addZeroToDate(dayOfMonth)+"/"+ NewsDate.addZeroToDate(month+1)+"/"+year;
             datePickerEditText.setText(endDateValue);
-            queryEndDateValue = "" + year + (month+1) + dayOfMonth;
+            queryEndDateValue = "" + year + (NewsDate.addZeroToDate(month+1)) + NewsDate.addZeroToDate(dayOfMonth);
         }
     }
 
