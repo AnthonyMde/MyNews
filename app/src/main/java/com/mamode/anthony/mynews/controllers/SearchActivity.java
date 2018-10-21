@@ -1,5 +1,6 @@
 package com.mamode.anthony.mynews.controllers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -9,10 +10,11 @@ import android.view.View;
 
 import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
 import com.mamode.anthony.mynews.R;
+import com.mamode.anthony.mynews.fragments.ReplaceFragment;
 import com.mamode.anthony.mynews.fragments.SearchFragment;
 import com.mamode.anthony.mynews.fragments.SectionFragment;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements SectionFragment.SectionFragmentCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +44,20 @@ public class SearchActivity extends AppCompatActivity {
         SectionFragment sectionFragment = SectionFragment.newInstance(FragmentNewsType.SCIENCE);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.frag_search_container, sectionFragment).commit();
+        fragmentTransaction.replace(R.id.frag_search_container, sectionFragment).commit();
+        fragmentTransaction.addToBackStack("Result Fragment");
     }
     // Method call from the fragment_search_and_notif layout file
     public void onCheckboxClicked(View view) {
         SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.frag_search_container);
         if (searchFragment != null)
             searchFragment.onCheckboxClicked(view);
+    }
+
+    @Override
+    public void openUrl(String url) {
+        Intent intent = new Intent(this, NewsWebView.class);
+        intent.putExtra("url",url);
+        startActivity(intent);
     }
 }

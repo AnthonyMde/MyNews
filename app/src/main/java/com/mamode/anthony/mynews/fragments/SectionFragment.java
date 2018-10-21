@@ -38,6 +38,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.ArticleCal
     public SectionFragment() {
         // Required empty public constructor
     }
+
     public static SectionFragment newInstance(@FragmentNewsType.FragmentType int type) {
         SectionFragment fragment = new SectionFragment();
         Bundle args = new Bundle();
