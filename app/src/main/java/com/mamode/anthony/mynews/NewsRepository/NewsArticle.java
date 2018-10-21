@@ -1,5 +1,7 @@
 package com.mamode.anthony.mynews.NewsRepository;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -27,6 +29,10 @@ public class NewsArticle {
         @SerializedName("abstract")
         @Expose
         private String _abstract = null;
+
+        @SerializedName("snippet")
+        @Expose
+        private String snippet = null;
 
         @SerializedName("url")
         @Expose
@@ -59,7 +65,7 @@ public class NewsArticle {
         public String getSection() {
             if(section != null) return section;
             if(search_section != null) return search_section;
-            else return "";
+            else return "Search Article";
         }
 
         public String getSubsection() {
@@ -69,7 +75,9 @@ public class NewsArticle {
         }
 
         public String getAbstract() {
-            return _abstract;
+            if(_abstract != null) return _abstract;
+            if(snippet != null) return snippet;
+            else return "";
         }
 
         public String getUrl() {

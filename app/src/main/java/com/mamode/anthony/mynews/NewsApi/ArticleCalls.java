@@ -2,6 +2,7 @@ package com.mamode.anthony.mynews.NewsApi;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
 
@@ -57,14 +58,19 @@ public class ArticleCalls {
                 @Override
                 public void onResponse(@NonNull Call<NewsArticles> call,@NonNull Response<NewsArticles> response) {
                     // 2.5 - Call the proper callback used in controller
-                    if (callbacksWeakReference.get() != null)
-                        callbacksWeakReference.get().onResponse(response.body());
+                    if(response.isSuccessful()) {
+                        if (callbacksWeakReference.get() != null)
+                            callbacksWeakReference.get().onResponse(response.body());
+                    } else if (response.errorBody() != null) {
+                        Log.e("APITRY", response.errorBody().toString());
+                    }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<NewsArticles> call,@NonNull Throwable t) {
                     if (callbacksWeakReference.get() != null)
                         callbacksWeakReference.get().onFailure();
+                    Log.e("APITRY", t.toString());
                 }
             });
         }

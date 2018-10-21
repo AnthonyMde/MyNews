@@ -1,5 +1,7 @@
 package com.mamode.anthony.mynews.NewsApi;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -31,16 +33,18 @@ public class DocsTypeAdapterFactory implements TypeAdapterFactory {
                     if (jsonObject.has("response") && jsonObject.get("response").isJsonObject())
                     {
                         jsonElement = jsonObject.get("response");
+                        Log.e("APITRY", "CONVERTER RESPONSE: " + jsonElement.toString());
                     }
                 }
 
-                if (jsonElement.isJsonObject()) {
+                /*if (jsonElement.isJsonObject()) {
                     JsonObject jsonObject = jsonElement.getAsJsonObject();
                     if (jsonObject.has("docs") && jsonObject.get("docs").isJsonArray())
                     {
                         jsonElement = jsonObject.get("docs");
+                        Log.e("APITRY", "CONVERTER DOCS: " + jsonElement.toString());
                     }
-                }
+                }*/
 
                 return delegate.fromJsonTree(jsonElement);
             }

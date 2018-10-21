@@ -10,6 +10,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.controllers.SearchActivity;
+import com.mamode.anthony.mynews.model.Constants;
 import com.mamode.anthony.mynews.utils.NewsDate;
 
 import java.text.ParseException;
@@ -43,7 +45,7 @@ public class SearchFragment extends Fragment {
     private String beginDateValue = "", endDateValue = "";
     private String queryBeginDateValue = "", queryEndDateValue = "";
     private int checkboxCounter = 0;
-    private HashMap<String, String> checkBoxesChecked;
+    private HashMap<String, String> checkBoxesChecked = new HashMap<>();
     private HashMap<String, String> query = null;
     private onResearchListener onResearchListener;
 
@@ -103,9 +105,10 @@ public class SearchFragment extends Fragment {
             }
         });
         mSearchButton.setOnClickListener(view1 -> {
-            query = null;
+            query = new HashMap<>();
             addQueryDataToTheMap();
             if(onResearchListener != null)
+                Log.e("APITRY", "Just before trigger method in frag : "+query.get("api-key"));
                 onResearchListener.displaySearchResults(query);
         });
         this.setActualDate();
@@ -114,9 +117,11 @@ public class SearchFragment extends Fragment {
     }
 
     private void addQueryDataToTheMap() {
-        query.put("query", mInput.getText().toString());
-        query.put("beginDate", queryBeginDateValue);
-        query.put("endDate", queryEndDateValue);
+        query.put("api-key", Constants.API_KEY);
+        Log.e("APITRY", "In the PUT method : "+query.get("api-key"));
+        query.put("q", mInput.getText().toString());
+        // query.put("begin_date", queryBeginDateValue);
+        // query.put("end_date", queryEndDateValue);
         // TODO: Add themes query
     }
 
