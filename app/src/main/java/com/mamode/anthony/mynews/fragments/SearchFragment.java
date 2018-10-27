@@ -10,7 +10,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,17 +19,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.mamode.anthony.mynews.R;
-import com.mamode.anthony.mynews.controllers.SearchActivity;
 import com.mamode.anthony.mynews.model.Constants;
 import com.mamode.anthony.mynews.utils.NewsDate;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,7 +40,7 @@ public class SearchFragment extends Fragment {
     private String beginDateValue = "", endDateValue = "";
     private String queryBeginDateValue = "", queryEndDateValue = "";
     private int checkboxCounter = 0;
-    private HashMap<String, String> checkBoxesChecked = new HashMap<>();
+    private HashMap<String, String> mCheckBoxesChecked = new HashMap<>();
     private HashMap<String, String> query = null;
     private onResearchListener onResearchListener;
 
@@ -54,12 +49,6 @@ public class SearchFragment extends Fragment {
     @BindView(R.id.search_frag_button) Button mSearchButton;
     @BindView(R.id.input_search_and_notif) TextInputEditText mInput;
     @BindView(R.id.textInputLayout) TextInputLayout mInputLayout;
-    @BindView(R.id.checkbox1) CheckBox checkBox1;
-    @BindView(R.id.checkbox2) CheckBox checkBox2;
-    @BindView(R.id.checkbox3) CheckBox checkBox3;
-    @BindView(R.id.checkbox4) CheckBox checkBox4;
-    @BindView(R.id.checkbox5) CheckBox checkBox5;
-    @BindView(R.id.checkbox6) CheckBox checkBox6;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -120,10 +109,10 @@ public class SearchFragment extends Fragment {
         query.put("q", mInput.getText().toString());
         query.put("hl", "true");
         if(!queryBeginDateValue.equals(""))
-        query.put("begin_date", queryBeginDateValue);
+            query.put("begin_date", queryBeginDateValue);
         if(!queryEndDateValue.equals(""))
-        query.put("end_date", queryEndDateValue);
-        // TODO: Add themes query
+            query.put("end_date", queryEndDateValue);
+        query.put("fq", setQueryThemes(mCheckBoxesChecked));
     }
 
     private void setActualDate() {
@@ -187,16 +176,23 @@ public class SearchFragment extends Fragment {
     }
 
     public void onCheckboxClicked(View view) {
-        // TODO: When it's OK for the query strategy, clean up this method
         CheckBox checkBox = (CheckBox) view;
         String checkboxName = checkBox.getText().toString();
         if(checkBox.isChecked()) {
             checkboxCounter++;
-            checkBoxesChecked.put(checkboxName, checkboxName);
+            mCheckBoxesChecked.put(checkboxName, checkboxName);
         } else {
             checkboxCounter--;
-            checkBoxesChecked.remove(checkboxName);
+            mCheckBoxesChecked.remove(checkboxName);
         }
         enableSearchIfConditionMet();
+    }
+
+    private String setQueryThemes(HashMap<String, String> themesQueryMap) {
+        StringBuilder sb = new StringBuilder();
+        for(String key : themesQueryMap.keySet()) {
+            sb.append(String.format("\"%s\" ", key));
+        }
+        return String.format("news_desk(%s)", sb);
     }
 }

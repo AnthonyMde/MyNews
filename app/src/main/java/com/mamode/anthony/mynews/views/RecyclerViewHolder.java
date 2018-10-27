@@ -6,10 +6,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.mamode.anthony.mynews.NewsRepository.Multimedia;
+import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
-import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
-import com.mamode.anthony.mynews.NewsRepository.Multimedia;
 import com.mamode.anthony.mynews.utils.NewsDate;
 
 import java.util.List;
@@ -34,7 +34,9 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         ButterKnife.bind(this, itemView);
     }
 
-    //Use API data to fill recycler view item.
+    /**
+     * Use API data to fill recyclerView item.
+     */
     public void updateWithArticleContent(NewsArticle article) {
         snippet.setText(article.getAbstract());
         displayBreadCrumbs(article);
@@ -42,6 +44,11 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         displayImage(article);
     }
 
+    /**
+     * Set the breadcrumb text to the item view.
+     * Breadcrumb is composed of the section type and possible with the subsection
+     * type if its available.
+     */
     private void displayBreadCrumbs(NewsArticle article) {
         String breadCrumbs = article.getSection();
         if (article.getSubsection() != null && !article.getSubsection().equals("")) {
@@ -50,11 +57,19 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         this.breadCrumbs.setText(breadCrumbs);
     }
 
+    /**
+     * Set the published date of the article.
+     */
     private void displayDate(NewsArticle article) {
         String date = NewsDate.setFrenchDateFormat(NewsDate.parseDate(article));
         this.date.setText(date);
     }
 
+    /**
+     * Set the miniature relative to the article.
+     * If there is no image available, a placeholder is automatically displayed
+     * (static image in res folder).
+     */
     private void displayImage(NewsArticle article) {
         if (article.getMultimedia() != null) {
             List<Multimedia> multimedia = article.getMultimedia();
@@ -76,8 +91,15 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    //Set onClickListener (on each recyclerView item) for fragment implementing the OnItemClickListener interface.
-    //This bind method is used by the Adapter (no by the ViewHolder directly).
+    /**
+     * Set onClickListener (on each recyclerView item) for fragment implementing the
+     * OnItemClickListener interface.
+     * This bind method is used by the Adapter (no by the ViewHolder directly).
+     *
+     * @param article  list of articles returned by the API
+     * @param listener the fragment or activity which implements the method to handle what action
+     *                 triggered on a recyclerView click event.
+     */
     public void bind(final NewsArticle article, final RecyclerViewAdapter.OnItemClickListener listener) {
         recyclerItem.setOnClickListener(view -> listener.onItemClick(article));
     }

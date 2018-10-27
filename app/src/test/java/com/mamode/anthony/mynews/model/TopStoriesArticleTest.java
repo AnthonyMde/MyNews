@@ -12,19 +12,19 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+/**
+ * Test our getters on the TopStories API articles
+ */
 public class TopStoriesArticleTest {
 
     private static NewsArticle article;
 
+    /**
+     * This method is called only one time before all the unit tests.
+     */
     @BeforeClass
     public static void setUp() {
-        /*Gson gson = new GsonBuilder().create();
-        try {
-            article = gson.fromJson(FileUtils.readFileToString(new File("../app/src/test/assets/news_article.json"), "UTF-8"), NewsArticle.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-        article = GsonParser.parseJson("news_article.json", NewsArticle.class);
+        article = GsonParser.parseJson("top_stories_article.json", NewsArticle.class);
     }
 
     @Test
@@ -47,23 +47,15 @@ public class TopStoriesArticleTest {
         assertEquals("2018-09-17T13:18:27-04:00", article.getPublishedDate());
     }
 
-    /* From TopStories */
     @Test
     public void Given_DataApi_When_CallTopStories_Then_GetMultimedia() {
         List<Multimedia> multimedia = article.getMultimedia();
         assert(!multimedia.isEmpty());
     }
 
-    /* From TopStories API */
     @Test
     public void Given_DataApi_When_CallTopStories_Then_GetMultimediaUrl() {
         assertEquals("https://static01.nyt.com/images/2018/09/18/science/18SCI-SPARROWS1/merlin_141234075_fafe4100-5370-49a3-9fe0-97330cf98cd9-thumbStandard.jpg", article.getMultimedia().get(0).getUrl());
         assertNotEquals("https://static01.nyt.com/images/2018/09/18/science/18SCI-SPARROWS1/merlin_141234075_fafe4100-5370-49a3-9fe0-97330cf98cd9-thumbLarge.jpg", article.getMultimedia().get(1).getUrl());
-    }
-
-    /* From MostPopular API */
-    @Test
-    public void Given_DataApi_When_CallApi_Then_GetMedia() {
-        // TODO
     }
 }

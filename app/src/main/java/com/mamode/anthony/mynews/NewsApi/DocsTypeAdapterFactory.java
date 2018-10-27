@@ -1,7 +1,5 @@
 package com.mamode.anthony.mynews.NewsApi;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,6 +11,13 @@ import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
 
+/**
+ * Singleton which is used by retrofit as is ConverterFactory.
+ * If the JSON in entry is a object "response" (from Search API) and return the sub-object (docs).
+ * Necessary for the Search API which returns an object wrapper "response" which does not fit
+ * our data structure. Instead of this "response" object, GSON will deal with the "docs" object.
+ */
+
 public class DocsTypeAdapterFactory implements TypeAdapterFactory {
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
@@ -21,31 +26,32 @@ public class DocsTypeAdapterFactory implements TypeAdapterFactory {
 
         return new TypeAdapter<T>() {
 
+            /**
+             * To serialize object, interface method not used here
+             * @param out
+             * @param value
+             * @throws IOException
+             */
             public void write(JsonWriter out, T value) throws IOException {
                 delegate.write(out, value);
             }
 
+            /**
+             * To deserialize object, takes JSON object as param and returns
+             * an object which is the modified object type.
+             * @param in
+             * @return
+             * @throws IOException
+             */
             public T read(JsonReader in) throws IOException {
 
                 JsonElement jsonElement = elementAdapter.read(in);
                 if (jsonElement.isJsonObject()) {
                     JsonObject jsonObject = jsonElement.getAsJsonObject();
-                    if (jsonObject.has("response") && jsonObject.get("response").isJsonObject())
-                    {
+                    if (jsonObject.has("response") && jsonObject.get("response").isJsonObject()) {
                         jsonElement = jsonObject.get("response");
-                        Log.e("APITRY", "CONVERTER RESPONSE: " + jsonElement.toString());
                     }
                 }
-
-                /*if (jsonElement.isJsonObject()) {
-                    JsonObject jsonObject = jsonElement.getAsJsonObject();
-                    if (jsonObject.has("docs") && jsonObject.get("docs").isJsonArray())
-                    {
-                        jsonElement = jsonObject.get("docs");
-                        Log.e("APITRY", "CONVERTER DOCS: " + jsonElement.toString());
-                    }
-                }*/
-
                 return delegate.fromJsonTree(jsonElement);
             }
         }.nullSafe();

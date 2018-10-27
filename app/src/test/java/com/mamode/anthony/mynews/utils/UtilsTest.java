@@ -11,7 +11,7 @@ public class UtilsTest {
 
     @Test
     public void Given_DayNumber_When_Nothing_Then_AddZeroToDateIfMinorTen() {
-        assertEquals("08", Utils.addZeroToDate(8));
-        assertEquals("12", Utils.addZeroToDate(12));
+        assertEquals("08", NewsDate.addZeroToDate(8));
+        assertEquals("12", NewsDate.addZeroToDate(12));
     }
 }

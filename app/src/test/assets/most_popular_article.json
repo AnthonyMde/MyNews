@@ -1,0 +1,58 @@
+{
+  "url": "https://www.nytimes.com/2018/10/15/science/gedmatch-genealogy-cold-cases.html",
+  "adx_keywords": "GEDmatch Inc;Genealogy;Genetics and Heredity;Forensic Science;Computers and the Internet;Sex Crimes;Serial Murders;Privacy",
+  "column": null,
+  "section": "Science",
+  "byline": "By HEATHER MURPHY",
+  "type": "Article",
+  "title": "How an Unlikely Family History Website Transformed Cold Case Investigations",
+  "abstract": "Fifteen murder and sexual assault cases have been solved since April with a single genealogy website. This is how GEDmatch went from a casual side project to a revolutionary tool.",
+  "published_date": "2018-10-15",
+  "source": "The New York Times",
+  "id": 100000006155515,
+  "asset_id": 100000006155515,
+  "views": 1,
+  "des_facet": [
+    "GENEALOGY",
+    "GENETICS AND HEREDITY",
+    "FORENSIC SCIENCE",
+    "COMPUTERS AND THE INTERNET"
+  ],
+  "org_facet": [
+    "GEDMATCH INC",
+    "SEX CRIMES",
+    "SERIAL MURDERS",
+    "PRIVACY"
+  ],
+  "per_facet": "",
+  "geo_facet": "",
+  "media": [
+    {
+      "type": "image",
+      "subtype": "photo",
+      "caption": "Curtis Rogers enjoys helping people solve family history puzzles. He inadvertently created a database that can now identify 60 percent of Americans of Northern European ancestry. ",
+      "copyright": "Scott McIntyre for The New York Times",
+      "approved_for_syndication": 1,
+      "media-metadata": [
+        {
+          "url": "https://static01.nyt.com/images/2018/09/25/science/00GEDMATCH1/00GEDMATCH1-thumbStandard.jpg",
+          "format": "Standard Thumbnail",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "url": "https://static01.nyt.com/images/2018/09/25/science/00GEDMATCH1/00GEDMATCH1-mediumThreeByTwo210.jpg",
+          "format": "mediumThreeByTwo210",
+          "height": 140,
+          "width": 210
+        },
+        {
+          "url": "https://static01.nyt.com/images/2018/09/25/science/00GEDMATCH1/00GEDMATCH1-mediumThreeByTwo440.jpg",
+          "format": "mediumThreeByTwo440",
+          "height": 293,
+          "width": 440
+        }
+      ]
+    }
+  ]
+}

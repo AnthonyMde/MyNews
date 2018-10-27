@@ -41,9 +41,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         return new RecyclerViewHolder(view);
     }
 
-    // Retrieve article object by position,
-    // set recyclerView item content with updateWithArticleContent() method,
-    // set onClickListener for each item with bind() method.
+    // Retrieve article object by position.
+    // Set recyclerView item content with updateWithArticleContent() method.
+    // Set onClickListener for each item with bind() method.
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         holder.updateWithArticleContent(mArticles.get(position));

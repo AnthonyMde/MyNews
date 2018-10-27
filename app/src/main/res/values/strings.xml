@@ -27,6 +27,8 @@
     <string name="checkbox_health_text">Health</string>
     <string name="checkbox_world_text">World</string>
     <string name="checkbox_technology_text">Technology</string>
+    <string name="checkbox_financial_text">Financial</string>
+    <string name="checkbox_education_text">Education</string>
     <string name="search_button_text">SEARCH</string>
     <string name="notification_switch_text">Enable notifications (once per day)</string>
 
@@ -35,7 +37,4 @@
     <string name="recycler_view_row_title">fil d\'ariane</string>
     <string name="recycler_view_content_text">Ici l\'apperçu du début de l\'article à l\'intérieur de cet item</string>
     <string name="recycler_view_date">17/25/89</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

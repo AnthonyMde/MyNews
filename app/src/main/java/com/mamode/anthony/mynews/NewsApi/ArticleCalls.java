@@ -62,7 +62,7 @@ public class ArticleCalls {
                         if (callbacksWeakReference.get() != null)
                             callbacksWeakReference.get().onResponse(response.body());
                     } else if (response.errorBody() != null) {
-                        Log.e("APITRY", response.errorBody().toString());
+                        Log.e("API_ERROR", response.errorBody().toString());
                     }
                 }
 
@@ -70,7 +70,7 @@ public class ArticleCalls {
                 public void onFailure(@NonNull Call<NewsArticles> call,@NonNull Throwable t) {
                     if (callbacksWeakReference.get() != null)
                         callbacksWeakReference.get().onFailure();
-                    Log.e("APITRY", t.toString());
+                    Log.e("API_ERROR", t.toString());
                 }
             });
         }

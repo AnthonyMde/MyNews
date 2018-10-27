@@ -118,7 +118,7 @@
         android:onClick="onCheckboxClicked"
         app:layout_constraintTop_toBottomOf="@id/checkbox4"
         app:layout_constraintStart_toStartOf="@id/guideline_middle"
-        android:text="CheckBox" />
+        android:text="@string/checkbox_financial_text" />
 
     <CheckBox
         android:id="@+id/checkbox6"
@@ -127,7 +127,7 @@
         android:onClick="onCheckboxClicked"
         app:layout_constraintTop_toBottomOf="@id/checkbox5"
         app:layout_constraintStart_toStartOf="@id/guideline_middle"
-        android:text="CheckBox" />
+        android:text="@string/checkbox_education_text" />
 
     <Button
         android:id="@+id/search_frag_button"
