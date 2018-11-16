@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements SectionFragment.S
     }
 
     //---------------------------------------------
-    //TOOLBAR CONFIGURATION
+    // TOOLBAR CONFIGURATION
     //---------------------------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements SectionFragment.S
     }
 
     //---------------------------------------------
-    //NAVIGATION DRAWER CONFIGURATION
+    // NAVIGATION DRAWER CONFIGURATION
     //---------------------------------------------
     private void configureDrawerLayout(){
         // Join the drawer with the toolbar to set the hamburger button.
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements SectionFragment.S
     }
 
     //---------------------------------------------
-    //TABS and VIEWPAGER CONFIGURATION
+    // TABS and VIEWPAGER CONFIGURATION
     //---------------------------------------------
     private void configurePageAdapterAndTabs(){
         // Set adapter to viewpager.

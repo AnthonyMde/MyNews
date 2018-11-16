@@ -2,10 +2,10 @@ package com.mamode.anthony.mynews.controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 
@@ -60,7 +60,7 @@ public class SearchActivity extends AppCompatActivity implements SectionFragment
 
     @Override
     public void displaySearchResults(HashMap<String, String> query) {
-        Log.e("APITRY", "In the activity : "+query.get("api-key"));
+        Log.e("APITRY", "In the activity : " + query.get("api-key"));
         SectionFragment sectionFragment = SectionFragment.newInstance(FragmentNewsType.SEARCH, query);
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frag_search_container, sectionFragment).commit();

@@ -96,7 +96,7 @@ public class SearchFragment extends Fragment {
         mSearchButton.setOnClickListener(view1 -> {
             query = new HashMap<>();
             addQueryDataToTheMap();
-            if(onResearchListener != null)
+            if (onResearchListener != null)
                 onResearchListener.displaySearchResults(query);
         });
         this.setActualDate();
@@ -172,13 +172,16 @@ public class SearchFragment extends Fragment {
     // Search button is enabled or disabled according to the required conditions.
     // At least 3 letters in the input and 1 checkbox checked
     private void enableSearchIfConditionMet() {
-        mSearchButton.setEnabled(mInput.getText().length()>= 1 && checkboxCounter>=1);
+        mSearchButton.setEnabled(
+                mInput.getText().length() >= 1
+                        && checkboxCounter >= 1
+        );
     }
 
     public void onCheckboxClicked(View view) {
         CheckBox checkBox = (CheckBox) view;
         String checkboxName = checkBox.getText().toString();
-        if(checkBox.isChecked()) {
+        if (checkBox.isChecked()) {
             checkboxCounter++;
             mCheckBoxesChecked.put(checkboxName, checkboxName);
         } else {

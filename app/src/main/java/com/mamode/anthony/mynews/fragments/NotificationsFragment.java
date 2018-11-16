@@ -1,6 +1,5 @@
 package com.mamode.anthony.mynews.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,7 +7,6 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +69,10 @@ public class NotificationsFragment extends Fragment {
     // Search button is enabled or disabled according to the required conditions.
     // At least 3 letters in the input and 1 checkbox checked
     private void enableSearchIfConditionMet(){
-        mSwitch.setEnabled(mInput.getText().length()>= 1 && checkboxCounter>=1);
+        mSwitch.setEnabled(
+                mInput.getText().length() >= 1
+                        && checkboxCounter >= 1
+        );
     }
 
     public void onCheckboxClicked(View view){
