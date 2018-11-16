@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 public class ArticleCalls {
     // Get a Retrofit instance and the related endpoints
-    private static NewsService newsService = NewsService.retrofit.create(NewsService.class);
+    private static NewsService newsService = ApiClient.getRetrofitInstance().create(NewsService.class);
     private static Call<NewsArticles> call = null;
 
     // 1 - Creating a callback

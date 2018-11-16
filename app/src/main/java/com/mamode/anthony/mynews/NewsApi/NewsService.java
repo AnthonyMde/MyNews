@@ -37,19 +37,6 @@ public interface NewsService {
 
     @GET("svc/search/v2/articlesearch.json")
     Call<NewsArticles> getSearchArticles(@QueryMap Map<String, String> query);
-
-
-    HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-    OkHttpClient.Builder client = new OkHttpClient.Builder()
-            .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC))
-            .addInterceptor(new AuthInterceptor());
-
-    Gson gson = new GsonBuilder().registerTypeAdapterFactory(new DocsTypeAdapterFactory()).create();
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.nytimes.com/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(client.build())
-            .build();
 }
 
 
