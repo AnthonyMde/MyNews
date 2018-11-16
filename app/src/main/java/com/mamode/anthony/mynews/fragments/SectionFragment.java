@@ -94,9 +94,9 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         super.onViewCreated(view, savedInstanceState);
         //NYT api call.
         if (mSearchQuery != null && !mSearchQuery.isEmpty())
-            ArticleCalls.fetchNews(this, Constants.API_KEY, mFragmentType, mSearchQuery);
+            ArticleCalls.fetchNews(this, mFragmentType, mSearchQuery);
         else
-            ArticleCalls.fetchNews(this, Constants.API_KEY, mFragmentType, null);
+            ArticleCalls.fetchNews(this, mFragmentType, null);
     }
 
     //If data are received from the NYT api.

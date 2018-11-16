@@ -18,22 +18,22 @@ import retrofit2.http.QueryMap;
 public interface NewsService {
 
     @GET("svc/topstories/v2/home.json")
-    Call<NewsArticles> getTopStories(@Query("api-key") String apiKey);
+    Call<NewsArticles> getTopStories();
 
     @GET("svc/mostpopular/v2/mostviewed/all-sections/1.json")
-    Call<NewsArticles> getMostPopular(@Query("api-key") String apiKey);
+    Call<NewsArticles> getMostPopular();
 
     @GET("svc/topstories/v2/science.json")
-    Call<NewsArticles> getTopStoriesScience(@Query("api-key") String apiKey);
+    Call<NewsArticles> getTopStoriesScience();
 
     @GET("svc/topstories/v2/world.json")
-    Call<NewsArticles> getTopStoriesWorld(@Query("api-key") String apiKey);
+    Call<NewsArticles> getTopStoriesWorld();
 
     @GET("svc/topstories/v2/health.json")
-    Call<NewsArticles> getTopStoriesHealth(@Query("api-key") String apiKey);
+    Call<NewsArticles> getTopStoriesHealth();
 
     @GET("svc/topstories/v2/technology.json")
-    Call<NewsArticles> getTopStoriesTechnology(@Query("api-key") String apiKey);
+    Call<NewsArticles> getTopStoriesTechnology();
 
     @GET("svc/search/v2/articlesearch.json")
     Call<NewsArticles> getSearchArticles(@QueryMap Map<String, String> query);
@@ -41,7 +41,8 @@ public interface NewsService {
 
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     OkHttpClient.Builder client = new OkHttpClient.Builder()
-            .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC));
+            .addInterceptor(logging.setLevel(HttpLoggingInterceptor.Level.BASIC))
+            .addInterceptor(new AuthInterceptor());
 
     Gson gson = new GsonBuilder().registerTypeAdapterFactory(new DocsTypeAdapterFactory()).create();
     Retrofit retrofit = new Retrofit.Builder()

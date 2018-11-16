@@ -25,29 +25,29 @@ public class ArticleCalls {
     }
 
     // Public method to start fetching top stories api data
-    public static void fetchNews(onAPIResponseListener callback, String apikey, @FragmentNewsType.FragmentType int fragmentType, @Nullable HashMap<String, String> query) {
+    public static void fetchNews(onAPIResponseListener callback, @FragmentNewsType.FragmentType int fragmentType, @Nullable HashMap<String, String> query) {
         // Create a weak reference to callback (avoid memory leaks)
         final WeakReference<onAPIResponseListener> callbacksWeakReference = new WeakReference<>(callback);
 
         // Make the right API call according to the fragment name
         switch (fragmentType) {
             case FragmentNewsType.TOPSTORIES:
-                call = newsService.getTopStories(apikey);
+                call = newsService.getTopStories();
                 break;
             case FragmentNewsType.MOSTPOPULAR:
-                call = newsService.getMostPopular(apikey);
+                call = newsService.getMostPopular();
                 break;
             case FragmentNewsType.SCIENCE:
-                call = newsService.getTopStoriesScience(apikey);
+                call = newsService.getTopStoriesScience();
                 break;
             case FragmentNewsType.WORLD:
-                call = newsService.getTopStoriesWorld(apikey);
+                call = newsService.getTopStoriesWorld();
                 break;
             case FragmentNewsType.HEALTH:
-                call = newsService.getTopStoriesHealth(apikey);
+                call = newsService.getTopStoriesHealth();
                 break;
             case FragmentNewsType.TECHNOLOGY:
-                call = newsService.getTopStoriesTechnology(apikey);
+                call = newsService.getTopStoriesTechnology();
                 break;
             case FragmentNewsType.SEARCH:
                 call = newsService.getSearchArticles(query);
