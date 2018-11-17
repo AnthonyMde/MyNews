@@ -5,12 +5,10 @@ import android.widget.CheckBox;
 import com.mamode.anthony.mynews.fragments.NotificationsFragment;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Field;
 

@@ -9,14 +9,14 @@ import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.fragments.NotificationsFragment;
 
 public class NotificationsActivity extends AppCompatActivity {
-    private NotificationsFragment notificationsFragment;
+    private NotificationsFragment mNotificationsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_notifications);
-        notificationsFragment = (NotificationsFragment) getSupportFragmentManager().findFragmentById(R.id.frag_notif);
+        mNotificationsFragment = (NotificationsFragment) getSupportFragmentManager().findFragmentById(R.id.frag_notif);
         this.configureToolbar();
     }
 
@@ -30,7 +30,7 @@ public class NotificationsActivity extends AppCompatActivity {
 
     // Method call from the fragment_search_and_notif layout file
     public void onCheckboxClicked(View view) {
-        if (notificationsFragment != null)
-            notificationsFragment.onCheckboxClicked(view);
+        if (mNotificationsFragment != null)
+            mNotificationsFragment.onCheckboxClicked(view);
     }
 }

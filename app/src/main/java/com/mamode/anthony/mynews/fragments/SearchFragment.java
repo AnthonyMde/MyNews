@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.mamode.anthony.mynews.R;
-import com.mamode.anthony.mynews.model.Constants;
 import com.mamode.anthony.mynews.utils.NewsDate;
 
 import java.text.ParseException;
@@ -36,13 +35,13 @@ public class SearchFragment extends Fragment {
         void displaySearchResults(HashMap<String, String> query);
     }
 
-    private int actualYear, actualMonth, actualDay;
-    private String beginDateValue = "", endDateValue = "";
-    private String queryBeginDateValue = "", queryEndDateValue = "";
-    private int checkboxCounter = 0;
+    private int mActualYear, mActualMonth, mActualDay;
+    private String mBeginDateValue = "", mEndDateValue = "";
+    private String mQueryBeginDateValue = "", mQueryEndDateValue = "";
+    private int mCheckboxCounter = 0;
     private HashMap<String, String> mCheckBoxesChecked = new HashMap<>();
-    private HashMap<String, String> query = null;
-    private onResearchListener onResearchListener;
+    private HashMap<String, String> mQuery = null;
+    private onResearchListener mOnResearchListener;
 
     @BindView(R.id.begin_date) EditText beginDate;
     @BindView(R.id.end_date) EditText endDate;
@@ -62,7 +61,7 @@ public class SearchFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if(getActivity() != null)
-            onResearchListener = (onResearchListener) getActivity();
+            mOnResearchListener = (onResearchListener) getActivity();
     }
 
     @Override
@@ -94,10 +93,10 @@ public class SearchFragment extends Fragment {
             }
         });
         mSearchButton.setOnClickListener(view1 -> {
-            query = new HashMap<>();
+            mQuery = new HashMap<>();
             addQueryDataToTheMap();
-            if (onResearchListener != null)
-                onResearchListener.displaySearchResults(query);
+            if (mOnResearchListener != null)
+                mOnResearchListener.displaySearchResults(mQuery);
         });
         this.setActualDate();
         this.configureDatePicker(beginDate);
@@ -105,21 +104,20 @@ public class SearchFragment extends Fragment {
     }
 
     private void addQueryDataToTheMap() {
-        query.put("api-key", Constants.API_KEY);
-        query.put("q", mInput.getText().toString());
-        query.put("hl", "true");
-        if(!queryBeginDateValue.equals(""))
-            query.put("begin_date", queryBeginDateValue);
-        if(!queryEndDateValue.equals(""))
-            query.put("end_date", queryEndDateValue);
-        query.put("fq", setQueryThemes(mCheckBoxesChecked));
+        mQuery.put("q", mInput.getText().toString());
+        mQuery.put("hl", "true");
+        if(!mQueryBeginDateValue.equals(""))
+            mQuery.put("begin_date", mQueryBeginDateValue);
+        if(!mQueryEndDateValue.equals(""))
+            mQuery.put("end_date", mQueryEndDateValue);
+        mQuery.put("fq", setQueryThemes(mCheckBoxesChecked));
     }
 
     private void setActualDate() {
         Calendar calendar = Calendar.getInstance();
-        this.actualYear = calendar.get(Calendar.YEAR);
-        this.actualMonth = calendar.get(Calendar.MONTH);
-        this.actualDay = calendar.get(Calendar.DAY_OF_MONTH);
+        this.mActualYear = calendar.get(Calendar.YEAR);
+        this.mActualMonth = calendar.get(Calendar.MONTH);
+        this.mActualDay = calendar.get(Calendar.DAY_OF_MONTH);
     }
 
     // Set default google calendar with max and min date logic
@@ -132,7 +130,7 @@ public class SearchFragment extends Fragment {
         if(getContext() != null){
             final DatePickerDialog datePickerDialog;
             datePickerDialog = new DatePickerDialog(getContext(), R.style.DialogTheme,
-                    (view, year, month, dayOfMonth) -> displaySelectedDate(year, month, dayOfMonth, datePickerEditText), actualYear, actualMonth, actualDay);
+                    (view, year, month, dayOfMonth) -> displaySelectedDate(year, month, dayOfMonth, datePickerEditText), mActualYear, mActualMonth, mActualDay);
 
             // Max date by default is the current day
             datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
@@ -145,10 +143,10 @@ public class SearchFragment extends Fragment {
     // Logic for avoid the begin date and the end date to pass each other
     private void setDatePickerBoundaries(DatePickerDialog datePickerDialog, EditText datePickerEditText) {
         try {
-            if (datePickerEditText == beginDate && !endDateValue.equals(""))
-                datePickerDialog.getDatePicker().setMaxDate((long) NewsDate.convertDateIntoMillis(endDateValue) + 40000000);
-            else if (datePickerEditText == endDate && !beginDateValue.equals(""))
-                datePickerDialog.getDatePicker().setMinDate((long) NewsDate.convertDateIntoMillis(beginDateValue) + 40000000);
+            if (datePickerEditText == beginDate && !mEndDateValue.equals(""))
+                datePickerDialog.getDatePicker().setMaxDate((long) NewsDate.convertDateIntoMillis(mEndDateValue) + 40000000);
+            else if (datePickerEditText == endDate && !mBeginDateValue.equals(""))
+                datePickerDialog.getDatePicker().setMinDate((long) NewsDate.convertDateIntoMillis(mBeginDateValue) + 40000000);
         } catch (ParseException e) {
             e.printStackTrace();
             Toast.makeText(getContext(), "The date can't be parsed, please contact support", Toast.LENGTH_LONG).show();
@@ -159,13 +157,13 @@ public class SearchFragment extends Fragment {
     // Display the selected date and store it (those data are used in setDatePickerBoundaries)
     private void displaySelectedDate(int year, int month, int dayOfMonth, EditText datePickerEditText) {
         if (datePickerEditText == beginDate){
-            beginDateValue = NewsDate.addZeroToDate(dayOfMonth)+"/"+ NewsDate.addZeroToDate(month+1)+"/"+year;
-            datePickerEditText.setText(beginDateValue);
-            queryBeginDateValue = "" + year + (NewsDate.addZeroToDate(month+1)) + NewsDate.addZeroToDate(dayOfMonth);
+            mBeginDateValue = NewsDate.addZeroToDate(dayOfMonth)+"/"+ NewsDate.addZeroToDate(month+1)+"/"+year;
+            datePickerEditText.setText(mBeginDateValue);
+            mQueryBeginDateValue = "" + year + (NewsDate.addZeroToDate(month+1)) + NewsDate.addZeroToDate(dayOfMonth);
         }else {
-            endDateValue = NewsDate.addZeroToDate(dayOfMonth)+"/"+ NewsDate.addZeroToDate(month+1)+"/"+year;
-            datePickerEditText.setText(endDateValue);
-            queryEndDateValue = "" + year + (NewsDate.addZeroToDate(month+1)) + NewsDate.addZeroToDate(dayOfMonth);
+            mEndDateValue = NewsDate.addZeroToDate(dayOfMonth)+"/"+ NewsDate.addZeroToDate(month+1)+"/"+year;
+            datePickerEditText.setText(mEndDateValue);
+            mQueryEndDateValue = "" + year + (NewsDate.addZeroToDate(month+1)) + NewsDate.addZeroToDate(dayOfMonth);
         }
     }
 
@@ -174,7 +172,7 @@ public class SearchFragment extends Fragment {
     private void enableSearchIfConditionMet() {
         mSearchButton.setEnabled(
                 mInput.getText().length() >= 1
-                        && checkboxCounter >= 1
+                        && mCheckboxCounter >= 1
         );
     }
 
@@ -182,10 +180,10 @@ public class SearchFragment extends Fragment {
         CheckBox checkBox = (CheckBox) view;
         String checkboxName = checkBox.getText().toString();
         if (checkBox.isChecked()) {
-            checkboxCounter++;
+            mCheckboxCounter++;
             mCheckBoxesChecked.put(checkboxName, checkboxName);
         } else {
-            checkboxCounter--;
+            mCheckboxCounter--;
             mCheckBoxesChecked.remove(checkboxName);
         }
         enableSearchIfConditionMet();

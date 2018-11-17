@@ -19,7 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NotificationsFragment extends Fragment {
-    private int checkboxCounter = 0;
+    private int mCheckboxCounter = 0;
     @BindView(R.id.notification_frag_switch)
     Switch mSwitch;
     @BindView(R.id.input_search_and_notif)
@@ -56,6 +56,7 @@ public class NotificationsFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mSwitch.setChecked(false);
                 enableSearchIfConditionMet();
             }
 
@@ -71,12 +72,13 @@ public class NotificationsFragment extends Fragment {
     private void enableSearchIfConditionMet(){
         mSwitch.setEnabled(
                 mInput.getText().length() >= 1
-                        && checkboxCounter >= 1
+                        && mCheckboxCounter >= 1
         );
     }
 
     public void onCheckboxClicked(View view){
-        checkboxCounter = ((CheckBox)view).isChecked() ? checkboxCounter+1 : checkboxCounter-1;
+        mSwitch.setChecked(false);
+        mCheckboxCounter = ((CheckBox)view).isChecked() ? mCheckboxCounter +1 : mCheckboxCounter -1;
         enableSearchIfConditionMet();
     }
 }

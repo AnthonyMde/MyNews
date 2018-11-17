@@ -18,11 +18,9 @@ import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
 import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
 import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
 import com.mamode.anthony.mynews.NewsApi.ArticleCalls;
-import com.mamode.anthony.mynews.model.Constants;
 import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
 
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,7 +29,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     @BindView(R.id.main_recycler_view)
     RecyclerView mRecyclerView;
 
-    private SectionFragmentCallback callback;
+    private SectionFragmentCallback mCallback;
     private static final String FRAGMENT_TYPE = "FRAGMENT-TYPE";
     private int mFragmentType = 0;
     private HashMap<String, String> mSearchQuery = new HashMap<>();
@@ -65,7 +63,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         super.onAttach(context);
 
         if (getActivity() != null)
-            callback = (SectionFragmentCallback) getActivity();
+            mCallback = (SectionFragmentCallback) getActivity();
     }
 
     @Override
@@ -129,8 +127,8 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     //Open webView on recyclerView item clicked.
     @Override
     public void onItemClick(NewsArticle article) {
-        if (callback != null)
-            callback.openUrl(article.getUrl());
+        if (mCallback != null)
+            mCallback.openUrl(article.getUrl());
     }
 
     public interface SectionFragmentCallback {
