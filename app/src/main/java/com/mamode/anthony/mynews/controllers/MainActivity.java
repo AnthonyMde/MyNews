@@ -18,7 +18,7 @@ import com.mamode.anthony.mynews.utils.Utils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements SectionFragment.SectionFragmentCallback{
+public class MainActivity extends BaseActivity implements SectionFragment.SectionFragmentCallback{
     @BindView(R.id.toolbar) android.support.v7.widget.Toolbar mToolbar;
     @BindView(R.id.activity_main_viewpager) ViewPager mViewPager;
     @BindView(R.id.activity_main_tabs) TabLayout mTabLayout;
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements SectionFragment.S
         }
     }
 
-    private void configureToolbar() {
+    protected void configureToolbar() {
         setSupportActionBar(mToolbar);
     }
 

@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
@@ -31,6 +32,8 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     RecyclerView mRecyclerView;
     @BindView(R.id.indeterminateBar)
     ProgressBar mProgressBar;
+    @BindView(R.id.section_frag_no_article_text)
+    TextView mNoArticleFoundText;
 
     private SectionFragmentCallback mCallback;
     private static final String FRAGMENT_TYPE = "FRAGMENT-TYPE";
@@ -117,6 +120,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     public void onFailure() {
         Log.e("ArticleCalls-onFailure", "Can not reach NYT data API");
         mProgressBar.setVisibility(View.GONE);
+        mNoArticleFoundText.setVisibility(View.VISIBLE);
     }
 
     private void configureRecyclerView(NewsArticles articles) {

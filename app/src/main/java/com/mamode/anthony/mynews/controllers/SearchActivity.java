@@ -15,7 +15,7 @@ import com.mamode.anthony.mynews.fragments.SectionFragment;
 
 import java.util.HashMap;
 
-public class SearchActivity extends AppCompatActivity implements SectionFragment.SectionFragmentCallback, SearchFragment.onResearchListener {
+public class SearchActivity extends BaseActivity implements SectionFragment.SectionFragmentCallback, SearchFragment.onResearchListener {
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
 
@@ -27,14 +27,6 @@ public class SearchActivity extends AppCompatActivity implements SectionFragment
         mFragmentManager = getSupportFragmentManager();
         configureToolbar();
         addSearchFragment();
-    }
-
-    private void configureToolbar() {
-        android.support.v7.widget.Toolbar toolbar = findViewById(R.id.include_toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar ab = getSupportActionBar();
-        if(ab != null)
-            ab.setDisplayHomeAsUpEnabled(true);
     }
 
     private void addSearchFragment() {

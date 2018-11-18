@@ -58,7 +58,7 @@ public class ArticleCalls {
                 @Override
                 public void onResponse(@NonNull Call<NewsArticles> call,@NonNull Response<NewsArticles> response) {
                     // 2.5 - Call the proper callback used in controller
-                    if(response.isSuccessful()) {
+                    if (response.isSuccessful()) {
                         if (callbacksWeakReference.get() != null)
                             callbacksWeakReference.get().onResponse(response.body());
                     } else if (response.errorBody() != null) {
