@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
@@ -28,6 +29,8 @@ import butterknife.ButterKnife;
 public class SectionFragment extends Fragment implements ArticleCalls.onAPIResponseListener, RecyclerViewAdapter.OnItemClickListener {
     @BindView(R.id.main_recycler_view)
     RecyclerView mRecyclerView;
+    @BindView(R.id.indeterminateBar)
+    ProgressBar mProgressBar;
 
     private SectionFragmentCallback mCallback;
     private static final String FRAGMENT_TYPE = "FRAGMENT-TYPE";
@@ -36,6 +39,9 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
 
     public SectionFragment() {
         // Required empty public constructor
+    }
+    public interface SectionFragmentCallback {
+        void openUrl(String url);
     }
 
     public static SectionFragment newInstance(@FragmentNewsType.FragmentType int type) {
@@ -46,9 +52,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         return fragment;
     }
 
-
     public static SectionFragment newInstance(@FragmentNewsType.FragmentType int type, HashMap<String, String> query) {
-        Log.e("APITRY", "In the sectionfrag before bundle : "+query.get("api-key"));
         SectionFragment fragment = new SectionFragment();
         Bundle args = new Bundle();
         args.putInt(FRAGMENT_TYPE, type);
@@ -57,11 +61,9 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         return fragment;
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         if (getActivity() != null)
             mCallback = (SectionFragmentCallback) getActivity();
     }
@@ -73,8 +75,6 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         if (getArguments() != null) {
             mFragmentType = getArguments().getInt(FRAGMENT_TYPE);
             mSearchQuery = (HashMap<String, String>) getArguments().getSerializable("QueryHashMap");
-            if(mSearchQuery != null && !mSearchQuery.isEmpty())
-            Log.e("APITRY", "In sectionfrag after retrieve bundle : "+mSearchQuery.get("api-key"));
         }
     }
 
@@ -90,25 +90,33 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //NYT api call.
+        // NYT api call.
+        mProgressBar.setVisibility(View.VISIBLE);
         if (mSearchQuery != null && !mSearchQuery.isEmpty())
             ArticleCalls.fetchNews(this, mFragmentType, mSearchQuery);
         else
             ArticleCalls.fetchNews(this, mFragmentType, null);
     }
 
-    //If data are received from the NYT api.
+    /**
+     * Method call if NYT API call is successful.
+     * @param articles list of articles fetched from the NYT API.
+     */
     @Override
     public void onResponse(@Nullable NewsArticles articles) {
         if (articles != null) {
             this.configureRecyclerView(articles);
         }
+        mProgressBar.setVisibility(View.GONE);
     }
-    //If fetching NYT data api has failed.
+
+    /**
+     * Method call if NYT API call failed.
+     */
     @Override
     public void onFailure() {
         Log.e("ArticleCalls-onFailure", "Can not reach NYT data API");
-
+        mProgressBar.setVisibility(View.GONE);
     }
 
     private void configureRecyclerView(NewsArticles articles) {
@@ -129,9 +137,5 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     public void onItemClick(NewsArticle article) {
         if (mCallback != null)
             mCallback.openUrl(article.getUrl());
-    }
-
-    public interface SectionFragmentCallback {
-        void openUrl(String url);
     }
 }
