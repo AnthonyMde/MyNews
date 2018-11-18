@@ -25,9 +25,25 @@
         android:text="@string/no_article_found_text"
         android:visibility="gone"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/main_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/medium"/>
+    <ImageView
+        android:id="@+id/arrow_pull_to_refresh"
+        android:contentDescription="@string/icon_pull_to_refresh_content_description"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_arrow_pull_to_refresh"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/large_xx"
+        android:visibility="gone"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/pullToRefresh"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/medium"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </FrameLayout>

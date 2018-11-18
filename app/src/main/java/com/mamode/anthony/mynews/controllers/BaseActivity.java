@@ -12,9 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.mamode.anthony.mynews.R;
+import com.mamode.anthony.mynews.fragments.SectionFragment;
+
 /**
  * Abstract class used to factoring shared activity class code.
- * This class is also responsible to watch internet connectivity and 
+ * This class is also responsible to watch internet connectivity and
  * notify the user when some changes happened.
  */
 public abstract class BaseActivity extends AppCompatActivity {

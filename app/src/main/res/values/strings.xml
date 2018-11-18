@@ -37,9 +37,12 @@
     <string name="recycler_view_row_title">fil d\'ariane</string>
     <string name="recycler_view_content_text">Ici l\'apperçu du début de l\'article à l\'intérieur de cet item</string>
     <string name="recycler_view_date">17/25/89</string>
-    <string name="no_article_found_text">Oups ! Nous n\'avons pas pu récupérer ces articles du New York Times.</string>
+    <string name="no_article_found_text">Oups ! Nous n\'avons pas pu récupérer ces articles du New York Times.\n\nGlisser vers le bas pour rafraichir.</string>
 
     <!-- Snackbar -->
     <string name="no_internet_connection">Pas de connexion internet</string>
     <string name="internet_connection_getback">Connexion retrouvée !</string>
+
+    <!-- Image content description -->
+    <string name="icon_pull_to_refresh_content_description">Flèche vers le bas qui indique dans quel sens toucher l\'écran pour rafraichir la page.</string>
 </resources>

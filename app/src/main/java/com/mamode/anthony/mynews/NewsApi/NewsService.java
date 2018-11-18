@@ -1,18 +1,11 @@
 package com.mamode.anthony.mynews.NewsApi;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
 
 import java.util.Map;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 public interface NewsService {

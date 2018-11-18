@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -34,6 +36,10 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     ProgressBar mProgressBar;
     @BindView(R.id.section_frag_no_article_text)
     TextView mNoArticleFoundText;
+    @BindView(R.id.pullToRefresh)
+    SwipeRefreshLayout mPullToRefresh;
+    @BindView(R.id.arrow_pull_to_refresh)
+    ImageView mArrowIconPullToRefresh;
 
     private SectionFragmentCallback mCallback;
     private static final String FRAGMENT_TYPE = "FRAGMENT-TYPE";
@@ -99,6 +105,8 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
             ArticleCalls.fetchNews(this, mFragmentType, mSearchQuery);
         else
             ArticleCalls.fetchNews(this, mFragmentType, null);
+
+        configurePullToRefresh();
     }
 
     /**
@@ -111,6 +119,9 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
             this.configureRecyclerView(articles);
         }
         mProgressBar.setVisibility(View.GONE);
+        mNoArticleFoundText.setVisibility(View.GONE);
+        mArrowIconPullToRefresh.setVisibility(View.GONE);
+        mPullToRefresh.setRefreshing(false);
     }
 
     /**
@@ -121,6 +132,8 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         Log.e("ArticleCalls-onFailure", "Can not reach NYT data API");
         mProgressBar.setVisibility(View.GONE);
         mNoArticleFoundText.setVisibility(View.VISIBLE);
+        mArrowIconPullToRefresh.setVisibility(View.VISIBLE);
+        mPullToRefresh.setRefreshing(false);
     }
 
     private void configureRecyclerView(NewsArticles articles) {
@@ -133,7 +146,17 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mRecyclerView.setAdapter(adapter);
         }
+    }
 
+    private void configurePullToRefresh() {
+        mPullToRefresh.setOnRefreshListener(() -> {
+            {
+                if (mSearchQuery != null && !mSearchQuery.isEmpty())
+                    ArticleCalls.fetchNews(this, mFragmentType, mSearchQuery);
+                else
+                    ArticleCalls.fetchNews(this, mFragmentType, null);
+            }
+        });
     }
 
     //Open webView on recyclerView item clicked.
