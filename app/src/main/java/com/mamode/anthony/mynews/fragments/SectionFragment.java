@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.mamode.anthony.mynews.NewsApi.NoConnectivityException;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
 import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
@@ -25,9 +27,12 @@ import com.mamode.anthony.mynews.NewsApi.ArticleCalls;
 import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.content.ContentValues.TAG;
 
 public class SectionFragment extends Fragment implements ArticleCalls.onAPIResponseListener, RecyclerViewAdapter.OnItemClickListener {
     @BindView(R.id.main_recycler_view)
@@ -45,6 +50,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     private static final String FRAGMENT_TYPE = "FRAGMENT-TYPE";
     private int mFragmentType = 0;
     private HashMap<String, String> mSearchQuery = new HashMap<>();
+    private boolean mIsSnackBarDisplayed = false;
 
     public SectionFragment() {
         // Required empty public constructor
@@ -102,9 +108,9 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         // NYT api call.
         mProgressBar.setVisibility(View.VISIBLE);
         if (mSearchQuery != null && !mSearchQuery.isEmpty())
-            ArticleCalls.fetchNews(this, mFragmentType, mSearchQuery);
+            ArticleCalls.fetchNews(getContext(), this, mFragmentType, mSearchQuery);
         else
-            ArticleCalls.fetchNews(this, mFragmentType, null);
+            ArticleCalls.fetchNews(getContext(), this, mFragmentType, null);
 
         configurePullToRefresh();
     }
@@ -128,8 +134,11 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
      * Method call if NYT API call failed.
      */
     @Override
-    public void onFailure() {
+    public void onFailure(@NonNull Throwable t) {
         Log.e("ArticleCalls-onFailure", "Can not reach NYT data API");
+        if (t instanceof NoConnectivityException) {
+            displayNoConnectionSnackBar();
+        }
         mProgressBar.setVisibility(View.GONE);
         mNoArticleFoundText.setVisibility(View.VISIBLE);
         mArrowIconPullToRefresh.setVisibility(View.VISIBLE);
@@ -137,7 +146,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     }
 
     private void configureRecyclerView(NewsArticles articles) {
-        if(articles.getArticles() != null) {
+        if (articles.getArticles() != null) {
             RecyclerViewAdapter adapter = new RecyclerViewAdapter(articles.getArticles(), this);
             mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mRecyclerView.setAdapter(adapter);
@@ -152,9 +161,9 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         mPullToRefresh.setOnRefreshListener(() -> {
             {
                 if (mSearchQuery != null && !mSearchQuery.isEmpty())
-                    ArticleCalls.fetchNews(this, mFragmentType, mSearchQuery);
+                    ArticleCalls.fetchNews(getContext(), this, mFragmentType, mSearchQuery);
                 else
-                    ArticleCalls.fetchNews(this, mFragmentType, null);
+                    ArticleCalls.fetchNews(getContext(), this, mFragmentType, null);
             }
         });
     }
@@ -164,5 +173,14 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     public void onItemClick(NewsArticle article) {
         if (mCallback != null)
             mCallback.openUrl(article.getUrl());
+    }
+
+    private void displayNoConnectionSnackBar() {
+        if (getView() != null) {
+        View rootView = getView().findViewById(R.id.main_recycler_view);
+        Snackbar.make(rootView, R.string.no_internet_connection, Snackbar.LENGTH_INDEFINITE)
+                .show();
+        mIsSnackBarDisplayed = true;
+        }
     }
 }

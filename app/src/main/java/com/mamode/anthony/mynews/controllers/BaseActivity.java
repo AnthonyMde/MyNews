@@ -27,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * When we lose wifi and mobile data, a indefinite snackbar is displayed.
      * As soon as the connection is recovered, we notify the user by an other snackbar.
      */
-    private BroadcastReceiver networkChangeReceiver = new BroadcastReceiver() {
+    /*private BroadcastReceiver networkChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             View rootView = findViewById(android.R.id.content);
@@ -48,28 +48,28 @@ public abstract class BaseActivity extends AppCompatActivity {
                     isSnackBarShown = false;
             }
         }
-    };
+    };*/
 
     /**
      * We register for a broadcast receiver which is listening
      * for connectivity action.
      */
-    @Override
+    /*@Override
     protected void onResume() {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(networkChangeReceiver, intentFilter);
-    }
+    }*/
 
     /**
      * We unregister our network-change listener when the application is paused.
      */
-    @Override
+    /*@Override
     protected void onPause() {
         super.onPause();
         unregisterReceiver(networkChangeReceiver);
-    }
+    }*/
 
     /**
      * Allow us to know if the mobile user have a internet connection available.

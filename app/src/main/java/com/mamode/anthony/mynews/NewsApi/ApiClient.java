@@ -1,5 +1,7 @@
 package com.mamode.anthony.mynews.NewsApi;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mamode.anthony.mynews.model.Constants;
@@ -10,11 +12,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-
-    private static OkHttpClient okHttpClient() {
+    private static OkHttpClient okHttpClient(Context context) {
         return new OkHttpClient.Builder()
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC))
                 .addInterceptor(new AuthInterceptor())
+                .addInterceptor(new ConnectivityInterceptor(context))
                 .build();
     }
 
@@ -23,11 +25,11 @@ public class ApiClient {
                     .registerTypeAdapterFactory(new DocsTypeAdapterFactory())
                     .create();
 
-    public static Retrofit getRetrofitInstance() {
+    public static Retrofit getRetrofitInstance(Context context) {
         return new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gsonConverter))
-                .client(okHttpClient())
+                .client(okHttpClient(context))
                 .build();
     }
 }
