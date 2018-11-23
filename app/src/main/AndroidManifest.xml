@@ -25,7 +25,7 @@
 
         <activity android:name=".controllers.NewsWebView"/>
 
-        <!--Child of MainActivity-->
+        <!-- Child of MainActivity -->
         <activity
             android:name=".controllers.NotificationsActivity"
             android:label="@string/notification_activity_name"
@@ -35,7 +35,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".controllers.MainActivity"/>
         </activity>
-        <!--Child of MainActivity-->
+        <!-- Child of MainActivity -->
         <activity
             android:name=".controllers.SearchActivity"
             android:label="@string/search_activity_name"
