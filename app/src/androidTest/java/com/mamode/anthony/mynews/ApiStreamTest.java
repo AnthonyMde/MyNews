@@ -1,10 +1,17 @@
-package com.mamode.anthony.mynews.network;
+package com.mamode.anthony.mynews;
+
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
+import android.test.mock.MockContext;
 
 import com.mamode.anthony.mynews.NewsApi.ApiClient;
 import com.mamode.anthony.mynews.NewsApi.NewsService;
 import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
+import com.mamode.anthony.mynews.controllers.MainActivity;
 
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -19,12 +26,15 @@ import static org.junit.Assert.assertTrue;
 public class ApiStreamTest {
     private static NewsService service = null;
 
+    @Rule
+    public ActivityTestRule<MainActivity> rule = new ActivityTestRule<>(MainActivity.class);
+
     /**
      * We create our client retrofit for all our tests.
      */
     @BeforeClass
     public static void setUp() {
-       service = ApiClient.getRetrofitInstance()
+       service = ApiClient.getRetrofitInstance(InstrumentationRegistry.getContext())
                 .create(NewsService.class);
     }
 

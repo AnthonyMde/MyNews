@@ -215,6 +215,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         else
             ArticleCalls.fetchNews(getContext(), this, mFragmentType, null);
     }
+
     //Open webView on recyclerView item clicked.
     @Override
     public void onItemClick(NewsArticle article) {
