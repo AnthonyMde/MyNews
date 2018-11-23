@@ -176,7 +176,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
             hideLoadingAndRefreshText();
             displayNoSearchResult();
         } else if (articles != null) {
-            this.configureRecyclerView(articles);
+            configureRecyclerView(articles);
             hideLoadingAndRefreshText();
         }
     }

@@ -9,11 +9,17 @@ import com.google.gson.annotations.SerializedName;
         @Expose
         private List<NewsArticle> articles = null;
         public List<NewsArticle> getArticles() {
+            if (articles != null && articles.size() > 50)
+                return articles.subList(0, 50);
             return articles;
         }
 
         @SerializedName("docs")
         @Expose
         private List<NewsArticle> searchArticles = null;
-        public List<NewsArticle> getSearchArticles() {return searchArticles;}
+        public List<NewsArticle> getSearchArticles() {
+            if (searchArticles != null && searchArticles.size() > 50)
+                return searchArticles.subList(0, 50);
+            return searchArticles;
+        }
     }
