@@ -10,11 +10,6 @@
     <string name="help_toolbar_title">Help</string>
     <string name="about_toolbar_title">About</string>
 
-    <!-- fragment title -->
-    <string name="business_frag_txt">Hello Business !</string>
-    <string name="most_pop_frag_txt">Hello from Most !</string>
-    <string name="top_stories_frag_txt">Hey from Top Stories !</string>
-
     <!-- navigation drawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -37,16 +32,16 @@
     <string name="recycler_view_row_title">fil d\'ariane</string>
     <string name="recycler_view_content_text">Ici l\'apperçu du début de l\'article à l\'intérieur de cet item</string>
     <string name="recycler_view_date">17/25/89</string>
-    <string name="no_article_found_text">Oups ! Nous n\'avons pas pu récupérer ces articles du New York Times.\n\nGlisser vers le bas pour rafraichir.</string>
+    <string name="no_article_found_text">Oops ! We can\'t fetch those New York Times articles.\n\nPull down to refresh.</string>
 
     <!-- Snackbar -->
-    <string name="no_internet_connection">Pas de connexion internet</string>
-    <string name="internet_connection_getback">Connexion retrouvée !</string>
-    <string name="snackbar_no_article_found_text">Nous n\'avons trouvé aucun article à lire par ici &#8230;</string>
-    <string name="positive_btn_no_article_found_sb_text">Affiner ma recherche</string>
-    <string name="negative_btn_no_article_found_sb_text">Abandonner</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="internet_connection_getback">Connection is back !</string>
+    <string name="snackbar_no_article_found_text">It seems we did no find any articles to read over here &#8230;</string>
+    <string name="positive_btn_no_article_found_sb_text">Refine my search</string>
+    <string name="negative_btn_no_article_found_sb_text">Go home</string>
     <string name="hmmm_snackbar">Hmmm</string>
 
     <!-- Image content description -->
-    <string name="icon_pull_to_refresh_content_description">Flèche vers le bas qui indique dans quel sens toucher l\'écran pour rafraichir la page.</string>
+    <string name="icon_pull_to_refresh_content_description">Down arrow to show how to refresh the page</string>
 </resources>

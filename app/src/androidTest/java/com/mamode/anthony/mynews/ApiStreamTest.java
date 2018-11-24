@@ -1,9 +1,7 @@
 package com.mamode.anthony.mynews;
 
-import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
-import android.test.mock.MockContext;
 
 import com.mamode.anthony.mynews.NewsApi.ApiClient;
 import com.mamode.anthony.mynews.NewsApi.NewsService;
