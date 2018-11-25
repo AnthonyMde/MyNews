@@ -34,6 +34,7 @@ import com.mamode.anthony.mynews.NewsApi.ArticleCalls;
 import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
 import com.mamode.anthony.mynews.controllers.MainActivity;
 import com.mamode.anthony.mynews.controllers.SearchActivity;
+import com.mamode.anthony.mynews.utils.Animations;
 
 import java.util.HashMap;
 
@@ -191,6 +192,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
             displayNoConnectionSnackBar();
         }
         hideLoadingButNotRefresh();
+        Animations.pullArrowAnimation(mArrowIconPullToRefresh);
     }
 
     private void configureRecyclerView(NewsArticles articles) {
@@ -216,7 +218,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
             ArticleCalls.fetchNews(getContext(), this, mFragmentType, null);
     }
 
-    //Open webView on recyclerView item clicked.
+    // Open webView on recyclerView item clicked.
     @Override
     public void onItemClick(NewsArticle article) {
         if (mCallback != null)
