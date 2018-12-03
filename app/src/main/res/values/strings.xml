@@ -39,8 +39,8 @@
     <string name="recycler_view_date">17/25/89</string>
     <string name="no_article_found_text">Oops ! We can\'t fetch those New York Times articles.\n\nPull down to refresh.</string>
 
-    <!-- Snackbar -->
-    <string name="no_internet_connection">No internet connection</string>
+    <!-- SnackBar -->
+    <string name="no_internet_connection">No connection</string>
     <string name="internet_connection_getback">Connection is back !</string>
     <string name="snackbar_no_article_found_text">It seems we did no find any articles to read over here &#8230;</string>
     <string name="positive_btn_no_article_found_sb_text">Refine my search</string>

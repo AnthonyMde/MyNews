@@ -16,7 +16,9 @@ public class NewsDate {
     }
 
     public static float convertDateIntoMillis(String date) throws ParseException {
-        return new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE).parse(date).getTime();
+        SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        formatDate.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return formatDate.parse(date).getTime();
     }
 
     //Convert the data api date in usable String.
@@ -31,6 +33,14 @@ public class NewsDate {
             return "";
         }
         return new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(dateObj);
+    }
+
+    public static String formatDate(int year, int month, int dayOfMonth) {
+        return addZeroToDate(dayOfMonth)+"/"+ addZeroToDate(month+1)+"/"+year;
+    }
+
+    public static String setQueryDateFormat(int year, int month, int dayOfMonth) {
+        return "" + year + (addZeroToDate(month+1)) + addZeroToDate(dayOfMonth);
     }
 
     public static String setFrenchDateFormat(String date) {

@@ -41,32 +41,31 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.content.ContentValues.TAG;
 import static com.mamode.anthony.mynews.utils.NetworkUtil.isOnline;
+import static com.mamode.anthony.mynews.utils.Utils.styleCompatWithLollipopAndBelow;
 
 public class SectionFragment extends Fragment implements ArticleCalls.onAPIResponseListener, RecyclerViewAdapter.OnItemClickListener {
     public interface onResearchComeBack {
         void returnToSearchFragment();
     }
-    @BindView(R.id.main_recycler_view)
-    RecyclerView mRecyclerView;
-    @BindView(R.id.indeterminateBar)
-    ProgressBar mProgressBar;
-    @BindView(R.id.section_frag_no_article_text)
-    TextView mNoArticleFoundText;
-    @BindView(R.id.pullToRefresh)
-    SwipeRefreshLayout mPullToRefresh;
-    @BindView(R.id.arrow_pull_to_refresh)
-    ImageView mArrowIconPullToRefresh;
+    @BindView(R.id.main_recycler_view) RecyclerView mRecyclerView;
+    @BindView(R.id.indeterminateBar) ProgressBar mProgressBar;
+    @BindView(R.id.section_frag_no_article_text) TextView mNoArticleFoundText;
+    @BindView(R.id.pullToRefresh) SwipeRefreshLayout mPullToRefresh;
+    @BindView(R.id.arrow_pull_to_refresh) ImageView mArrowIconPullToRefresh;
 
-    private SectionFragmentCallback mCallback;
+    private SectionFragmentCallback mCallbackOnArticleClick;
     private static final String FRAGMENT_TYPE = "FRAGMENT-TYPE";
     private int mFragmentType = 0;
     private HashMap<String, String> mSearchQuery = new HashMap<>();
     private boolean mIsSnackBarDisplayed = false;
     private View mRootView = null;
     private onResearchComeBack mOnResearchComeBack;
-    // Listen internet connection changes
+
+    /**
+     * Listen to internet connection changes. When the connection is retrieved,
+     * it displays a SnackBar and reloads the page.
+     */
     private BroadcastReceiver networkChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -85,10 +84,19 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     public SectionFragment() {
         // Required empty public constructor
     }
+
+    /**
+     * Callback implemented by activities which need to
+     * handle the click on articles list.
+     */
     public interface SectionFragmentCallback {
         void openUrl(String url);
     }
 
+    /**
+     * @param type determine the type of SectionFragment returned.
+     * @return an instance of SectionFragment
+     */
     public static SectionFragment newInstance(@FragmentNewsType.FragmentType int type) {
         SectionFragment fragment = new SectionFragment();
         Bundle args = new Bundle();
@@ -97,6 +105,11 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         return fragment;
     }
 
+    /**
+     * This getter is used to get a search SectionFragment type.
+     * @param query The user query used to make the articles research.
+     * @return an instance of Section fragment (usually a search type).
+     */
     public static SectionFragment newInstance(@FragmentNewsType.FragmentType int type, HashMap<String, String> query) {
         SectionFragment fragment = new SectionFragment();
         Bundle args = new Bundle();
@@ -106,16 +119,26 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         return fragment;
     }
 
+    /**
+     * We set our activities callback here to be sure
+     * the getActivity will not return a null pointer.
+     */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (getActivity() != null)
-            mCallback = (SectionFragmentCallback) getActivity();
+            mCallbackOnArticleClick = (SectionFragmentCallback) getActivity();
         if (getActivity() != null && getActivity() instanceof SearchActivity)
             mOnResearchComeBack = (onResearchComeBack) getActivity();
     }
 
+    /**
+     * We retrieve our fragment type and search query params from bundle.
+     * @param savedInstanceState Bundle containing the params we passed through when
+     *                           creating our fragment instance.
+     */
     @Override
+    // The compiler can not be sure that the serializable's containing <String>,<String>
     @SuppressWarnings("unchecked")
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +148,9 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         }
     }
 
+    /**
+     * Bind our views here.
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -134,10 +160,14 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         return view;
     }
 
+    /**
+     * Once the view is created we set the loader on, get the articles
+     * from the API and enable the pull-to-refresh.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Get the root view if we want to display snackbar later.
+        // Get the root view if we want to display SnackBar later.
         if (getView() != null)
             mRootView = getView().findViewById(R.id.main_recycler_view);
         mProgressBar.setVisibility(View.VISIBLE);
@@ -149,6 +179,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     public void onResume() {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
+        // TODO: Change the implementation to avoid deprecated constant.
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         if (getContext() != null) {
             getContext().registerReceiver(networkChangeReceiver, intentFilter);
@@ -164,30 +195,37 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     }
 
     /**
-     * Method call if NYT API call is successful.
+     * Call when NYT API call succeed.
+     * Displays the list of articles in a RecyclerView or handle the
+     * lack of articles with a custom behavior.
      * @param articles list of articles fetched from the NYT API.
      */
     @Override
     public void onResponse(@Nullable NewsArticles articles) {
-        if (
-            articles != null &&
-            articles.getSearchArticles() != null &&
-            articles.getSearchArticles().size() == 0
-        ) {
-            hideLoadingAndRefreshText();
-            displayNoSearchResult();
-        } else if (articles != null) {
-            configureRecyclerView(articles);
-            hideLoadingAndRefreshText();
+        if (articles != null) {
+            if (articles.getSearchArticles() != null && articles.getSearchArticles().size() == 0) {
+                hideLoadingAndRefreshText();
+                displayNoSearchResult();
+            } else if (articles.getArticles() != null && articles.getArticles().size() == 0) {
+                hideLoadingButNotRefresh();
+                Animations.pullArrowAnimation(mArrowIconPullToRefresh);
+            } else {
+                configureRecyclerView(articles);
+                hideLoadingAndRefreshText();
+            }
+        } else {
+            hideLoadingButNotRefresh();
+            Animations.pullArrowAnimation(mArrowIconPullToRefresh);
         }
     }
 
     /**
-     * Method call if NYT API call failed.
+     * Call when NYT API call failed.
+     * If the failure is due to a lack of internet connection, a
+     * SnackBar is displayed to the user.
      */
     @Override
     public void onFailure(@NonNull Throwable t) {
-        Log.e("ArticleCalls-onFailure", "Can not reach NYT data API");
         if (t instanceof NoConnectivityException && mRootView != null) {
             displayNoConnectionSnackBar();
         }
@@ -195,22 +233,34 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         Animations.pullArrowAnimation(mArrowIconPullToRefresh);
     }
 
+    /**
+     * We test which type of articles do we have to pass for the
+     * RecyclerView.
+     * @param articles NYT articles from the API.
+     */
     private void configureRecyclerView(NewsArticles articles) {
+        RecyclerViewAdapter adapter;
         if (articles.getArticles() != null) {
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(articles.getArticles(), this);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mRecyclerView.setAdapter(adapter);
-        } else if (articles.getSearchArticles() != null) {
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(articles.getSearchArticles(), this);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mRecyclerView.setAdapter(adapter);
+            adapter = new RecyclerViewAdapter(articles.getArticles(), this);
+        } else {
+            adapter = new RecyclerViewAdapter(articles.getSearchArticles(), this);
         }
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.setAdapter(adapter);
     }
 
+    /**
+     * We send a new request to the NYT API when the
+     * user trigger the pull-to-refresh.
+     */
     private void configurePullToRefresh() {
         mPullToRefresh.setOnRefreshListener(this::getDataApi);
     }
 
+    /**
+     * Make our call here. If some query are available, we are in a
+     * search SectionFragment, so we call the NYT search API.
+     */
     private void getDataApi(){
         if (mSearchQuery != null && !mSearchQuery.isEmpty())
             ArticleCalls.fetchNews(getContext(), this, mFragmentType, mSearchQuery);
@@ -218,23 +268,25 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
             ArticleCalls.fetchNews(getContext(), this, mFragmentType, null);
     }
 
-    // Open webView on recyclerView item clicked.
+    /**
+     * Open webView on RecyclerView item clicked.
+     * @param article the targeted article.
+     */
     @Override
     public void onItemClick(NewsArticle article) {
-        if (mCallback != null)
-            mCallback.openUrl(article.getUrl());
+        if (mCallbackOnArticleClick != null)
+            mCallbackOnArticleClick.openUrl(article.getUrl());
     }
 
-    private void displayNoConnectionSnackBar() {
-        Snackbar.make(mRootView, R.string.no_internet_connection, Snackbar.LENGTH_INDEFINITE)
-                .show();
-        mIsSnackBarDisplayed = true;
-    }
-
+    /**
+     * AlertDialog displayed when no result are found in the
+     * SearchActivity. It allows to came back to the search fragment
+     * or directly to the home.
+     */
     private void displayNoSearchResult() {
         if (getContext() != null) {
-            AlertDialog.Builder alertdialog = new AlertDialog.Builder(getContext(), styleCompatWithLolipopAndBelow());
-            alertdialog
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext(), styleCompatWithLollipopAndBelow());
+            alertDialog
                     .setTitle(R.string.hmmm_snackbar)
                     .setMessage(R.string.snackbar_no_article_found_text)
                     .setPositiveButton(R.string.positive_btn_no_article_found_sb_text,(DialogInterface dialogInterface, int i) -> {
@@ -251,6 +303,12 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         }
     }
 
+    private void displayNoConnectionSnackBar() {
+        Snackbar.make(mRootView, R.string.no_internet_connection, Snackbar.LENGTH_INDEFINITE)
+                .show();
+        mIsSnackBarDisplayed = true;
+    }
+
     private void hideLoadingAndRefreshText() {
         mProgressBar.setVisibility(View.GONE);
         mNoArticleFoundText.setVisibility(View.GONE);
@@ -263,12 +321,5 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
         mNoArticleFoundText.setVisibility(View.VISIBLE);
         mArrowIconPullToRefresh.setVisibility(View.VISIBLE);
         mPullToRefresh.setRefreshing(false);
-    }
-
-    private int styleCompatWithLolipopAndBelow() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return android.R.style.Theme_Material_Dialog_Alert;
-        }
-        return R.style.Theme_AppCompat_Dialog_Alert;
     }
 }

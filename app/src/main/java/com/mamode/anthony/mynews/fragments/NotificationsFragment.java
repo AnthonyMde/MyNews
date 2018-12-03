@@ -1,6 +1,5 @@
 package com.mamode.anthony.mynews.fragments;
 
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,8 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -41,11 +38,9 @@ public class NotificationsFragment extends Fragment {
      * SharedPreferences editor used to saved the notifications
      * preferences of the user
      */
-    private SharedPreferences.Editor mSharedPrefEditor = null;
-    @BindView(R.id.notification_frag_switch)
-    Switch mSwitch;
-    @BindView(R.id.input_search_and_notif)
-    TextInputEditText mInput;
+
+    @BindView(R.id.notification_frag_switch) Switch mSwitch;
+    @BindView(R.id.input_search_and_notif) TextInputEditText mInput;
     @BindView(R.id.checkboxScience) CheckBox mCheckboxScience;
     @BindView(R.id.checkboxHealth) CheckBox mCheckboxHealth;
     @BindView(R.id.checkboxWorld) CheckBox mCheckboxWorld;
@@ -55,14 +50,6 @@ public class NotificationsFragment extends Fragment {
 
     public NotificationsFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getContext() != null) {
-            mSharedPrefEditor = getContext().getSharedPreferences("SAVED_NOTIFICATION", Context.MODE_PRIVATE).edit();
-        }
     }
 
     /**
@@ -86,9 +73,9 @@ public class NotificationsFragment extends Fragment {
     }
 
     /**
-     * Set a listener on input text changes. We enable/disable the search button
+     * Set a listener on input text changes. We enable/disable the switch button
      * according to the input size. The switch is automatically unchecked when the
-     * user modify is request.
+     * user modify his request.
      */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -113,8 +100,8 @@ public class NotificationsFragment extends Fragment {
     }
 
     /**
-     * We save/delete the user preferences and launch/cancel
-     * according to the user notification is on/off.
+     * We save/delete the user preferences and launch/cancel the work
+     * when the user notification is turn on/off.
      */
     @Override
     public void onPause() {
@@ -125,9 +112,9 @@ public class NotificationsFragment extends Fragment {
 
     /**
      * Switch button is enabled or disabled according to the required conditions.
-     * At least 1 letter in the input text and 1 checkbox checked
+     * At least 1 letter for the input text and 1 checkbox checked
      */
-    private void enableSearchIfConditionMet(){
+    private void enableSearchIfConditionMet() {
         if (mInput.getText() != null) {
             mSwitch.setEnabled(
                     mInput.getText().length() >= 1
@@ -137,25 +124,29 @@ public class NotificationsFragment extends Fragment {
     }
 
     /**
-     * Method called when the user clicks on the checkboxes which
-     * implemented the onClick method.
-     * We update our counter up or down according to the view is checked or not.
-     * We enable/disable the search button according to the counter.
-     * We save if the checkbox is checked or not in the sharedPrefs.
+     * Called when the user clicks on the checkboxes which implement
+     * the onClick method.
+     * We (de)increase the counter when the view is (un)checked.
+     * and enable/disable the search button according to this counter.
+     * We save the checkbox status (checked or not) in the sharedPrefs.
      * @param view The checkbox that have been clicked.
      */
-    public void onCheckboxClicked(View view){
-        mSwitch.setChecked(false);
-        CheckBox checkBox = (CheckBox) view;
-        String checkboxName = checkBox.getText().toString();
-        if (checkBox.isChecked()) {
-            mCheckboxCounter++;
-            mSharedPrefEditor.putBoolean(checkboxName, true);
-        } else {
-            mCheckboxCounter--;
-            mSharedPrefEditor.putBoolean(checkboxName, false);
+    public void onCheckboxClicked(View view) {
+        if (getContext() != null) {
+            SharedPreferences.Editor mSharedPrefEditor = getContext().getSharedPreferences("SAVED_NOTIFICATION", Context.MODE_PRIVATE).edit();
+            mSwitch.setChecked(false);
+            CheckBox checkBox = (CheckBox) view;
+            String checkboxName = checkBox.getText().toString();
+            if (checkBox.isChecked()) {
+                mCheckboxCounter++;
+                mSharedPrefEditor.putBoolean(checkboxName, true);
+            } else {
+                mCheckboxCounter--;
+                mSharedPrefEditor.putBoolean(checkboxName, false);
+            }
+            enableSearchIfConditionMet();
+            mSharedPrefEditor.apply();
         }
-        enableSearchIfConditionMet();
     }
 
     /**
@@ -163,13 +154,16 @@ public class NotificationsFragment extends Fragment {
      * we save it into sharePrefs. If not, we clean up the SearchPrefs.
      */
     private void manageNotificationPreferences() {
-        if (mSwitch.isChecked() && mInput.getText() != null) {
-            mSharedPrefEditor.putString("query", mInput.getText().toString());
-            mSharedPrefEditor.putBoolean("isSwitchActive", mSwitch.isEnabled());
-        } else {
-            mSharedPrefEditor.clear();
+        if (getContext() != null) {
+            SharedPreferences.Editor mSharedPrefEditor = getContext().getSharedPreferences("SAVED_NOTIFICATION", Context.MODE_PRIVATE).edit();
+            if (mSwitch.isChecked() && mInput.getText() != null) {
+                mSharedPrefEditor.putString("query", mInput.getText().toString());
+                mSharedPrefEditor.putBoolean("isSwitchActive", mSwitch.isEnabled());
+            } else {
+                mSharedPrefEditor.clear();
+            }
+            mSharedPrefEditor.apply();
         }
-        mSharedPrefEditor.apply();
     }
 
     /**
@@ -220,13 +214,13 @@ public class NotificationsFragment extends Fragment {
      * (switch on/off).
      */
     private void manageNotificationWork() {
-        Constraints notificationsContraints =
+        Constraints notificationsConstraints =
                 new Constraints.Builder()
                         .setRequiredNetworkType(NetworkType.CONNECTED)
                         .build();
         PeriodicWorkRequest notificationCheckWork =
                 new PeriodicWorkRequest.Builder(NotificationWorker.class, 1, TimeUnit.HOURS)
-                        .setConstraints(notificationsContraints)
+                        .setConstraints(notificationsConstraints)
                         .build();
         if (mSwitch.isChecked()) {
             WorkManager.getInstance().enqueue(notificationCheckWork);
