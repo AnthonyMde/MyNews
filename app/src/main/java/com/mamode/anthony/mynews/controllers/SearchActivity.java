@@ -28,19 +28,33 @@ public class SearchActivity extends BaseActivity implements SectionFragment.Sect
         addSearchFragment();
     }
 
+    /**
+     * We need to add a SearchFragment instance when the user
+     * arrived on the SearchActivity screen.
+     */
     private void addSearchFragment() {
         SearchFragment searchFragment = SearchFragment.newInstance();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.add(R.id.frag_search_container, searchFragment).commit();
     }
 
-    // Method call from the fragment_search_and_notif layout file
+    /**
+     * Method called from the fragment_search_and_notif layout file,
+     * when the user clicks on the checkboxes which implemented the onClick method.
+     * The click is propagated through the search fragment.
+     * @param view The checkbox that have been clicked.
+     */
     public void onCheckboxClicked(View view) {
         SearchFragment searchFragment = (SearchFragment) getSupportFragmentManager().findFragmentById(R.id.frag_search_container);
         if (searchFragment != null)
             searchFragment.onCheckboxClicked(view);
     }
 
+    /**
+     * Callback from section fragment which allows to open
+     * an article in the NewsWebView class.
+     * @param url url of the article displayed in the webview.
+     */
     @Override
     public void openUrl(String url) {
         Intent intent = new Intent(this, NewsWebView.class);
@@ -48,6 +62,12 @@ public class SearchActivity extends BaseActivity implements SectionFragment.Sect
         startActivity(intent);
     }
 
+    /**
+     * Replace SearchFragment instance by a SectionFragment instance (of search type)
+     * to display the search results.
+     * @param query the SectionFragment needs the query pass by the user to make the
+     *              search request.
+     */
     @Override
     public void displaySearchResults(HashMap<String, String> query) {
         mSearchResultFragment = SectionFragment.newInstance(FragmentNewsType.SEARCH, query);
@@ -56,6 +76,10 @@ public class SearchActivity extends BaseActivity implements SectionFragment.Sect
         mFragmentTransaction.addToBackStack("Search results fragment");
     }
 
+    /**
+     * Allow to get back to the SearchFragment if the user clicks on the
+     * back navigation when he is on the SectionFragment search results.
+     */
     @Override
     public void returnToSearchFragment() {
         mFragmentManager.popBackStack();

@@ -74,7 +74,7 @@
         app:layout_constraintTop_toBottomOf="@id/textInputLayout"/>
 
     <CheckBox
-        android:id="@+id/checkbox1"
+        android:id="@+id/checkboxScience"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/medium"
@@ -84,25 +84,25 @@
         android:text="@string/checkbox_science_text" />
 
     <CheckBox
-        android:id="@+id/checkbox2"
+        android:id="@+id/checkboxHealth"
         android:layout_width="0dp"
         android:onClick="onCheckboxClicked"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/checkbox1"
+        app:layout_constraintTop_toBottomOf="@id/checkboxScience"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         android:text="@string/checkbox_health_text" />
 
     <CheckBox
-        android:id="@+id/checkbox3"
+        android:id="@+id/checkboxWorld"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="onCheckboxClicked"
-        app:layout_constraintTop_toBottomOf="@id/checkbox2"
+        app:layout_constraintTop_toBottomOf="@id/checkboxHealth"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         android:text="@string/checkbox_world_text" />
 
     <CheckBox
-        android:id="@+id/checkbox4"
+        android:id="@+id/checkboxTechnology"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="onCheckboxClicked"
@@ -112,20 +112,20 @@
         android:text="@string/checkbox_technology_text" />
 
     <CheckBox
-        android:id="@+id/checkbox5"
+        android:id="@+id/checkboxFinancial"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="onCheckboxClicked"
-        app:layout_constraintTop_toBottomOf="@id/checkbox4"
+        app:layout_constraintTop_toBottomOf="@id/checkboxTechnology"
         app:layout_constraintStart_toStartOf="@id/guideline_middle"
         android:text="@string/checkbox_financial_text" />
 
     <CheckBox
-        android:id="@+id/checkbox6"
+        android:id="@+id/checkboxEducation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="onCheckboxClicked"
-        app:layout_constraintTop_toBottomOf="@id/checkbox5"
+        app:layout_constraintTop_toBottomOf="@id/checkboxFinancial"
         app:layout_constraintStart_toStartOf="@id/guideline_middle"
         android:text="@string/checkbox_education_text" />
 
@@ -134,7 +134,7 @@
         android:enabled="false"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/checkbox3"
+        app:layout_constraintTop_toBottomOf="@id/checkboxWorld"
         app:layout_constraintStart_toStartOf="@id/guideline_start"
         app:layout_constraintEnd_toEndOf="@id/guideline_end"
         android:layout_marginTop="@dimen/large_xx"
@@ -154,7 +154,7 @@
         android:layout_marginRight="@dimen/small"
         app:layout_constraintEnd_toStartOf="@id/guideline_end"
         app:layout_constraintStart_toEndOf="@id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@+id/checkbox3"
+        app:layout_constraintTop_toBottomOf="@+id/checkboxWorld"
         android:theme="@style/AccentBlue"/>
 
     <android.support.constraint.Group

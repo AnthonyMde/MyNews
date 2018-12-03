@@ -92,6 +92,7 @@ public class SearchFragment extends Fragment {
 
             }
         });
+
         mSearchButton.setOnClickListener(view1 -> {
             mQuery = new HashMap<>();
             addQueryDataToTheMap();
@@ -104,13 +105,17 @@ public class SearchFragment extends Fragment {
     }
 
     private void addQueryDataToTheMap() {
-        mQuery.put("q", mInput.getText().toString());
-        mQuery.put("hl", "true");
-        if(!mQueryBeginDateValue.equals(""))
+        if (mInput.getText() != null) {
+            mQuery.put("q", mInput.getText().toString());
+        }
+        if (!mQueryBeginDateValue.equals("")) {
             mQuery.put("begin_date", mQueryBeginDateValue);
-        if(!mQueryEndDateValue.equals(""))
+        }
+        if (!mQueryEndDateValue.equals("")) {
             mQuery.put("end_date", mQueryEndDateValue);
+        }
         mQuery.put("fq", setQueryThemes(mCheckBoxesChecked));
+        mQuery.put("hl", "true");
     }
 
     private void setActualDate() {
@@ -168,7 +173,7 @@ public class SearchFragment extends Fragment {
     }
 
     // Search button is enabled or disabled according to the required conditions.
-    // At least 3 letters in the input and 1 checkbox checked
+    // At least 1 letter in the input and 1 checkbox checked
     private void enableSearchIfConditionMet() {
         mSearchButton.setEnabled(
                 mInput.getText().length() >= 1
@@ -176,6 +181,11 @@ public class SearchFragment extends Fragment {
         );
     }
 
+    /**
+     * Method called when the user clicks on the checkboxes which
+     * implemented the onClick method.
+     * @param view The checkbox that have been clicked.
+     */
     public void onCheckboxClicked(View view) {
         CheckBox checkBox = (CheckBox) view;
         String checkboxName = checkBox.getText().toString();

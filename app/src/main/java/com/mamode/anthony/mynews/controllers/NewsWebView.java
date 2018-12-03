@@ -15,6 +15,11 @@ import com.mamode.anthony.mynews.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
+/**
+ * Fullscreen web view class used to display our New York Times
+ * articles.
+ */
 public class NewsWebView extends Activity {
     @BindView(R.id.webview)
     WebView webview;

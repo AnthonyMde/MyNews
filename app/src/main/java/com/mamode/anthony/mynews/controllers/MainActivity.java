@@ -37,12 +37,24 @@ public class MainActivity extends BaseActivity implements SectionFragment.Sectio
     //---------------------------------------------
     // TOOLBAR CONFIGURATION
     //---------------------------------------------
+
+    /**
+     * Set layout for our toolbar
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_button, menu);
         return true;
     }
 
+    /**
+     * Launch our activities from the menu according to the ID
+     * of the selected item
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -73,8 +85,11 @@ public class MainActivity extends BaseActivity implements SectionFragment.Sectio
     //---------------------------------------------
     // NAVIGATION DRAWER CONFIGURATION
     //---------------------------------------------
+
+    /**
+     *  Join the drawer with the toolbar to set the hamburger button.
+     */
     private void configureDrawerLayout(){
-        // Join the drawer with the toolbar to set the hamburger button.
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
@@ -88,13 +103,19 @@ public class MainActivity extends BaseActivity implements SectionFragment.Sectio
         // Set adapter to viewpager.
         mViewPager.setAdapter(new PagerAdapter(getSupportFragmentManager()));
 
-        // Glue the tabs with the viewpager + tabs had the same width.
+        // Glue the tabs with the viewpager
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        // Set the same width for each tab
         int paddingInPixels = Utils.convertDipInPixel(getBaseContext(), 52);
         mTabLayout.getChildAt(mTabLayout.getChildCount()-1).setPadding(paddingInPixels, 0 , paddingInPixels, 0);
     }
 
+    /**
+     * Callback from section fragment which allows to open
+     * an article in the NewsWebView class.
+     * @param url url of the article displayed in the webview.
+     */
     @Override
     public void openUrl(String url) {
         Intent intent = new Intent(this, NewsWebView.class);

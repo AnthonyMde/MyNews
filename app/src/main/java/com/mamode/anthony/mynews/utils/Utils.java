@@ -6,6 +6,7 @@ import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
 
