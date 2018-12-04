@@ -20,6 +20,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.not;
 
+/**
+ * Instrumented test to insure we can checked
+ * the switch button only when conditions are fulfilled.
+ */
 public class NotificationActivityInstrumentationTest {
     @Rule
     public ActivityTestRule<NotificationsActivity> rule = new ActivityTestRule<>(NotificationsActivity.class);
@@ -34,7 +38,7 @@ public class NotificationActivityInstrumentationTest {
 
     @Test
     public void Given_JustCheckboxChecked_When_SearchButtonIsDisabled_Then_SwitchIsDisabled() {
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
         onView(withId(R.id.notification_frag_switch))
                 .check(matches(not(isEnabled())));
@@ -44,9 +48,9 @@ public class NotificationActivityInstrumentationTest {
     public void Given_TextAndCheckboxChecked_When_SearchButtonIsDisabled_Then_SwitchIsEnabled() {
         onView(withId(R.id.input_search_and_notif))
                 .perform(typeText("Pikachu"));
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
-        onView(withId(R.id.checkbox2))
+        onView(withId(R.id.checkboxHealth))
                 .perform(click());
         onView(withId(R.id.notification_frag_switch))
                 .check(matches((isEnabled())));
@@ -56,9 +60,9 @@ public class NotificationActivityInstrumentationTest {
     public void Given_CheckboxDeselection_When_SearchButtonWasEnable_Then_SwitchIsDisabled() {
         onView(withId(R.id.input_search_and_notif))
                 .perform(typeText("Bulbizarre"));
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
         onView(withId(R.id.notification_frag_switch))
                 .check(matches(not(isEnabled())));
@@ -68,7 +72,7 @@ public class NotificationActivityInstrumentationTest {
     public void Given_DeleteText_When_SearchButtonWasEnable_Then_SwitchIsDisabled() {
         onView(withId(R.id.input_search_and_notif))
                 .perform(typeText("Tortank"));
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
         onView(withId(R.id.input_search_and_notif))
                 .perform(clearText());
@@ -80,7 +84,7 @@ public class NotificationActivityInstrumentationTest {
     public void Given_RemoveText_When_SwitchIsChecked_Then_SwitchIsDisabledAndNotChecked() {
         onView(withId(R.id.input_search_and_notif))
                 .perform(typeText("Salameche"));
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
         onView(withId(R.id.notification_frag_switch))
                 .perform(click());

@@ -13,7 +13,11 @@ public class PagerAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
-    // Create new fragment according to its position.
+    /**
+     * Create new fragment according to its position.
+     * @param position where is the fragment in the PagerAdapter.
+     * @return the current fragment.
+     */
     @Override
     public Fragment getItem(int position) {
         switch (position) {
@@ -33,11 +37,20 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 return null;
         }
     }
+
+    /**
+     * @return the total number of fragments in the PagerAdapter.
+     */
     @Override
     public int getCount() {
         return 6;
     }
 
+    /**
+     * @param position the current position in the PagerAdapter.
+     * @return a header title (CharSequence) according to the
+     * current position in the PagerAdapter.
+     */
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {

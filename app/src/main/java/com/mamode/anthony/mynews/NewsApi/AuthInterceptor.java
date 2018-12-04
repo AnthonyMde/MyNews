@@ -19,6 +19,10 @@ public class AuthInterceptor implements Interceptor {
     AuthInterceptor() {
     }
 
+    /**
+     * We set the API key here, during the request instead
+     * of setting it statically in our calls.
+     */
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request request = chain.request();

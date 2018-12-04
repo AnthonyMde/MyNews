@@ -17,9 +17,17 @@ import static android.content.ContentValues.TAG;
 public class ConnectivityInterceptor implements Interceptor {
     private Context mContext;
 
+    /**
+     * Default constructor.
+     */
     ConnectivityInterceptor (Context context) {
         mContext = context;
     }
+
+    /**
+     * Interrupts the call and throws a custom exception (NoConnectivityException)
+     * when no network is available.
+     */
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
         if (!(NetworkUtil.isOnline(mContext))) {

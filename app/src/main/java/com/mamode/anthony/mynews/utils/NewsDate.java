@@ -8,7 +8,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class NewsDate {
-    public static String addZeroToDate(int date){
+    static String addZeroToDate(int date){
         if (date < 10)
             return "0" + date;
         else
@@ -21,7 +21,7 @@ public class NewsDate {
         return formatDate.parse(date).getTime();
     }
 
-    //Convert the data api date in usable String.
+    // Convert the data api date in usable String.
     public static String parseDate(NewsArticle article){
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));   // This line converts the given date into UTC time zone
@@ -35,14 +35,17 @@ public class NewsDate {
         return new SimpleDateFormat("MM/dd/yyyy", Locale.US).format(dateObj);
     }
 
+    // Use to format the date displayed in our DatePicker (SearchFragment).
     public static String formatDate(int year, int month, int dayOfMonth) {
         return addZeroToDate(dayOfMonth)+"/"+ addZeroToDate(month+1)+"/"+year;
     }
 
+    // Date format required by the search API.
     public static String setQueryDateFormat(int year, int month, int dayOfMonth) {
         return "" + year + (addZeroToDate(month+1)) + addZeroToDate(dayOfMonth);
     }
 
+    // Format display to the user in the RecyclerView.
     public static String setFrenchDateFormat(String date) {
         String[] d = date.split("/");
         if (d.length == 3)

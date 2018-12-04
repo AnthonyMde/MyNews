@@ -14,24 +14,31 @@ import com.mamode.anthony.mynews.views.RecyclerViewHolder;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
-    // Implementing by fragment who need callback on recyclerView item click.
+    /**
+     * Implementing by fragment/activity which needs callback
+     * on recyclerView item click.
+     */
     public interface OnItemClickListener {
         void onItemClick(NewsArticle article);
     }
-
     private List<NewsArticle> mArticles;
     private OnItemClickListener mListener;
 
-    public RecyclerViewAdapter(OnItemClickListener listener){
-        mListener = listener;
-    }
-
+    /**
+     * RecyclerView adapter constructor.
+     * @param articles list of articles from NYT API.
+     * @param listener fragment/activity which will handle the
+     *                 click on RecyclerView items (articles).
+     */
     public RecyclerViewAdapter(List<NewsArticle> articles, OnItemClickListener listener) {
         super();
         mArticles = articles;
         mListener = listener;
     }
 
+    /**
+     * @return an instance of our custom ViewHolder.
+     */
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,15 +48,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         return new RecyclerViewHolder(view);
     }
 
-    // Retrieve article object by position.
-    // Set recyclerView item content with updateWithArticleContent() method.
-    // Set onClickListener for each item with bind() method.
+    /**
+     * We get the article according to the position in the RecyclerView.
+     * We set the content and click listener using the RecyclerViewHolder
+     * methods.
+     * @param holder our custom ViewHolder.
+     * @param position the position of the item in the RecyclerView.
+     */
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         holder.updateWithArticleContent(mArticles.get(position));
         holder.bind(mArticles.get(position), mListener);
     }
 
+    /**
+     * Set the total size of the RecyclerView.
+     * @return the number of articles we get from the API.
+     */
     @Override
     public int getItemCount() {
         return mArticles.size();

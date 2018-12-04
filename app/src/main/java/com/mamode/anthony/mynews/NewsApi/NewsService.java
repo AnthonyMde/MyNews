@@ -8,6 +8,12 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
+/**
+ * Each retrofit instance takes an interface as parameter,
+ * it represents all the calls that the retrofit
+ * instance can make.
+ * This interface represents all types of NYT call.
+ */
 public interface NewsService {
 
     @GET("svc/topstories/v2/home.json")

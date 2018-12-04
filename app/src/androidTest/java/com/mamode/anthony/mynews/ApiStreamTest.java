@@ -21,6 +21,9 @@ import retrofit2.Response;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Test if our API endpoints are up.
+ */
 public class ApiStreamTest {
     private static NewsService service = null;
 

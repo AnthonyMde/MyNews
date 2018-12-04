@@ -6,8 +6,8 @@ import android.net.NetworkInfo;
 
 public class NetworkUtil {
     /**
-     * Allow us to know if the mobile user have a internet connection available.
-     * @return true if there is wifi or mobile data connected.
+     * Allows to know if the user have a internet connection available.
+     * @return true if there is wifi or mobile data available.
      */
     public static boolean isOnline(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

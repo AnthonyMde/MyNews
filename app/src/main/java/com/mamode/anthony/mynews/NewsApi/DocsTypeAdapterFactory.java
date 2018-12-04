@@ -13,7 +13,6 @@ import java.io.IOException;
 
 /**
  * Singleton which is used by retrofit as is ConverterFactory.
- * If the JSON in entry is a object "response" (from Search API) and return the sub-object (docs).
  * Necessary for the Search API which returns an object wrapper "response" which does not fit
  * our data structure. Instead of this "response" object, GSON will deal with the "docs" object.
  */
@@ -28,9 +27,6 @@ public class DocsTypeAdapterFactory implements TypeAdapterFactory {
 
             /**
              * To serialize object, interface method not used here
-             * @param out
-             * @param value
-             * @throws IOException
              */
             public void write(JsonWriter out, T value) throws IOException {
                 delegate.write(out, value);
@@ -39,9 +35,6 @@ public class DocsTypeAdapterFactory implements TypeAdapterFactory {
             /**
              * To deserialize object, takes JSON object as param and returns
              * an object which is the modified object type.
-             * @param in
-             * @return
-             * @throws IOException
              */
             public T read(JsonReader in) throws IOException {
 

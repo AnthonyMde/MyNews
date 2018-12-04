@@ -5,7 +5,13 @@ import android.animation.ValueAnimator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
-
+/**
+ * Animation set programmatically to go down
+ * and restart again and again until the view
+ * is hidden.
+ * A delay is set before the animation is starting and
+ * we use a DecelerateInterpolator() to make an ease-out effect.
+ */
 public class Animations extends DecelerateInterpolator {
     public static void pullArrowAnimation(ImageView arrowView) {
         ValueAnimator animation = ValueAnimator.ofFloat(0f, 100f);

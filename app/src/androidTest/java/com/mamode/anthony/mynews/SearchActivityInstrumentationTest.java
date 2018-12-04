@@ -19,9 +19,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.not;
 
 /**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * Instrumented test to insure we can click
+ * the search button only when conditions are fulfilled.
  */
 @RunWith(AndroidJUnit4.class)
 public class SearchActivityInstrumentationTest {
@@ -38,7 +37,7 @@ public class SearchActivityInstrumentationTest {
 
     @Test
     public void Given_JustCheckboxChecked_When_SearchButtonIsDisabled_Then_SearchButtonIsDisabled() {
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
         onView(withId(R.id.search_frag_button))
                 .check(matches(not(isEnabled())));
@@ -48,9 +47,9 @@ public class SearchActivityInstrumentationTest {
     public void Given_TextAndCheckboxChecked_When_SearchButtonIsDisabled_Then_SearchButtonIsEnabled() {
         onView(withId(R.id.input_search_and_notif))
                 .perform(typeText("Pikachu"));
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
-        onView(withId(R.id.checkbox2))
+        onView(withId(R.id.checkboxHealth))
                 .perform(click());
         onView(withId(R.id.search_frag_button))
                 .check(matches((isEnabled())));
@@ -60,9 +59,9 @@ public class SearchActivityInstrumentationTest {
     public void Given_CheckboxDeselection_When_SearchButtonWasEnable_Then_SearchButtonIsDisabled() {
         onView(withId(R.id.input_search_and_notif))
                 .perform(typeText("Bulbizarre"));
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
         onView(withId(R.id.search_frag_button))
                 .check(matches(not(isEnabled())));
@@ -72,7 +71,7 @@ public class SearchActivityInstrumentationTest {
     public void Given_DeleteText_When_SearchButtonWasEnable_Then_SearchButtonIsDisabled() {
         onView(withId(R.id.input_search_and_notif))
                 .perform(typeText("Tortank"));
-        onView(withId(R.id.checkbox1))
+        onView(withId(R.id.checkboxScience))
                 .perform(click());
         onView(withId(R.id.input_search_and_notif))
                 .perform(clearText());

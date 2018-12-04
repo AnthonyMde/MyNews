@@ -1,12 +1,16 @@
 package com.mamode.anthony.mynews.NewsRepository;
 
-import android.util.Log;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+/**
+ * The article model. We have kept only the necessary getters.
+ * We custom some getters to get the right variable according
+ * to which type of articles we have.
+ */
 public class NewsArticle {
         @SerializedName("section")
         @Expose

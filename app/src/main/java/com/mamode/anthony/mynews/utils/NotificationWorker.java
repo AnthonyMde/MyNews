@@ -77,7 +77,6 @@ public class NotificationWorker extends Worker {
             call.enqueue(new Callback<NewsArticles>() {
                 @Override
                 public void onResponse(@NonNull Call<NewsArticles> call,@NonNull Response<NewsArticles> response) {
-                    // 2.5 - Call the proper callback used in controller
                     if (response.isSuccessful() && response.body() != null) {
                         int numberOfArticles = response.body().getSearchArticles().size();
                         createNotificationChannel(context);
