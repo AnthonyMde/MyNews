@@ -22,6 +22,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -219,11 +220,12 @@ public class NotificationsFragment extends Fragment {
                         .setRequiredNetworkType(NetworkType.CONNECTED)
                         .build();
         PeriodicWorkRequest notificationCheckWork =
-                new PeriodicWorkRequest.Builder(NotificationWorker.class, 1, TimeUnit.HOURS)
+                new PeriodicWorkRequest.Builder(NotificationWorker.class, 24, TimeUnit.HOURS)
                         .setConstraints(notificationsConstraints)
                         .build();
         if (mSwitch.isChecked()) {
-            WorkManager.getInstance().enqueue(notificationCheckWork);
+            WorkManager.getInstance().enqueueUniquePeriodicWork(
+                    "Send Notification", ExistingPeriodicWorkPolicy.REPLACE, notificationCheckWork);
         } else {
             UUID notificationWorkID = notificationCheckWork.getId();
             WorkManager.getInstance().cancelWorkById(notificationWorkID);

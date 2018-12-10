@@ -42,19 +42,18 @@ public class NotificationWorker extends Worker {
 
     private void sendNotification(Context context, int articles) {
         String contentText = articles + " articles match your request !";
-        NotificationCompat.Builder notifBuilder = new NotificationCompat.Builder(context, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_arrow_pull_to_refresh)
                 .setContentTitle("New York Times")
                 .setContentText(contentText)
-                .setChannelId(CHANNEL_ID)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat manager = NotificationManagerCompat.from(context);
-        manager.notify(1, notifBuilder.build());
+        manager.notify(1, builder.build());
     }
 
     private void createNotificationChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "search_prefs_notification";
+            CharSequence name = "My saved research";
             String description = "Send numbers of new articles that match the user saved research";
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
@@ -79,13 +78,14 @@ public class NotificationWorker extends Worker {
                 public void onResponse(@NonNull Call<NewsArticles> call,@NonNull Response<NewsArticles> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         int numberOfArticles = response.body().getSearchArticles().size();
-                        createNotificationChannel(context);
-                        sendNotification(context, numberOfArticles);
+                        if (numberOfArticles > 0) {
+                            createNotificationChannel(context);
+                            sendNotification(context, numberOfArticles);
+                        }
                     } else if (response.errorBody() != null) {
-                        Log.e("API_RESPONSE_ERROR", response.errorBody().toString());
+                        Log.e("API_RESPONSE_ERROR WM", response.errorBody().toString());
                     }
                 }
-
                 @Override
                 public void onFailure(@NonNull Call<NewsArticles> call,@NonNull Throwable t) {
                     Log.e("API_FAILURE", t.toString());

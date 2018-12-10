@@ -1,14 +1,11 @@
 package com.mamode.anthony.mynews;
 
 import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 
 import com.mamode.anthony.mynews.controllers.NotificationsActivity;
-import com.mamode.anthony.mynews.controllers.SearchActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
@@ -21,7 +18,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.not;
 
 /**
- * Instrumented test to insure we can checked
+ * Instrumented tests to insure we can checked
  * the switch button only when conditions are fulfilled.
  */
 public class NotificationActivityInstrumentationTest {
