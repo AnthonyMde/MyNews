@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class Multimedia {
     @SerializedName("url")
     @Expose
-    private String url;
+    private String url = null;
     public String getUrl() {
         return url;
     }

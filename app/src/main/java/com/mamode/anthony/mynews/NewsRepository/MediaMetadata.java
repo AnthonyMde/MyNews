@@ -11,7 +11,7 @@ public class MediaMetadata {
 
     @SerializedName("url")
     @Expose
-    private String url;
+    private String url = null;
     public String getUrl() {
         return url;
     }

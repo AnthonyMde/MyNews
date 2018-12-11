@@ -10,6 +10,7 @@ import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.fragments.SearchFragment;
 import com.mamode.anthony.mynews.fragments.SectionFragment;
+import com.mamode.anthony.mynews.utils.BaseActivity;
 
 import java.util.HashMap;
 

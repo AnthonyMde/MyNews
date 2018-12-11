@@ -177,7 +177,7 @@ public class SectionFragment extends Fragment implements ArticleCalls.onAPIRespo
     public void onResume() {
         super.onResume();
         IntentFilter intentFilter = new IntentFilter();
-        // TODO: Change the implementation to avoid deprecated constant.
+        // TODO: Change the implementation to avoid deprecated constant when min target sdk is above 21.
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         if (getContext() != null) {
             getContext().registerReceiver(networkChangeReceiver, intentFilter);

@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.fragments.NotificationsFragment;
+import com.mamode.anthony.mynews.utils.BaseActivity;
 
 /**
  * Class where the user can set a specific research to be

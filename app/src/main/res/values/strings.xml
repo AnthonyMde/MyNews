@@ -27,10 +27,16 @@
     <string name="search_button_text">SEARCH</string>
     <string name="notification_switch_text">Enable notifications (once per day)</string>
 
-    <!-- shared preferences for notifications -->
+    <!-- Shared preferences for notifications -->
     <string name="notification_preference_file_key">SAVED_NOTIFICATION</string>
     <string name="notification_preferences_query">NOTIFICATION_PREFS_QUERY</string>
     <string name="notification_preferences_themes">NOTIFICATION_PREFS_THEMES</string>
+
+    <!-- Notification content -->
+    <string name="notification_content_title">"New York Times"</string>
+    <string name="notification_content_articles_found">" articles match your request !"</string>
+    <string name="notification_channel_title">"My saved research"</string>
+    <string name="notification_channel_description">"Send numbers of new articles that match the user saved research"</string>
 
     <!-- RecyclerView row strings -->
     <string name="recycler_view_image_description">news_article_picture</string>

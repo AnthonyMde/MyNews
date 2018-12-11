@@ -10,11 +10,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.PagerAdapter;
 import com.mamode.anthony.mynews.fragments.SectionFragment;
+import com.mamode.anthony.mynews.utils.BaseActivity;
 import com.mamode.anthony.mynews.utils.Utils;
 
 import butterknife.BindView;

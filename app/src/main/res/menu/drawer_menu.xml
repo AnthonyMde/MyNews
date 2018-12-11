@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single"
+    <group
         android:id="@+id/drawer_activity_group">
         <item
             android:id="@+id/drawer_search_articles"
@@ -28,11 +28,11 @@
         <item
             android:title="@string/checkbox_world_text"
             android:id="@+id/drawer_world_articles"
-            android:icon="@drawable/ic_world_24dp"/>
+            android:icon="@drawable/ic_world_white_24dp"/>
         <item
             android:title="@string/checkbox_health_text"
             android:id="@+id/drawer_health_articles"
-            android:icon="@drawable/ic_health_box_white_24dp"/>
+            android:icon="@drawable/ic_health_white_24dp"/>
         <item
             android:title="@string/checkbox_technology_text"
             android:id="@+id/drawer_technology_articles"

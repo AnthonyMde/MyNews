@@ -25,14 +25,26 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.support.constraint.Constraints.TAG;
-
+/**
+ * Allow to launch some work in background, one time or
+ * periodically.
+ * Under the hood, the worker uses the most appropriate
+ * class for doing the job among AlarmManager,
+ * JobScheduler and JobDispatcher.
+ */
 public class NotificationWorker extends Worker {
+    /**
+     * Channel is required when sending notification with
+     * android SDK above Android Oreo.
+     */
     private static final String CHANNEL_ID = "search_prefs_notification";
     public NotificationWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
+    /**
+     * We are doing the background work here.
+     */
     @NonNull
     @Override
     public Result doWork() {
@@ -41,26 +53,37 @@ public class NotificationWorker extends Worker {
         return Result.success();
     }
 
+
+    /**
+     * Here we send the notification to the user with a
+     * title, an icon and the number of article we found.
+     * @param articles the number of articles we get from
+     *                 the NYT API.
+     */
     private void sendNotification(Context context, int articles) {
-        String contentText = articles + " articles match your request !";
+        String contentText = articles + context.getString(R.string.notification_content_articles_found);
+        String title = context.getString(R.string.notification_content_title);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.nyt_placeholder)
-                .setContentTitle("New York Times")
+                .setContentTitle(title)
                 .setContentText(contentText)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat manager = NotificationManagerCompat.from(context);
         manager.notify(1, builder.build());
     }
 
+    /**
+     * If the SDK version is above android Oreo, we create
+     * a channel for sending our notifications.
+     */
     private void createNotificationChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "My saved research";
-            String description = "Send numbers of new articles that match the user saved research";
+            CharSequence name = context.getString(R.string.notification_channel_title);
+            String description = context.getString(R.string.notification_channel_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
+            // Register the channel with the system. We can't change notification behaviors after.
             NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
             if (notificationManager != null) {
                 notificationManager.createNotificationChannel(channel);
@@ -68,6 +91,10 @@ public class NotificationWorker extends Worker {
         }
     }
 
+    /**
+     * Launch the API call here to know if some articles match the
+     * user saved preferences.
+     */
     private void getArticlesThatMatchRequest(Context context) {
         final NewsService newsService = ApiClient.getRetrofitInstance(context).create(NewsService.class);
         Map<String, String> query = getSavedQuery(context);
@@ -75,6 +102,12 @@ public class NotificationWorker extends Worker {
         // Start the call
         if (call != null) {
             call.enqueue(new Callback<NewsArticles>() {
+                /**
+                 * We send the notification only if we receive at least one article in
+                 * our body reponse.
+                 * @param call the retrofit API call.
+                 * @param response the New York Times API response.
+                 */
                 @Override
                 public void onResponse(@NonNull Call<NewsArticles> call,@NonNull Response<NewsArticles> response) {
                     if (response.isSuccessful() && response.body() != null) {
@@ -95,6 +128,10 @@ public class NotificationWorker extends Worker {
         }
     }
 
+    /**
+     * Retrieve the selected themes and the search query
+     * from the user preferences.
+     */
     private Map<String, String> getSavedQuery(Context context) {
         String[] themes = {"Science", "Health", "World", "Technology", "Financial", "Education"};
         SharedPreferences sharedPrefs = context.getSharedPreferences("SAVED_NOTIFICATION", Context.MODE_PRIVATE);
@@ -108,7 +145,6 @@ public class NotificationWorker extends Worker {
             }
         }
         String queryThemes = String.format("news_desk(%s)", sb);
-        Log.d(TAG, "getSavedQuery: " + queryThemes);
         if (queryText != null && !queryText.equals("")) {
             query.put("q", queryText);
             query.put("fq", queryThemes);
