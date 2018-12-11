@@ -49,4 +49,8 @@
 
     <!-- Image content description -->
     <string name="icon_pull_to_refresh_content_description">Down arrow to show how to refresh the page</string>
+    <string name="nav_drawer_subtitle">Powered by New York Times</string>
+    <string name="nav_drawer_title">MyNews</string>
+    <string name="drawer_ts_text">Top Stories</string>
+    <string name="drawer_mp_text">Most Popular</string>
 </resources>

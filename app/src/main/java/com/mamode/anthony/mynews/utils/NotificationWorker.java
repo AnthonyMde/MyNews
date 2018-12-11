@@ -18,6 +18,7 @@ import com.mamode.anthony.mynews.R;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.work.Result;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 import retrofit2.Call;
@@ -37,13 +38,13 @@ public class NotificationWorker extends Worker {
     public Result doWork() {
         Context context = getApplicationContext();
         getArticlesThatMatchRequest(context);
-        return Result.SUCCESS;
+        return Result.success();
     }
 
     private void sendNotification(Context context, int articles) {
         String contentText = articles + " articles match your request !";
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_arrow_pull_to_refresh)
+                .setSmallIcon(R.drawable.nyt_placeholder)
                 .setContentTitle("New York Times")
                 .setContentText(contentText)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
@@ -108,7 +109,7 @@ public class NotificationWorker extends Worker {
         }
         String queryThemes = String.format("news_desk(%s)", sb);
         Log.d(TAG, "getSavedQuery: " + queryThemes);
-        if (!queryText.equals("")) {
+        if (queryText != null && !queryText.equals("")) {
             query.put("q", queryText);
             query.put("fq", queryThemes);
         }

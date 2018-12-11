@@ -7,8 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
+import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.views.RecyclerViewHolder;
 
 import java.util.List;

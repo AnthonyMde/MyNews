@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.mamode.anthony.mynews.fragments.SectionFragment;
 import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
+import com.mamode.anthony.mynews.fragments.SectionFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     public PagerAdapter(FragmentManager fm) {

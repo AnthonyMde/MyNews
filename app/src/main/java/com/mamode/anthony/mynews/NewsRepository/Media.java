@@ -1,8 +1,9 @@
 package com.mamode.anthony.mynews.NewsRepository;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 /**
  * Model from MostPopular API.

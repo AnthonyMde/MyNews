@@ -174,6 +174,8 @@ public class NotificationsFragment extends Fragment {
      */
     private void displayNotificationPreferences() {
         if (getContext() != null) {
+            String[] themes = {"Science", "Health", "World", "Technology", "Financial", "Education"};
+            CheckBox[] checkBoxes = {mCheckboxScience, mCheckboxHealth, mCheckboxWorld, mCheckboxTechnology, mCheckboxFinancial, mCheckboxEducation};
             SharedPreferences sharedPrefs = getContext().getSharedPreferences("SAVED_NOTIFICATION", Context.MODE_PRIVATE);
             Boolean isSwitchActive = sharedPrefs.getBoolean("isSwitchActive", false);
             if (isSwitchActive) {
@@ -181,29 +183,11 @@ public class NotificationsFragment extends Fragment {
                 mInput.setText(query);
                 mSwitch.setChecked(true);
                 mSwitch.setEnabled(true);
-                if (sharedPrefs.getBoolean("Science", false)) {
-                    mCheckboxScience.setChecked(true);
-                    mCheckboxCounter++;
-                }
-                if (sharedPrefs.getBoolean("Health", false)) {
-                    mCheckboxHealth.setChecked(true);
-                    mCheckboxCounter++;
-                }
-                if (sharedPrefs.getBoolean("World", false)) {
-                    mCheckboxWorld.setChecked(true);
-                    mCheckboxCounter++;
-                }
-                if (sharedPrefs.getBoolean("Technology", false)) {
-                    mCheckboxTechnology.setChecked(true);
-                    mCheckboxCounter++;
-                }
-                if (sharedPrefs.getBoolean("Financial", false)) {
-                    mCheckboxFinancial.setChecked(true);
-                    mCheckboxCounter++;
-                }
-                if (sharedPrefs.getBoolean("Education", false)) {
-                    mCheckboxEducation.setChecked(true);
-                    mCheckboxCounter++;
+                for (int i = 0; i < themes.length; i++) {
+                    if(sharedPrefs.getBoolean(themes[i], false)) {
+                        checkBoxes[i].setChecked(true);
+                        mCheckboxCounter++;
+                    }
                 }
             }
         }
@@ -220,7 +204,7 @@ public class NotificationsFragment extends Fragment {
                         .setRequiredNetworkType(NetworkType.CONNECTED)
                         .build();
         PeriodicWorkRequest notificationCheckWork =
-                new PeriodicWorkRequest.Builder(NotificationWorker.class, 24, TimeUnit.HOURS)
+                new PeriodicWorkRequest.Builder(NotificationWorker.class, 24, TimeUnit.HOURS, 2, TimeUnit.HOURS)
                         .setConstraints(notificationsConstraints)
                         .build();
         if (mSwitch.isChecked()) {

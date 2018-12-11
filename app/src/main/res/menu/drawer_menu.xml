@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single"
+        android:id="@+id/drawer_activity_group">
+        <item
+            android:id="@+id/drawer_search_articles"
+            android:title="@string/search_activity_name"
+            android:icon="@drawable/ic_search_white_24dp"/>
+        <item
+            android:id="@+id/drawer_notifications"
+            android:title="@string/notification_activity_name"
+            android:icon="@drawable/ic_notifications_white_24dp"/>
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/drawer_themes_group">
+        <item
+            android:title="@string/drawer_ts_text"
+            android:id="@+id/drawer_top_stories_articles"
+            android:icon="@drawable/ic_star_top_stories_white_24dp"/>
+        <item
+            android:title="@string/drawer_mp_text"
+            android:id="@+id/drawer_most_pop_articles"
+            android:icon="@drawable/ic_most_pop_thumb_white_24dp"/>
+        <item
+            android:title="@string/checkbox_science_text"
+            android:id="@+id/drawer_science_articles"
+            android:icon="@drawable/ic_lightbulb_science_white_24dp"/>
+        <item
+            android:title="@string/checkbox_world_text"
+            android:id="@+id/drawer_world_articles"
+            android:icon="@drawable/ic_world_24dp"/>
+        <item
+            android:title="@string/checkbox_health_text"
+            android:id="@+id/drawer_health_articles"
+            android:icon="@drawable/ic_health_box_white_24dp"/>
+        <item
+            android:title="@string/checkbox_technology_text"
+            android:id="@+id/drawer_technology_articles"
+            android:icon="@drawable/ic_laptop_mac_white_24dp"/>
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/drawer_others_group">
+        <item
+            android:id="@+id/drawer_help"
+            android:title="@string/help_toolbar_title"
+            android:icon="@drawable/ic_help_white_24dp"/>
+        <item
+            android:id="@+id/drawer_about"
+            android:title="@string/about_toolbar_title"
+            android:icon="@drawable/ic_info_white_24dp"/>
+    </group>
+</menu>
