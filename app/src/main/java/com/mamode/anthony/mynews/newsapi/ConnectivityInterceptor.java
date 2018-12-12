@@ -1,4 +1,4 @@
-package com.mamode.anthony.mynews.NewsApi;
+package com.mamode.anthony.mynews.newsapi;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

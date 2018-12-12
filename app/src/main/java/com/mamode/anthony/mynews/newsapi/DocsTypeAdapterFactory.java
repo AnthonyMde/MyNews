@@ -1,4 +1,4 @@
-package com.mamode.anthony.mynews.NewsApi;
+package com.mamode.anthony.mynews.newsapi;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

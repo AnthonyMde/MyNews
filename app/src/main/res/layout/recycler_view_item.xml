@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:id="@+id/recycler_item"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!-- todo: replace fake strings with NYT api data -->
 
     <ImageView
         android:id="@+id/recycler_item_image"

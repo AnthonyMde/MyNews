@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
-import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
+import com.mamode.anthony.mynews.newsapi.FragmentNewsType;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.fragments.SearchFragment;
 import com.mamode.anthony.mynews.fragments.SectionFragment;

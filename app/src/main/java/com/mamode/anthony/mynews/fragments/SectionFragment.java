@@ -23,11 +23,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.mamode.anthony.mynews.NewsApi.ArticleCalls;
-import com.mamode.anthony.mynews.NewsApi.FragmentNewsType;
-import com.mamode.anthony.mynews.NewsApi.NoConnectivityException;
-import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
-import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
+import com.mamode.anthony.mynews.newsapi.ArticleCalls;
+import com.mamode.anthony.mynews.newsapi.FragmentNewsType;
+import com.mamode.anthony.mynews.newsapi.NoConnectivityException;
+import com.mamode.anthony.mynews.newsmodels.NewsArticle;
+import com.mamode.anthony.mynews.newsmodels.NewsArticles;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
 import com.mamode.anthony.mynews.controllers.MainActivity;

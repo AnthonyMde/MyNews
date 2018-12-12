@@ -1,6 +1,6 @@
 package com.mamode.anthony.mynews.utils;
 
-import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
+import com.mamode.anthony.mynews.newsmodels.NewsArticle;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

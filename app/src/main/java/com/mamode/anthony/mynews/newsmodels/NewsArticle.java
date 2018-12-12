@@ -1,4 +1,4 @@
-package com.mamode.anthony.mynews.NewsRepository;
+package com.mamode.anthony.mynews.newsmodels;
 
 
 import com.google.gson.annotations.Expose;

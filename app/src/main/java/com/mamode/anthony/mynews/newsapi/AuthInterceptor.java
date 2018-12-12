@@ -1,8 +1,8 @@
-package com.mamode.anthony.mynews.NewsApi;
+package com.mamode.anthony.mynews.newsapi;
 
 import android.support.annotation.NonNull;
 
-import com.mamode.anthony.mynews.model.Constants;
+import com.mamode.anthony.mynews.newsmodels.Constants;
 
 import java.io.IOException;
 

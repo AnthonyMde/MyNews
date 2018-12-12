@@ -1,6 +1,6 @@
-package com.mamode.anthony.mynews.NewsApi;
+package com.mamode.anthony.mynews.newsapi;
 
-import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
+import com.mamode.anthony.mynews.newsmodels.NewsArticles;
 
 import java.util.Map;
 

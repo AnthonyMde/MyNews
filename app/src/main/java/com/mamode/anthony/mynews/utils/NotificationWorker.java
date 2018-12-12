@@ -10,9 +10,9 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
-import com.mamode.anthony.mynews.NewsApi.ApiClient;
-import com.mamode.anthony.mynews.NewsApi.NewsService;
-import com.mamode.anthony.mynews.NewsRepository.NewsArticles;
+import com.mamode.anthony.mynews.newsapi.ApiClient;
+import com.mamode.anthony.mynews.newsapi.NewsService;
+import com.mamode.anthony.mynews.newsmodels.NewsArticles;
 import com.mamode.anthony.mynews.R;
 
 import java.util.HashMap;

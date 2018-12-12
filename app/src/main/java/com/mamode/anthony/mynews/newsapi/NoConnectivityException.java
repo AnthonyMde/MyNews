@@ -1,4 +1,4 @@
-package com.mamode.anthony.mynews.NewsApi;
+package com.mamode.anthony.mynews.newsapi;
 
 import java.io.IOException;
 

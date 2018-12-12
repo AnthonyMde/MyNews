@@ -6,8 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.mamode.anthony.mynews.NewsRepository.Multimedia;
-import com.mamode.anthony.mynews.NewsRepository.NewsArticle;
+import com.mamode.anthony.mynews.newsmodels.Multimedia;
+import com.mamode.anthony.mynews.newsmodels.NewsArticle;
 import com.mamode.anthony.mynews.R;
 import com.mamode.anthony.mynews.adapters.RecyclerViewAdapter;
 import com.mamode.anthony.mynews.utils.NewsDate;
